@@ -9,7 +9,7 @@ const base = process.env.BASE_PATH ?? '/';
 // (those need absolute URLs). Override with SITE_URL, e.g. for a custom domain.
 const siteUrl = process.env.SITE_URL ?? 'https://josepdecid.github.io/pokedex-md/';
 const description =
-  'Recruitment checklist for Pokémon Mystery Dungeon: Rescue Team DX. Track all 418 Pokémon and see where to recruit each one, by dungeon and camp. Works offline.';
+  'Recruitment checklist for Pokémon Mystery Dungeon: Rescue Team DX. Track all 473 Pokémon and see where to recruit each one, by dungeon and camp. Works offline.';
 
 export default defineConfig({
   base,
