@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { untrack } from 'svelte';
+  import InstallBanner from './components/InstallBanner.svelte';
   import ProgressBar from './components/ProgressBar.svelte';
   import { i18n, t } from './i18n/i18n.svelte.ts';
   import { pickLocale } from './i18n/locales.ts';
   import { loadGame } from './lib/data.ts';
+  import { install } from './lib/install.svelte.ts';
   import { ProgressStore } from './lib/progress.svelte.ts';
   import { paths, router } from './lib/router.svelte.ts';
   import { GameSession } from './lib/session.svelte.ts';
@@ -54,6 +57,18 @@
   $effect(() => {
     document.title = t('app.name');
   });
+
+  // Suggest installing once someone is clearly using the app, not on their first visit.
+  // The count is read when the Pokédex opens (untracked), so the banner never appears mid-list
+  // and pushes rows away while someone is ticking them off.
+  const INSTALL_BANNER_AFTER = 3; // recruited Pokémon
+  const showInstallBanner = $derived(
+    route.name === 'pokedex' &&
+      install.method !== null &&
+      !settings.installBannerDismissed &&
+      session !== null &&
+      untrack(() => session!.recruitedCount) >= INSTALL_BANNER_AFTER,
+  );
 </script>
 
 <header class="topbar">
@@ -81,6 +96,7 @@
   {:else if !session}
     <p class="center muted">{t('app.loading')}</p>
   {:else if route.name === 'pokedex'}
+    {#if showInstallBanner}<InstallBanner />{/if}
     <Pokedex {session} />
   {:else if route.name === 'pokemon'}
     {#key route.id}<Pokemon {session} id={route.id} />{/key}
