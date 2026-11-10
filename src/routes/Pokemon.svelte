@@ -13,7 +13,6 @@
   const index = $derived(entry ? session.data.pokemon.indexOf(entry) : -1);
   const prev = $derived(index > 0 ? session.data.pokemon[index - 1] : undefined);
   const next = $derived(index >= 0 ? session.data.pokemon[index + 1] : undefined);
-  const hasPortrait = $derived(!!entry && !!session.data.portraitCredits[entry.species]);
 </script>
 
 <a class="back" href={paths.pokedex(session.id)}>‹ {t('pokemon.back')}</a>
@@ -21,7 +20,7 @@
 {#if entry}
   <article class="card">
     <header>
-      <Portrait entryId={entry.id} species={entry.species} available={hasPortrait} size={120} />
+      <Portrait entryId={entry.id} portrait={entry.portrait} size={120} />
       <div class="heading">
         <span class="dex">{dexLabel(entry.dex)}</span>
         <h1 style:view-transition-name={router.morphId === entry.id ? 'pokemon-name' : undefined}>{i18n.entryName(entry)}</h1>

@@ -1426,9 +1426,201 @@
     - { method: dungeon, dungeon: remains-island }
     - { method: dungeon, dungeon: marvelous-sea }
     - { method: dungeon, dungeon: fantasy-strait }
-- id: unown
+# Unown counts as one species, but every form can be recruited separately.
+- id: unown-a
+  species: unown
+  form: a
   types: [psychic]
   camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-b
+  species: unown
+  form: b
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-c
+  species: unown
+  form: c
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-d
+  species: unown
+  form: d
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-e
+  species: unown
+  form: e
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-f
+  species: unown
+  form: f
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-g
+  species: unown
+  form: g
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-h
+  species: unown
+  form: h
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-i
+  species: unown
+  form: i
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-j
+  species: unown
+  form: j
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-k
+  species: unown
+  form: k
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-l
+  species: unown
+  form: l
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-m
+  species: unown
+  form: m
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-n
+  species: unown
+  form: n
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-o
+  species: unown
+  form: o
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-p
+  species: unown
+  form: p
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-q
+  species: unown
+  form: q
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-r
+  species: unown
+  form: r
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-s
+  species: unown
+  form: s
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-t
+  species: unown
+  form: t
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-u
+  species: unown
+  form: u
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-v
+  species: unown
+  form: v
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-w
+  species: unown
+  form: w
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-x
+  species: unown
+  form: x
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-y
+  species: unown
+  form: y
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-z
+  species: unown
+  form: z
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-exclamation
+  species: unown
+  form: exclamation
+  types: [psychic]
+  camp: aged-chamber-o-question
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: unown-question
+  species: unown
+  form: question
+  types: [psychic]
+  camp: aged-chamber-o-question
   obtain:
     - { method: dungeon, dungeon: unown-relic }
 - id: wobbuffet

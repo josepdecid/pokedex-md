@@ -21,3 +21,5 @@ type:
   fairy: "Hada"
 # Pokémon keep their English names in Spanish.
 species: english
+# Unown letters are the same in every language.
+form: english

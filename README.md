@@ -20,7 +20,7 @@ npm run dev       # builds data, starts Vite at http://localhost:5173
 npm test          # data validation + unit tests
 npm run check     # svelte-check / TypeScript
 npm run build     # production build in dist/
-npm run portraits # re-download portraits + credits (only needed when species are added)
+npm run portraits # re-download portraits + credits (only needed when species or forms are added)
 npm run icons     # regenerate the favicon and app icons in public/ from scripts/build-icons.ts
 ```
 
@@ -63,7 +63,8 @@ The workflow sets `BASE_PATH` to `/<repo-name>/`.
 
 ## Portraits
 
-`public/portraits/<species-id>.png` are 40×40 portraits from
+`public/portraits/<species-id>.png` (and `<species-id>-<form>.png` for forms with their own
+portrait, like Unown letters) are 40×40 portraits from
 [PMDCollab SpriteCollab](https://github.com/PMDCollab/SpriteCollab), shared under
 CC BY-NC 4.0: no commercial use, and artists must be credited. Most are original Spike
 Chunsoft portraits from earlier Mystery Dungeon games. Artist credits are in

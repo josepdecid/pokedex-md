@@ -23,7 +23,15 @@ describe('shipped data', () => {
   });
 
   it('has a credited portrait for every Pokémon', () => {
-    for (const e of dx.pokemon) expect(dx.portraitCredits[e.species]?.length, e.id).toBeGreaterThan(0);
+    for (const e of dx.pokemon) expect(dx.portraitCredits[e.portrait!]?.length, e.id).toBeGreaterThan(0);
+  });
+
+  it('gives each Unown form its own portrait, with A using the species one', () => {
+    const portraits = dx.pokemon.filter((e) => e.species === 'unown').map((e) => e.portrait);
+    expect(portraits[0]).toBe('unown');
+    expect(portraits[1]).toBe('unown-b');
+    expect(portraits.at(-1)).toBe('unown-question');
+    expect(new Set(portraits).size).toBe(28);
   });
 
   it('has a Spanish name for everything, with Pokémon names kept in English', () => {
@@ -32,6 +40,14 @@ describe('shipped data', () => {
     expect(es['species.pikachu']).toBe('Pikachu');
     expect(es['dungeon.murky-cave']).toBe('Cueva Tenebrosa');
     expect(es['camp.gourd-swamp']).toBe('Ciénaga Calabaza');
+  });
+
+  it('lists every Unown form, in letter order, under one dex number', () => {
+    const unown = dx.pokemon.filter((e) => e.species === 'unown');
+    const names = result.dictionaries.dx!.en!;
+    expect(unown.map((e) => names[`form.${e.form}`]).join('')).toBe('ABCDEFGHIJKLMNOPQRSTUVWXYZ!?');
+    expect(new Set(unown.map((e) => e.dex))).toEqual(new Set([201]));
+    expect(dx.idAliases.unown).toBe('unown-a');
   });
 
   it('keeps entries in National Dex order', () => {
@@ -79,10 +95,10 @@ describe('validation', () => {
     const dir = copy();
     mkdirSync(join(dir, 'locales/fr'));
     cpSync(join(dir, 'locales/es/dx.yaml'), join(dir, 'locales/fr/dx.yaml'));
-    writeFileSync(join(dir, 'locales/fr/shared.yaml'), 'type:\n  fire: "Feu"\nspecies: english\n');
+    writeFileSync(join(dir, 'locales/fr/shared.yaml'), 'type:\n  fire: "Feu"\nspecies: english\nform: english\n');
     const result = buildData(dir, PORTRAITS);
     const fallback = result.warnings.find((w) => w.startsWith('locales/fr: '));
-    // Only the 17 untranslated types fall back; species are English on purpose.
+    // Only the 17 untranslated types fall back; species and forms are English on purpose.
     expect(fallback).toMatch(/^locales\/fr: 17\//);
     expect(result.dictionaries.dx!.fr!['species.pikachu']).toBe('Pikachu');
   });

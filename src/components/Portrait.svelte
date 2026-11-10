@@ -3,23 +3,22 @@
 
   let {
     entryId,
-    species,
-    available,
+    portrait,
     size,
   }: {
     /** Checklist entry, used to match the same portrait across pages in view transitions. */
     entryId: string;
-    species: string;
-    available: boolean;
+    /** Portrait file name (entry.portrait); a placeholder is shown when undefined. */
+    portrait: string | undefined;
     size: number;
   } = $props();
 
   let failed = $state(false);
-  const src = $derived(`${import.meta.env.BASE_URL}portraits/${species}.png`);
+  const src = $derived(`${import.meta.env.BASE_URL}portraits/${portrait}.png`);
   const morph = $derived(router.morphId === entryId);
 </script>
 
-{#if available && !failed}
+{#if portrait && !failed}
   <img
     class="portrait"
     {src}

@@ -18,6 +18,8 @@ export interface PokemonEntry {
   species: string;
   dex: number;
   form?: string;
+  /** Portrait file name (portraits/<portrait>.png): the form's own portrait or the species one. Absent if none. */
+  portrait?: string;
   types: string[];
   camp: string;
   obtain: Obtain[];
@@ -42,7 +44,7 @@ export interface GameData {
   pokemon: PokemonEntry[];
   dungeons: Dungeon[];
   camps: Camp[];
-  /** Species id -> portrait artists. A species has a portrait at portraits/<id>.png iff it is listed here. */
+  /** Portrait (entry.portrait) -> artists, for every portrait this game uses. */
   portraitCredits: Record<string, string[]>;
   /** Old entry id -> current entry id, applied to saved progress on load. */
   idAliases: Record<string, string>;

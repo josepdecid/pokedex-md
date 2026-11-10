@@ -107,10 +107,11 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
 
   const creditsFile = join(dataDir, 'shared/portrait-credits.yaml');
   const portraitCredits = existsSync(creditsFile) ? (readYaml(creditsFile, PortraitCreditsFile, problems) ?? {}) : {};
-  for (const speciesId of Object.keys(portraitCredits)) {
-    if (!speciesById.has(speciesId)) problems.push(`shared/portrait-credits.yaml: unknown species "${speciesId}"`);
-    else if (!existsSync(join(portraitsDir, `${speciesId}.png`))) {
-      problems.push(`public/portraits/${speciesId}.png is missing (listed in portrait-credits.yaml); run npm run portraits`);
+  // Keys are a species id or `<species>-<form>`; form keys are checked once the games are read.
+  const portraitKeys = new Set<string>(speciesById.keys());
+  for (const key of Object.keys(portraitCredits)) {
+    if (!existsSync(join(portraitsDir, `${key}.png`))) {
+      problems.push(`public/portraits/${key}.png is missing (listed in portrait-credits.yaml); run npm run portraits`);
     }
   }
 
@@ -160,7 +161,11 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
         if (o.dungeon && !dungeonSet.has(o.dungeon)) problems.push(`${at}: unknown dungeon "${o.dungeon}"`);
       }
       if (p.obtain.length === 0) warnings.push(`${at}: no way to obtain listed`);
-      if (!portraitCredits[speciesId]) warnings.push(`${at}: no portrait for species "${speciesId}"`);
+      // A form uses its own portrait when there is one, otherwise the species portrait.
+      const formKey = p.form ? `${speciesId}-${p.form}` : undefined;
+      if (formKey) portraitKeys.add(formKey);
+      const portrait = [formKey, speciesId].find((k) => k && portraitCredits[k]);
+      if (!portrait) warnings.push(`${at}: no portrait for species "${speciesId}"`);
       required.add(`species.${speciesId}`);
       if (p.form) required.add(`form.${p.form}`);
       return {
@@ -168,12 +173,14 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
         species: speciesId,
         dex: s?.dex ?? 0,
         ...(p.form ? { form: p.form } : {}),
+        ...(portrait ? { portrait } : {}),
         types: p.types,
         camp: p.camp,
         obtain: p.obtain,
       };
     });
-    entries.sort((a, b) => a.dex - b.dex || a.id.localeCompare(b.id));
+    // Stable sort: forms sharing a dex number keep their pokemon.yaml order (Unown A-Z, !, ?).
+    entries.sort((a, b) => a.dex - b.dex);
 
     for (const [from, to] of Object.entries(game.idAliases)) {
       if (!entryIds.has(to)) problems.push(`${where('game.yaml')}: idAliases.${from} points to unknown entry "${to}"`);
@@ -223,12 +230,15 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
       dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1 })),
       camps,
       portraitCredits: Object.fromEntries(
-        [...new Set(entries.map((e) => e.species))].flatMap((sp) => (portraitCredits[sp] ? [[sp, portraitCredits[sp]]] : [])),
+        [...new Set(entries.flatMap((e) => (e.portrait ? [e.portrait] : [])))].map((k) => [k, portraitCredits[k]!]),
       ),
       idAliases: game.idAliases,
     });
   }
 
+  for (const key of Object.keys(portraitCredits)) {
+    if (!portraitKeys.has(key)) problems.push(`shared/portrait-credits.yaml: "${key}" is not a species or a form used by any game`);
+  }
   if (games.length === 0) problems.push('no games found in data/games/');
   if (problems.length) throw new DataError(problems);
   return { games, dictionaries, warnings };

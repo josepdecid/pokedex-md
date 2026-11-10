@@ -19,7 +19,7 @@
   {#each entries as entry (entry.id)}
     <li class="row" class:done={session.progress.isRecruited(entry.id)}>
       <a class="link" href={paths.pokemon(session.id, entry.id)}>
-        <Portrait entryId={entry.id} species={entry.species} available={!!session.data.portraitCredits[entry.species]} size={40} />
+        <Portrait entryId={entry.id} portrait={entry.portrait} size={40} />
         <span class="main">
           <span class="name" style:view-transition-name={router.morphId === entry.id ? 'pokemon-name' : undefined}>
             {i18n.entryName(entry)}

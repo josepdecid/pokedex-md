@@ -15,4 +15,5 @@ methods:
   - { id: pokemon-square, dungeon: false }
 # If an entry id ever has to change, map the old id to the new one here so
 # saved progress keeps working. Never reuse an old id for something else.
-idAliases: {}
+idAliases:
+  unown: unown-a

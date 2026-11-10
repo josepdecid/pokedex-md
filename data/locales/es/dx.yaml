@@ -56,6 +56,7 @@ dungeon:
 # (e.g. Caldera, Ciénaga Maní) and gives "Isla del Sur" for Southern Island.
 camp:
   aged-chamber-a-n: "Vieja Cámara AN"
+  aged-chamber-o-question: "Vieja Cámara O?"
   ancient-relic: "Ruinas Antiguas"
   beau-plains: "Pradera Encanto"
   boulder-cave: "Cueva Granito"
