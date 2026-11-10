@@ -95,6 +95,10 @@ export const en = {
   'install.title': 'Install',
   'install.hint': 'Add it to your home screen. It then opens like an app and works offline.',
   'install.button': 'Install app',
+  'install.ios': 'Tap Share in your browser (in Safari it may be under the ••• menu), then choose Add to Home Screen.',
+  'install.bannerTitle': 'Install Pokédex MD',
+  'install.later': 'Not now',
+  'install.ok': 'Got it',
 
   'about.title': 'About',
   'about.disclaimer': 'Fan-made and unofficial. Not affiliated with Nintendo, Creatures, GAME FREAK, The Pokémon Company or Spike Chunsoft. Pokémon names are trademarks of their respective owners.',
