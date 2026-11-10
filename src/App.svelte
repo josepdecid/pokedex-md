@@ -59,7 +59,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href={paths.pokedex(gameId)}>
-      <span class="brand-name">{t('app.name')}</span>
+      <h1 class="brand-name">{t('app.name')}</h1>
       {#if session}<span class="brand-game">{i18n.name('game', 'short')}</span>{/if}
     </a>
     {#if session}
