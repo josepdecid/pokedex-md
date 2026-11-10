@@ -4,7 +4,7 @@ A recruitment checklist and small guide for **Pokémon Mystery Dungeon: Rescue T
 built as an installable, offline-capable web app (PWA). It's a static site with no backend:
 progress is saved on the device (IndexedDB) and can be backed up and restored as a JSON file.
 
-- **Pokédex**: all 418 recruitable Pokémon, with search, filter (missing / recruited / type) and sort.
+- **Pokédex**: all 418 recruitable Pokémon, plus the 28 that can be Shiny (each right after its regular one), with search, filter (missing / recruited / type) and sort.
 - **Pokémon pages**: a Mystery Dungeon portrait, how to get it (dungeon, strong foe, legendary encounter, Mystery House...) and its camp.
 - **Dungeons**: in unlock order with a screenshot, split into incomplete and complete, with which Pokémon you can recruit in each and how many you have.
 - **Camps**: in unlock order with their artwork, split into incomplete and complete, and which Pokémon live in each.
@@ -66,7 +66,7 @@ The workflow sets `BASE_PATH` to `/<repo-name>/`.
 ## Portraits
 
 `public/portraits/<gameId>/<species-id>.webp` (and `<species-id>-<form>.webp` for forms, like
-Unown letters) are each game's own Pokémon portraits (Spike Chunsoft), downloaded from
+Unown letters, and `<species-id>-shiny.webp` for Shiny ones) are each game's own Pokémon portraits (Spike Chunsoft), downloaded from
 [Serebii](https://www.serebii.net/dungeonrescueteamdx/pokemon.shtml) by `npm run portraits` and
 re-encoded as WebP. Serebii is credited in Settings → About.
 

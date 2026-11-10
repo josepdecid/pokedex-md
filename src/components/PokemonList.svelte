@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { i18n } from '../i18n/i18n.svelte.ts';
   import type { PokemonEntry } from '../lib/game-data.ts';
   import { dexLabel } from '../lib/format.ts';
   import { paths, router } from '../lib/router.svelte.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
+  import EntryName from './EntryName.svelte';
   import Portrait from './Portrait.svelte';
   import RecruitToggle from './RecruitToggle.svelte';
   import TypeBadge from './TypeBadge.svelte';
@@ -28,7 +28,7 @@
         <Portrait entryId={entry.id} portrait={entry.portrait} size={40} />
         <span class="main">
           <span class="name" style:view-transition-name={router.morphId === entry.id ? 'pokemon-name' : undefined}>
-            {i18n.entryName(entry)}
+            <EntryName {entry} />
           </span>
           <span class="meta">
             <span class="dex">{dexLabel(entry.dex)}</span>

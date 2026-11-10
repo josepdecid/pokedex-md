@@ -39,6 +39,8 @@ export const en = {
   'pokedex.clear': 'Clear filters',
 
   'pokemon.back': 'Pokédex',
+  'pokemon.shiny': 'Shiny',
+  'pokemon.shinyName': '{name} (Shiny)',
   'pokemon.obtain': 'How to get it',
   'pokemon.evolveLevel': 'Level {level}',
   'pokemon.evolveItem': '{count} × {item}',
@@ -50,7 +52,6 @@ export const en = {
   'obtain.floor': 'Floor {floors}',
   'obtain.floors': 'Floors {floors}',
   'obtain.level': 'Lv. {level}',
-  'obtain.rate': '{rate}% recruit rate',
   'obtain.rateShort': '{rate}%',
   'obtain.rateLabel': 'Recruit rate',
 

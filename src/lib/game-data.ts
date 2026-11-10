@@ -40,7 +40,9 @@ export interface PokemonEntry {
   /** Position when sorting by family: dex order, with each evolution line kept together. */
   familyOrder: number;
   form?: string;
-  /** Portrait path under public/ (portraits/<gameId>/<species>[-<form>].webp): the form's own or the species one. Absent if none. */
+  /** The Shiny one of another entry (generated as `<id>-shiny`, right after it). Only obtainable by the `obtain` it lists. */
+  shiny?: true;
+  /** Portrait path under public/ (portraits/<gameId>/<species>[-<form>][-shiny].webp): the form's own or the species one. Absent if none. */
   portrait?: string;
   types: string[];
   camp: string;

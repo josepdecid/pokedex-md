@@ -24,11 +24,18 @@ class I18n {
   /** Display name of any content id, e.g. name('dungeon', 'mt-steel'). Falls back to the id. */
   name = (kind: string, id: string): string => this.#names[`${kind}.${id}`] ?? id;
 
+  /** Visible name of a checklist entry. A Shiny one shows the Shiny icon next to it (EntryName.svelte). */
   entryName = (entry: PokemonEntry): string => {
     const own = this.#names[`pokemon.${entry.id}`];
     if (own) return own;
     const species = this.name('species', entry.species);
     return entry.form ? `${species} (${this.name('form', entry.form)})` : species;
+  };
+
+  /** entryName as plain text, saying "Shiny" in words: for labels, search and sorting. */
+  entryLabel = (entry: PokemonEntry): string => {
+    const name = this.entryName(entry);
+    return entry.shiny ? this.t('pokemon.shinyName', { name }) : name;
   };
 
   collator = $derived(new Intl.Collator(this.locale));

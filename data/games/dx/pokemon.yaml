@@ -7,6 +7,9 @@
 # obtain: other ways to get it. `method` must be one of the methods in game.yaml. Where known,
 #   `floors` ("1-3, 5"), the Pokémon's `level` there and its base recruit `rate` (%; negative means
 #   it can't be recruited without boosts). Source: the DX tables on Bulbapedia's dungeon pages.
+# shiny: it can be Shiny, and the Shiny one shows up by these methods of its `obtain` (only those).
+#   The build adds the Shiny one as its own entry (`<id>-shiny`) right after it. Source: Serebii's
+#   Shiny Pokémon page (strong foes, plus Celebi in a Mystery House).
 - id: bulbasaur
   types: [grass, poison]
   camp: beau-plains
@@ -91,6 +94,7 @@
     - { method: strong-foe, dungeon: howling-forest, floors: "6-15", level: 60, rate: -6.4 }
     - { method: dungeon, dungeon: pitfall-valley, floors: "4-9", level: 33, rate: 8.2 }
     - { method: fainted, dungeon: remains-island, floors: "2-12", level: 39, rate: 100 }
+  shiny: [strong-foe]
 - id: weedle
   types: [bug, poison]
   camp: stump-forest
@@ -348,6 +352,7 @@
     - { method: mystery-house, dungeon: buried-relic, level: 35, rate: 100 }
     - { method: mystery-house, dungeon: solar-cave, floors: "2-19", level: 30, rate: 100 }
     - { method: mystery-house, dungeon: fiery-field, floors: "2-29", level: 45, rate: 100 }
+  shiny: [strong-foe]
 - id: jigglypuff
   types: [normal, fairy]
   camp: sky-blue-plains
@@ -740,6 +745,7 @@
     - { method: dungeon, dungeon: joyous-tower, floors: "57-59", level: 40, rate: -2.2 }
     - { method: dungeon, dungeon: purity-forest, floors: "57-59", level: 40, rate: -2.2 }
     - { method: mystery-house, dungeon: fiery-field, floors: "2-29", level: 45, rate: 100 }
+  shiny: [strong-foe]
 - id: slowpoke
   types: [water, psychic]
   camp: bountiful-sea
@@ -997,6 +1003,7 @@
     - { method: dungeon, dungeon: joyous-tower, floors: "50-55", level: 30, rate: 8.2 }
     - { method: dungeon, dungeon: purity-forest, floors: "51-53", level: 30, rate: 8.2 }
     - { method: mystery-house, dungeon: lightning-field, floors: "2-29", level: 45, rate: 100 }
+  shiny: [strong-foe]
 - id: exeggcute
   types: [grass, psychic]
   camp: jungle
@@ -1010,6 +1017,7 @@
     - { method: dungeon, dungeon: marvelous-sea, floors: "5-6", level: 60, rate: 14.4 }
     - { method: dungeon, dungeon: fantasy-strait, floors: "5-6", level: 60, rate: 14.4 }
     - { method: mystery-house, dungeon: waterfall-pond, floors: "2-18", level: 30, rate: 100 }
+  shiny: [strong-foe]
 - id: exeggutor
   types: [grass, psychic]
   camp: jungle
@@ -1021,6 +1029,7 @@
     - { method: dungeon, dungeon: purity-forest, floors: "15-16", level: 15, rate: 14.4 }
     - { method: fainted, dungeon: far-off-sea, floors: "2-74", level: 46, rate: 100 }
     - { method: fainted, dungeon: northwind-field, floors: "2-29", level: 49, rate: 100 }
+  shiny: [strong-foe]
 - id: cubone
   types: [ground]
   camp: mt-green
@@ -1196,6 +1205,7 @@
     - { method: dungeon, dungeon: stormy-sea, floors: "35-39", level: 30, rate: 8.2 }
     - { method: dungeon, dungeon: silver-trench, floors: "35-44", level: 60, rate: 8.2 }
     - { method: fainted, dungeon: far-off-sea, floors: "2-74", level: 46, rate: 100 }
+  shiny: [strong-foe]
 - id: mr-mime
   types: [psychic, fairy]
   camp: decrepit-lab
@@ -1296,6 +1306,7 @@
     - { method: strong-foe, dungeon: marvelous-sea, floors: "1-17", level: 60, rate: -6.4 }
     - { method: fainted, dungeon: remains-island, floors: "2-12", level: 37, rate: 100 }
     - { method: fainted, dungeon: fantasy-strait, floors: "2-24", level: 62, rate: 100 }
+  shiny: [strong-foe]
 - id: gyarados
   types: [water, flying]
   camp: waterfall-lake
@@ -1305,6 +1316,7 @@
     - { method: mystery-house, dungeon: grand-sea, floors: "2-29", level: 37, rate: 100 }
     - { method: mystery-house, dungeon: far-off-sea, floors: "2-74", level: 44, rate: 100 }
     - { method: mystery-house, dungeon: fantasy-strait, floors: "2-24", level: 60, rate: 100 }
+  shiny: [strong-foe]
 - id: lapras
   types: [water, ice]
   camp: mystic-lake
@@ -1323,6 +1335,7 @@
     - { method: dungeon, dungeon: joyous-tower, floors: "52-59", level: 25, rate: 10.8 }
     - { method: dungeon, dungeon: purity-forest, floors: "1-99", level: 25, rate: 10.8 }
     - { method: mystery-house, dungeon: waterfall-pond, floors: "2-18", level: 30, rate: 100 }
+  shiny: [strong-foe]
 - id: eevee
   types: [normal]
   camp: evolution-forest
@@ -1450,6 +1463,7 @@
     - { method: strong-foe, dungeon: mt-thunder, floors: "3-12", level: 55, rate: -6.4 }
     - { method: dungeon, dungeon: grand-sea, floors: "10, 15, 20, 25", level: 55, rate: 10.8 }
     - { method: fainted, dungeon: far-off-sea, floors: "2-74", level: 59, rate: 100 }
+  shiny: [strong-foe]
 - id: mewtwo
   types: [psychic]
   camp: cryptic-cave
@@ -1551,6 +1565,7 @@
     - { method: dungeon, dungeon: purity-forest, floors: "16-18", level: 16, rate: 14.4 }
     - { method: strong-foe, dungeon: murky-cave, floors: "5-19", level: 60, rate: -6.4 }
     - { method: fainted, dungeon: howling-forest, floors: "2-15", level: 42, rate: 100 }
+  shiny: [strong-foe]
 - id: noctowl
   types: [normal, flying]
   camp: flyaway-forest
@@ -1561,6 +1576,7 @@
     - { method: dungeon, dungeon: northern-range, floors: "12-16", level: 33, rate: 10.8 }
     - { method: mystery-house, dungeon: sky-tower, floors: "3-25", rate: 100 }
     - { method: fainted, dungeon: uproar-forest, floors: "2-3", rate: 100 }
+  shiny: [strong-foe]
 - id: ledyba
   types: [bug, flying]
   camp: stump-forest
@@ -1713,6 +1729,7 @@
     - { method: dungeon, dungeon: lightning-field, floors: "16-21", level: 45, rate: 14.4 }
     - { method: dungeon, dungeon: purity-forest, floors: "31-33", level: 30, rate: 14.4 }
     - { method: mystery-house, dungeon: lightning-field, floors: "2-29", level: 45, rate: 100 }
+  shiny: [strong-foe]
 - id: bellossom
   types: [grass]
   camp: jungle
@@ -1743,6 +1760,7 @@
     - { method: mystery-house, dungeon: buried-relic, level: 35, rate: 100 }
     - { method: mystery-house, dungeon: solar-cave, floors: "2-19", level: 30, rate: 100 }
     - { method: mystery-house, dungeon: western-cave, floors: "2-19", level: 60, rate: 100 }
+  shiny: [strong-foe]
 - id: sudowoodo
   types: [rock]
   camp: overgrown-forest
@@ -1756,6 +1774,7 @@
     - { method: mystery-house, dungeon: buried-relic, level: 35, rate: 100 }
     - { method: mystery-house, dungeon: solar-cave, floors: "2-19", level: 30, rate: 100 }
     - { method: mystery-house, dungeon: silver-trench, floors: "2-98", level: 60, rate: 100 }
+  shiny: [strong-foe]
 - id: politoed
   types: [water]
   camp: tadpole-pond
@@ -1805,6 +1824,7 @@
     - { method: dungeon, dungeon: marvelous-sea, floors: "10-13", level: 60, rate: 10.8 }
     - { method: dungeon, dungeon: fantasy-strait, floors: "10-13", level: 60, rate: 10.8 }
     - { method: fainted, dungeon: mt-freeze, floors: "2-20", level: 24, rate: 100 }
+  shiny: [strong-foe]
 - id: sunkern
   types: [grass]
   camp: jungle
@@ -1854,6 +1874,7 @@
   obtain:
     - { method: dungeon, dungeon: murky-cave, floors: "15-19", level: 33, rate: 8.2 }
     - { method: strong-foe, dungeon: remains-island, floors: "1-12", level: 60, rate: -6.4 }
+  shiny: [strong-foe]
 - id: umbreon
   types: [dark]
   camp: evolution-forest
@@ -2112,6 +2133,7 @@
     - { method: mystery-house, dungeon: southern-cavern, floors: "2-49", level: 42, rate: 100 }
     - { method: mystery-house, dungeon: wyvern-hill, floors: "2-29", level: 30, rate: 100 }
     - { method: mystery-house, dungeon: remains-island, floors: "2-12", level: 35, rate: 100 }
+  shiny: [strong-foe]
 - id: girafarig
   types: [normal, psychic]
   camp: sky-blue-plains
@@ -2234,6 +2256,7 @@
     - { method: dungeon, dungeon: fantasy-strait, floors: "14-15", level: 60, rate: 10.8 }
     - { method: mystery-house, dungeon: waterfall-pond, floors: "2-18", level: 30, rate: 100 }
     - { method: fainted, dungeon: great-canyon, floors: "2-12", level: 18, rate: 100 }
+  shiny: [strong-foe]
 - id: heracross
   types: [bug, fighting]
   camp: overgrown-forest
@@ -2330,6 +2353,7 @@
     - { method: mystery-house, dungeon: fantasy-strait, floors: "2-24", level: 60, rate: 100 }
     - { method: fainted, dungeon: lapis-cave, floors: "2-14", level: 19, rate: 100 }
     - { method: fainted, dungeon: oddity-cave, floors: "2-7", level: 12, rate: 100 }
+  shiny: [strong-foe]
 - id: remoraid
   types: [water]
   camp: treasure-sea
@@ -2584,6 +2608,7 @@
   obtain:
     - { method: legendary, dungeon: purity-forest, floors: "100", level: 55, rate: 100 }
     - { method: mystery-house, dungeon: western-cave, floors: "2-19", level: 60, rate: 100 }
+  shiny: [mystery-house]
 - id: treecko
   types: [grass]
   camp: overgrown-forest
@@ -3263,6 +3288,7 @@
     - { method: fainted, dungeon: lightning-field, floors: "2-29", level: 47, rate: 100 }
     - { method: fainted, dungeon: western-cave, floors: "2-19", level: 62, rate: 100 }
     - { method: fainted, dungeon: silver-trench, floors: "2-98", level: 62, rate: 100 }
+  shiny: [strong-foe]
 - id: trapinch
   types: [ground]
   camp: withering-desert
@@ -3342,6 +3368,7 @@
     - { method: mystery-house, dungeon: southern-cavern, floors: "2-49", level: 42, rate: 100 }
     - { method: mystery-house, dungeon: wyvern-hill, floors: "2-29", level: 30, rate: 100 }
     - { method: mystery-house, dungeon: remains-island, floors: "2-12", level: 35, rate: 100 }
+  shiny: [strong-foe]
 - id: zangoose
   types: [normal]
   camp: wild-plains
@@ -3351,6 +3378,7 @@
     - { method: dungeon, dungeon: wish-cave, floors: "65-71", level: 25, rate: 10.8 }
     - { method: dungeon, dungeon: purity-forest, floors: "65-70", level: 26, rate: 10.8 }
     - { method: fainted, dungeon: lightning-field, floors: "2-29", level: 47, rate: 100 }
+  shiny: [strong-foe]
 - id: seviper
   types: [poison]
   camp: wild-plains
@@ -3755,6 +3783,7 @@
     - { method: mystery-house, dungeon: magma-cavern, floors: "2-22", rate: 100 }
     - { method: mystery-house, dungeon: northern-range, floors: "2-24", level: 45, rate: 100 }
     - { method: mystery-house, dungeon: silver-trench, floors: "2-98", level: 60, rate: 100 }
+  shiny: [strong-foe]
 - id: regirock
   types: [rock]
   camp: ancient-relic
@@ -3829,6 +3858,7 @@
   obtain:
     - { method: strong-foe, dungeon: great-canyon, floors: "3-12", level: 16, rate: -6.4 }
     - { method: fainted, dungeon: grand-sea, floors: "2-29", level: 39, rate: 100 }
+  shiny: [strong-foe]
 - id: mismagius
   types: [ghost]
   camp: darkness-ridge
@@ -3956,6 +3986,7 @@
   obtain:
     - { method: strong-foe, dungeon: mt-freeze, floors: "3-5, 7-8, 11-20", level: 22, rate: -6.4 }
     - { method: fainted, dungeon: fiery-field, floors: "2-29", level: 49, rate: 100 }
+  shiny: [strong-foe]
 - id: rhyperior
   types: [ground, rock]
   camp: safari

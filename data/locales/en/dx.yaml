@@ -110,7 +110,7 @@ camp:
 method:
   dungeon: "Recruit in dungeon"
   legendary: "Legendary encounter"
-  strong-foe: "Strong foe (can be Shiny)"
+  strong-foe: "Strong foe"
   fainted: "Fainted"
   mystery-house: "Mystery House"
   pokemon-square: "Pokémon Square (post-game)"
