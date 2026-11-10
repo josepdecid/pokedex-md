@@ -132,6 +132,9 @@
       position: sticky;
       top: var(--topbar-h);
       z-index: 5;
+      /* Browsers floor the topbar's border to whole device pixels, leaving it a fraction short
+         of --topbar-h on fractional-density screens. Reaches behind it to close that gap. */
+      box-shadow: 0 -1px var(--bg);
     }
     /* Rows fade out as they scroll under. Fills the margin above, so it's invisible at rest. */
     .tools::after {
