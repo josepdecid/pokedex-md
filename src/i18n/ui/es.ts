@@ -54,6 +54,7 @@ export const es: UiStrings = {
   'obtain.floor': 'Piso {floors}',
   'obtain.floors': 'Pisos {floors}',
   'obtain.level': 'Nv. {level}',
+  'obtain.anyDungeon': 'Cualquier territorio',
   'obtain.rateShort': '{rate} %',
   'obtain.rateLabel': 'Probabilidad de reclutamiento',
 

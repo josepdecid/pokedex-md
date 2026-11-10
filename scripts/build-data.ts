@@ -31,7 +31,8 @@ const GameFile = z.strictObject({
   releaseYear: z.number().int(),
   sections: z.array(id).min(1),
   methods: z
-    .array(z.strictObject({ id, dungeon: z.boolean(), section: id, icon: id.optional() }))
+    // dungeon: whether its obtain entries name a dungeon, or `any` for "in any dungeon" (none named).
+    .array(z.strictObject({ id, dungeon: z.union([z.boolean(), z.literal('any')]), section: id, icon: id.optional() }))
     .superRefine(unique('method')),
   evolveIcon: id.optional(),
   idAliases: z.record(id, id).default({}),
@@ -221,10 +222,11 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
       for (const o of p.obtain) {
         const method = methods.get(o.method);
         if (!method) problems.push(`${at}: unknown method "${o.method}"`);
-        else if (method.dungeon && !o.dungeon) problems.push(`${at}: method "${o.method}" needs a dungeon`);
-        else if (!method.dungeon && o.dungeon) problems.push(`${at}: method "${o.method}" does not take a dungeon`);
+        else if (method.dungeon === true && !o.dungeon) problems.push(`${at}: method "${o.method}" needs a dungeon`);
+        else if (method.dungeon !== true && o.dungeon) problems.push(`${at}: method "${o.method}" does not take a dungeon`);
         if (o.dungeon && !dungeonSet.has(o.dungeon)) problems.push(`${at}: unknown dungeon "${o.dungeon}"`);
-        if (!o.dungeon && (o.floors || o.level || o.rate !== undefined)) problems.push(`${at}: floors, level and rate need a dungeon`);
+        if (!o.dungeon && o.floors) problems.push(`${at}: floors need a dungeon`);
+        if (method && method.dungeon === false && (o.level || o.rate !== undefined)) problems.push(`${at}: level and rate need a dungeon`);
       }
       // Evolution: only from a pre-evolution that is in this game.
       const preEvolution = s?.evolvesFrom && speciesInGame.has(s.evolvesFrom) ? s.evolvesFrom : undefined;

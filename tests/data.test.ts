@@ -128,6 +128,9 @@ describe('shipped data', () => {
     expect(obtain('beedrill')).toContainEqual({ method: 'dungeon', dungeon: 'silent-chasm', floors: '8-9', level: 14, rate: 14.4 });
     expect(obtain('gligar')).toContainEqual({ method: 'fainted', dungeon: 'silent-chasm', floors: '2-9', level: 15, rate: 100 });
     expect(obtain('metagross')).toContainEqual({ method: 'strong-foe', dungeon: 'silent-chasm', floors: '6, 8-9', level: 45, rate: -6.4 });
+    // Kecleon also joins after stealing from its shop, in any dungeon.
+    expect(obtain('kecleon')).toContainEqual({ method: 'shop-thief', level: 90, rate: -50 });
+    expect(dx.methods.find((m) => m.id === 'shop-thief')?.dungeon).toBe('any');
     // Every fainted Pokémon is tied to a dungeon now (Serebii only said "fainted in a dungeon").
     const fainted = dx.pokemon.flatMap((e) => e.obtain).filter((o) => o.method === 'fainted');
     expect(fainted.length).toBeGreaterThan(400);

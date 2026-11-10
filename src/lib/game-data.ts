@@ -3,8 +3,8 @@
 
 export interface ObtainMethod {
   id: string;
-  /** Whether obtain entries using this method name a dungeon. */
-  dungeon: boolean;
+  /** Whether obtain entries using this method name a dungeon, or `any`: it happens in any dungeon (none named). */
+  dungeon: boolean | 'any';
   /** Section of the Pokémon page it is listed in (one of GameData.sections). */
   section: string;
   /** Icon path under public/ (icons/<gameId>/<name>.png). Absent if none. */

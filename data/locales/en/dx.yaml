@@ -114,6 +114,7 @@ method:
   fainted: "Fainted"
   mystery-house: "Mystery House"
   pokemon-square: "Pokémon Square (post-game)"
+  shop-thief: "Steal from a Kecleon Shop"
 section:
   recruit: "Recruit"
   evolve: "Evolve"

@@ -113,7 +113,8 @@ camp:
   wild-plains: "Pradera Salvaje"
   withering-desert: "Desierto Abrasador"
 # In-game terms: territorio (dungeon), superrival (strong foe), variocolor (Shiny),
-# casa misteriosa (Mystery House), Plaza Pokémon (Pokémon Square), evolito (Evolution Crystal).
+# casa misteriosa (Mystery House), Plaza Pokémon (Pokémon Square), evolito (Evolution Crystal),
+# tienda Kecleon (Kecleon Shop).
 method:
   dungeon: "Reclutar en un territorio"
   legendary: "Encuentro con un legendario"
@@ -121,6 +122,7 @@ method:
   fainted: "Debilitado"
   mystery-house: "Casa misteriosa"
   pokemon-square: "Plaza Pokémon (tras la historia principal)"
+  shop-thief: "Robar en una tienda Kecleon"
 section:
   recruit: "Reclutar"
   evolve: "Evolucionar"

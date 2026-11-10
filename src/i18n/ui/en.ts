@@ -52,6 +52,7 @@ export const en = {
   'obtain.floor': 'Floor {floors}',
   'obtain.floors': 'Floors {floors}',
   'obtain.level': 'Lv. {level}',
+  'obtain.anyDungeon': 'Any dungeon',
   'obtain.rateShort': '{rate}%',
   'obtain.rateLabel': 'Recruit rate',
 

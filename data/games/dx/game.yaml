@@ -8,7 +8,8 @@ releaseYear: 2020
 # from each entry's `evolve`. Names live in locales under `section` and `section-none`.
 sections: [recruit, evolve, mystery-house, fainted]
 # Ways to recruit or obtain a Pokémon in this game, and the section each one is listed in.
-# `dungeon: true` means an `obtain` entry with this method must name the dungeon where it happens.
+# `dungeon: true` means an `obtain` entry with this method must name the dungeon where it happens;
+# `dungeon: any` means it happens in any dungeon (no dungeon named, shown as "Any dungeon").
 # `icon`: optional public/icons/<gameId>/<icon>.png (DX item icons from Serebii). Methods without
 # one get a generic icon.
 methods:
@@ -16,6 +17,8 @@ methods:
   - { id: strong-foe, dungeon: true, section: recruit, icon: strong-foe }
   - { id: legendary, dungeon: true, section: recruit }
   - { id: pokemon-square, dungeon: false, section: recruit }
+  # Stealing from a Kecleon Shop: the Kecleon that attack can be recruited.
+  - { id: shop-thief, dungeon: any, section: recruit }
   - { id: mystery-house, dungeon: true, section: mystery-house, icon: invitation }
   - { id: fainted, dungeon: true, section: fainted, icon: apple }
 # Icon of the built-in `evolve` section, like a method's `icon`.

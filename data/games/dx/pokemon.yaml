@@ -3534,6 +3534,7 @@
   camp: overgrown-forest
   obtain:
     - { method: dungeon, dungeon: joyous-tower, floors: "51-98", level: 5, rate: 16.9 }
+    - { method: shop-thief, level: 90, rate: -50 }
 - id: shuppet
   types: [ghost]
   camp: darkness-ridge

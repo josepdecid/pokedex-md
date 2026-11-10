@@ -90,6 +90,11 @@
                 <li>
                   {#if o.dungeon}
                     <a href={paths.dungeon(session.id, o.dungeon)}>{i18n.name('dungeon', o.dungeon)}</a>
+                  {:else if session.methodById.get(o.method)?.dungeon === 'any'}
+                    <span class="where">
+                      <span>{t('obtain.anyDungeon')}</span>
+                      <small class="label">{i18n.name('method', o.method)}</small>
+                    </span>
                   {:else}
                     <span>{i18n.name('method', o.method)}</span>
                   {/if}
@@ -199,6 +204,10 @@
   }
   .label {
     color: var(--muted);
+  }
+  .where {
+    display: grid;
+    gap: 0.1rem;
   }
   .details {
     display: flex;
