@@ -10,6 +10,8 @@
 
   let { session }: { session: GameSession } = $props();
 
+  const COFFEE_URL = 'https://buymeacoffee.com/josepdecid';
+
   const gameName = $derived(i18n.name('game', 'short'));
   const total = $derived(session.data.pokemon.length);
 
@@ -91,7 +93,10 @@
   }
 </script>
 
-<h1>{t('nav.settings')}</h1>
+<a class="button coffee" href={COFFEE_URL} target="_blank" rel="noopener">
+  <span aria-hidden="true">☕</span>
+  {t('settings.coffee')}
+</a>
 
 <section class="card">
   <h2><label for="locale">{t('settings.language')}</label></h2>
@@ -188,6 +193,12 @@
 </section>
 
 <style>
+  .coffee {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+  }
   h3 {
     margin: 1.4rem 0 0.25rem;
     font-size: 1rem;

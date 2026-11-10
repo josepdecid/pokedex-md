@@ -73,6 +73,7 @@ export const ja: UiStrings = {
   'camp.residents': 'ここに住むポケモン',
   'camp.notFound': 'そのキャンプはこのゲームにありません。',
 
+  'settings.coffee': 'コーヒーで応援する',
   'settings.language': '言語',
   'settings.progress': '進行状況',
   'settings.summary': '{game}で{total}匹中{done}匹を仲間にしました。',

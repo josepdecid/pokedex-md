@@ -72,6 +72,7 @@ export const en = {
   'camp.residents': 'Pokémon that live here',
   'camp.notFound': "That camp isn't in this game.",
 
+  'settings.coffee': 'Buy me a coffee',
   'settings.language': 'Language',
   'settings.progress': 'Your progress',
   'settings.summary': "You've recruited {done} of {total} Pokémon in {game}.",

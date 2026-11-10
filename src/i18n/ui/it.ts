@@ -74,6 +74,7 @@ export const it: UiStrings = {
   'camp.residents': 'Pokémon che vivono qui',
   'camp.notFound': 'Questo Campo Base non è presente in questo gioco.',
 
+  'settings.coffee': 'Offrimi un caffè',
   'settings.language': 'Lingua',
   'settings.progress': 'I tuoi progressi',
   'settings.summary': 'Hai reclutato {done} Pokémon su {total} in {game}.',
