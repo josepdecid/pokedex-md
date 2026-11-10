@@ -7,6 +7,15 @@
 
   const on = $derived(session.progress.isRecruited(entry.id));
   const name = $derived(i18n.entryLabel(entry));
+
+  // Only play the "caught" wobble after a user click, never on first render
+  // (otherwise every already-recruited row would wobble when the list mounts).
+  let caught = $state(false);
+
+  function toggle() {
+    session.progress.toggle(entry.id);
+    caught = session.progress.isRecruited(entry.id);
+  }
 </script>
 
 <button
@@ -14,13 +23,19 @@
   class="toggle"
   class:large
   class:on
+  class:caught
   aria-pressed={on}
   aria-label={large ? undefined : t(on ? 'toggle.unmark' : 'toggle.mark', { name })}
-  onclick={() => session.progress.toggle(entry.id)}
+  onclick={toggle}
 >
-  <span class="box" aria-hidden="true">
-    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-  </span>
+  <svg class="ball" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+    <g class="body">
+      <path class="lid" d="M3 17a13 13 0 0 1 26 0z" />
+      <path class="base" d="M3 17a13 13 0 0 0 26 0z" />
+      <circle class="button" cx="16" cy="17" r="4.25" />
+      <circle class="glint" cx="16" cy="17" r="1.6" onanimationend={() => (caught = false)} />
+    </g>
+  </svg>
   {#if large}
     <span>{t(on ? 'toggle.recruited' : 'toggle.notRecruited')}</span>
   {/if}
@@ -43,36 +58,105 @@
     font: inherit;
     font-weight: 600;
   }
-  .box {
-    display: grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    border: 2px solid var(--border-strong);
-    background: var(--surface);
-    transition: background 0.12s, border-color 0.12s;
+
+  .ball {
+    flex: none;
+    overflow: visible;
   }
-  svg {
-    fill: none;
-    stroke: #fff;
-    stroke-width: 3;
-    stroke-linecap: round;
+  .ball * {
+    transform-box: view-box;
+  }
+  .lid,
+  .base,
+  .button {
+    fill: var(--surface);
+    stroke: var(--border-strong);
+    stroke-width: 2;
     stroke-linejoin: round;
-    opacity: 0;
-    transform: scale(0.6);
-    transition: opacity 0.12s, transform 0.12s;
+    transition:
+      fill 0.15s,
+      stroke 0.15s;
   }
-  .on .box {
-    background: var(--accent);
-    border-color: var(--accent);
+  .glint {
+    fill: var(--border-strong);
+    transition: fill 0.15s;
   }
-  .on svg {
-    opacity: 1;
+
+  /* Open: the lid hinges up from the back of the ball. */
+  .lid {
+    transform-origin: 29px 17px;
+    transform: rotate(32deg);
+    transition:
+      transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+      fill 0.15s,
+      stroke 0.15s;
+  }
+
+  /* Closed: snaps shut and takes on the Poké Ball colours. */
+  .on .lid {
     transform: none;
+    fill: var(--ball-top);
+    transition:
+      transform 0.18s cubic-bezier(0.55, 0, 0.9, 0.5),
+      fill 0.12s 0.06s,
+      stroke 0.12s;
   }
+  .on .base,
+  .on .button {
+    fill: var(--ball-bottom);
+  }
+  .on .lid,
+  .on .base,
+  .on .button {
+    stroke: var(--ball-line);
+  }
+  .on .glint {
+    fill: var(--ball-line);
+  }
+
+  /* Just caught: a few wobbles on the floor, then the button clicks. */
+  .body {
+    transform-origin: 16px 30px;
+  }
+  .caught .body {
+    animation: wobble 0.62s 0.18s ease-in-out;
+  }
+  .caught .glint {
+    transform-origin: 16px 17px;
+    animation: click 0.3s 0.78s ease-out;
+  }
+  @keyframes wobble {
+    0%,
+    100% {
+      transform: none;
+    }
+    20% {
+      transform: rotate(-16deg);
+    }
+    45% {
+      transform: rotate(12deg);
+    }
+    68% {
+      transform: rotate(-6deg);
+    }
+    86% {
+      transform: rotate(2deg);
+    }
+  }
+  @keyframes click {
+    0%,
+    100% {
+      transform: none;
+      fill: var(--ball-line);
+    }
+    40% {
+      transform: scale(1.7);
+      fill: var(--ball-top);
+    }
+  }
+
   .large {
-    padding: 0.4rem 1rem 0.4rem 0.6rem;
+    padding: 0.4rem 1rem 0.4rem 0.5rem;
     border-radius: 999px;
     border: 2px solid var(--border-strong);
     background: var(--surface);
@@ -88,9 +172,13 @@
     border-radius: 10px;
   }
   @media (prefers-reduced-motion: reduce) {
-    .box,
-    svg {
+    .ball *,
+    .on .lid {
       transition: none;
+    }
+    .caught .body,
+    .caught .glint {
+      animation: none;
     }
   }
 </style>
