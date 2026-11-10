@@ -28,14 +28,15 @@
   aria-label={large ? undefined : t(on ? 'toggle.unmark' : 'toggle.mark', { name })}
   onclick={toggle}
 >
-  <svg class="ball" viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
-    <g class="body">
-      <path class="lid" d="M3 17a13 13 0 0 1 26 0z" />
-      <path class="base" d="M3 17a13 13 0 0 0 26 0z" />
-      <circle class="button" cx="16" cy="17" r="4.25" />
-      <circle class="glint" cx="16" cy="17" r="1.6" onanimationend={() => (caught = false)} />
-    </g>
-  </svg>
+  <!-- An empty checkbox that rounds into a Poké Ball when checked. -->
+  <span class="box" aria-hidden="true">
+    <svg viewBox="0 0 24 24">
+      <rect class="lid" x="-2" y="-2" width="26" height="14" />
+      <rect class="band" x="-2" y="10.5" width="28" height="3" />
+      <circle class="button" cx="12" cy="12" r="4" />
+      <circle class="glint" cx="12" cy="12" r="1.5" onanimationend={() => (caught = false)} />
+    </svg>
+  </span>
   {#if large}
     <span>{t(on ? 'toggle.recruited' : 'toggle.notRecruited')}</span>
   {/if}
@@ -59,71 +60,92 @@
     font-weight: 600;
   }
 
-  .ball {
-    flex: none;
-    overflow: visible;
+  /*
+   * Unchecking runs the steps backwards: the button and band go, the lid
+   * swings open, then the box squares off again.
+   */
+  .box {
+    display: block;
+    width: 28px;
+    height: 28px;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 2px solid var(--border-strong);
+    background: var(--surface);
+    transform-origin: 50% 100%;
+    transition:
+      border-radius 0.18s 0.14s ease-out,
+      border-color 0.18s 0.14s,
+      background 0.18s 0.14s;
   }
-  .ball * {
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  svg * {
     transform-box: view-box;
   }
-  .lid,
-  .base,
+  .lid {
+    fill: var(--ball-top);
+    transform-origin: 24px 12px;
+    transform: rotate(110deg);
+    transition: transform 0.16s ease-out;
+  }
+  .band {
+    fill: var(--ball-line);
+    transform-origin: 12px 12px;
+    transform: scaleX(0);
+    transition: transform 0.1s;
+  }
   .button {
-    fill: var(--surface);
-    stroke: var(--border-strong);
+    fill: var(--ball-bottom);
+    stroke: var(--ball-line);
     stroke-width: 2;
-    stroke-linejoin: round;
-    transition:
-      fill 0.15s,
-      stroke 0.15s;
+    transform-origin: 12px 12px;
+    transform: scale(0);
+    transition: transform 0.1s;
   }
   .glint {
-    fill: var(--border-strong);
-    transition: fill 0.15s;
+    fill: var(--ball-line);
+    transform-origin: 12px 12px;
+    transform: scale(0);
+    transition: transform 0.1s;
   }
 
-  /* Open: the lid hinges up from the back of the ball. */
-  .lid {
-    transform-origin: 29px 17px;
-    transform: rotate(32deg);
+  /*
+   * Checking: the box rounds into a ball, the red lid swings shut from the
+   * hinge at the back, then the band and the button pop in.
+   */
+  .on .box {
+    border-radius: 50%;
+    border-color: var(--ball-line);
+    background: var(--ball-bottom);
     transition:
-      transform 0.2s cubic-bezier(0.2, 0.9, 0.3, 1.2),
-      fill 0.15s,
-      stroke 0.15s;
+      border-radius 0.18s ease-out,
+      border-color 0.18s,
+      background 0.18s;
   }
-
-  /* Closed: snaps shut and takes on the Poké Ball colours. */
   .on .lid {
     transform: none;
-    fill: var(--ball-top);
-    transition:
-      transform 0.18s cubic-bezier(0.55, 0, 0.9, 0.5),
-      fill 0.12s 0.06s,
-      stroke 0.12s;
+    transition: transform 0.2s 0.12s cubic-bezier(0.55, 0, 0.9, 0.5);
   }
-  .on .base,
-  .on .button {
-    fill: var(--ball-bottom);
+  .on .band {
+    transform: none;
+    transition: transform 0.12s 0.3s ease-out;
   }
-  .on .lid,
-  .on .base,
-  .on .button {
-    stroke: var(--ball-line);
-  }
+  .on .button,
   .on .glint {
-    fill: var(--ball-line);
+    transform: none;
+    transition: transform 0.18s 0.34s cubic-bezier(0.3, 1.6, 0.5, 1);
   }
 
   /* Just caught: a few wobbles on the floor, then the button clicks. */
-  .body {
-    transform-origin: 16px 30px;
-  }
-  .caught .body {
-    animation: wobble 0.62s 0.18s ease-in-out;
+  .caught .box {
+    animation: wobble 0.62s 0.5s ease-in-out;
   }
   .caught .glint {
-    transform-origin: 16px 17px;
-    animation: click 0.3s 0.78s ease-out;
+    animation: click 0.3s 1.12s ease-out;
   }
   @keyframes wobble {
     0%,
@@ -156,7 +178,7 @@
   }
 
   .large {
-    padding: 0.4rem 1rem 0.4rem 0.5rem;
+    padding: 0.4rem 1rem 0.4rem 0.6rem;
     border-radius: 999px;
     border: 2px solid var(--border-strong);
     background: var(--surface);
@@ -172,11 +194,13 @@
     border-radius: 10px;
   }
   @media (prefers-reduced-motion: reduce) {
-    .ball *,
-    .on .lid {
+    .box,
+    .on .box,
+    svg *,
+    .on svg * {
       transition: none;
     }
-    .caught .body,
+    .caught .box,
     .caught .glint {
       animation: none;
     }
