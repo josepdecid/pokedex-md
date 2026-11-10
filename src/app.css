@@ -16,6 +16,7 @@
   --danger-soft: #f9e1df;
   --radius: 14px;
   --tabbar-h: 60px;
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%235f6b67' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 
   --type-normal: #8f8f73;
   --type-fire: #e0662b;
@@ -52,6 +53,7 @@
     --accent-text: #8fdcc4;
     --danger: #f2827a;
     --danger-soft: #3a1f1d;
+    --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%239aa8a3' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
 }
 
@@ -101,6 +103,24 @@ textarea {
   border-radius: 12px;
   border: 1px solid var(--border-strong);
   background: var(--surface);
+}
+
+/* Replace the native arrow, which hugs the right edge and ignores padding. */
+select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: var(--select-chevron);
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 12px 8px;
+  text-overflow: ellipsis;
+}
+
+@media (forced-colors: active) {
+  select {
+    appearance: auto;
+    padding-right: 0.75rem;
+  }
 }
 
 input:focus-visible,
