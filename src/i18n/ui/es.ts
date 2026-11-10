@@ -41,11 +41,17 @@ export const es: UiStrings = {
 
   'pokemon.back': 'Pokédex',
   'pokemon.obtain': 'Cómo conseguirlo',
-  'pokemon.obtainNone': 'Aún no hay información de reclutamiento.',
+  'pokemon.evolveLevel': 'Nivel {level}',
+  'pokemon.evolveItem': '{count} × {item}',
   'pokemon.camp': 'Vive en',
   'pokemon.prev': 'Anterior',
   'pokemon.next': 'Siguiente',
   'pokemon.notFound': 'Ese Pokémon no está en este juego.',
+
+  'obtain.floor': 'Piso {floors}',
+  'obtain.floors': 'Pisos {floors}',
+  'obtain.level': 'Nv. {level}',
+  'obtain.rate': 'Reclutamiento: {rate} %',
 
   'sections.incomplete': 'Incompletos',
   'sections.complete': 'Completos',

@@ -112,6 +112,17 @@ method:
   legendary: "Legendary encounter"
   strong-foe: "Strong foe (can be Shiny)"
   fainted: "Found fainted in a dungeon"
-  evolution: "Evolve a team member"
   mystery-house: "Mystery House"
   pokemon-square: "Pokémon Square (post-game)"
+section:
+  recruit: "Recruit"
+  evolve: "Evolve"
+  mystery-house: "Mystery House"
+  fainted: "Found fainted"
+section-none:
+  recruit: "Can't be recruited in any dungeon."
+  evolve: "Doesn't evolve from another Pokémon."
+  mystery-house: "Never shows up in a Mystery House."
+  fainted: "Never found fainted in a dungeon."
+item:
+  evolution-crystal: "Evolution Crystal"

@@ -5,11 +5,29 @@ export interface ObtainMethod {
   id: string;
   /** Whether obtain entries using this method name a dungeon. */
   dungeon: boolean;
+  /** Section of the Pokémon page it is listed in (one of GameData.sections). */
+  section: string;
 }
 
 export interface Obtain {
   method: string;
   dungeon?: string;
+  /** Floors it appears on, e.g. "1-3, 5". */
+  floors?: string;
+  /** Its level there. */
+  level?: number;
+  /** Base recruit rate in %; negative means it can't be recruited without boosts. */
+  rate?: number;
+}
+
+/** What it takes to evolve into an entry. At least one of `level` and `item` is set. */
+export interface Evolution {
+  /** Entry it evolves from. */
+  from: string;
+  level?: number;
+  item?: string;
+  /** How many of `item` it takes (1 if absent). */
+  count?: number;
 }
 
 export interface PokemonEntry {
@@ -24,6 +42,8 @@ export interface PokemonEntry {
   portrait?: string;
   types: string[];
   camp: string;
+  /** Absent if it doesn't evolve from another Pokémon in this game. */
+  evolvesFrom?: Evolution;
   obtain: Obtain[];
 }
 
@@ -46,6 +66,8 @@ export interface GameData {
   platform: string;
   releaseYear: number;
   types: string[];
+  /** Sections of a Pokémon's "How to get it", in order. `evolve` lists `evolvesFrom`; the rest list methods. */
+  sections: string[];
   methods: ObtainMethod[];
   pokemon: PokemonEntry[];
   /** In unlock order. */

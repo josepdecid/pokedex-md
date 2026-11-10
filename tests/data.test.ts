@@ -1,4 +1,4 @@
-import { mkdtempSync, mkdirSync, writeFileSync, cpSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
@@ -71,6 +71,36 @@ describe('shipped data', () => {
     expect(dx.idAliases.unown).toBe('unown-a');
   });
 
+  it('says how each evolved Pokémon evolves, and only those', () => {
+    const byId = new Map(dx.pokemon.map((e) => [e.id, e]));
+    expect(byId.get('beedrill')!.evolvesFrom).toEqual({ from: 'kakuna', level: 10 });
+    expect(byId.get('machamp')!.evolvesFrom).toEqual({ from: 'machoke', item: 'evolution-crystal', count: 4 });
+    expect(byId.get('hitmontop')!.evolvesFrom).toEqual({ from: 'tyrogue', level: 20, item: 'evolution-crystal', count: 2 });
+    expect(byId.get('weedle')!.evolvesFrom).toBeUndefined();
+    expect(dx.pokemon.filter((e) => e.evolvesFrom).length).toBe(215);
+    expect(result.dictionaries.dx!.es!['item.evolution-crystal']).toBe('Evolito');
+  });
+
+  it('puts every method in a section and names the Mystery House dungeons', () => {
+    expect(dx.sections).toEqual(['recruit', 'evolve', 'mystery-house', 'fainted']);
+    for (const m of dx.methods) expect(dx.sections, m.id).toContain(m.section);
+    const beedrill = dx.pokemon.find((e) => e.id === 'beedrill')!;
+    expect(beedrill.obtain).toContainEqual(expect.objectContaining({ method: 'mystery-house', dungeon: 'silver-trench' }));
+    const names = result.dictionaries.dx!.en!;
+    for (const s of dx.sections) expect(names[`section-none.${s}`], s).toBeTruthy();
+  });
+
+  it('has floors, level and recruit rate from Bulbapedia, including fainted Pokémon', () => {
+    const obtain = (id: string) => dx.pokemon.find((e) => e.id === id)!.obtain;
+    expect(obtain('beedrill')).toContainEqual({ method: 'dungeon', dungeon: 'silent-chasm', floors: '8-9', level: 14, rate: 14.4 });
+    expect(obtain('gligar')).toContainEqual({ method: 'fainted', dungeon: 'silent-chasm', floors: '2-9', level: 15, rate: 100 });
+    expect(obtain('metagross')).toContainEqual({ method: 'strong-foe', dungeon: 'silent-chasm', floors: '6, 8-9', level: 45, rate: -6.4 });
+    // Every fainted Pokémon is tied to a dungeon now (Serebii only said "fainted in a dungeon").
+    const fainted = dx.pokemon.flatMap((e) => e.obtain).filter((o) => o.method === 'fainted');
+    expect(fainted.length).toBeGreaterThan(400);
+    for (const o of fainted) expect(o.dungeon).toBeTruthy();
+  });
+
   it('keeps entries in National Dex order', () => {
     const dex = dx.pokemon.map((e) => e.dex);
     expect(dex).toEqual([...dex].sort((a, b) => a - b));
@@ -114,6 +144,33 @@ describe('validation', () => {
       expect(problems).toContain('unknown camp "nowhere"');
       expect(problems).toContain('unknown dungeon "atlantis"');
     }
+  });
+
+  it('reports evolve on a Pokémon with no pre-evolution in the game, and a missing one', () => {
+    const dir = copy();
+    const file = join(dir, 'games/dx/pokemon.yaml');
+    const yaml = readFileSync(file, 'utf8')
+      .replace('- id: weedle\n  types: [bug, poison]\n  camp: stump-forest\n', '- id: weedle\n  types: [bug, poison]\n  camp: stump-forest\n  evolve: { level: 3 }\n')
+      .replace('  evolve: { level: 10 }\n', '');
+    writeFileSync(file, yaml);
+    expect(() => buildData(dir, PORTRAITS)).toThrow('weedle: has evolve but doesn\'t evolve from a Pokémon in this game');
+    writeFileSync(file, yaml.replace('  evolve: { level: 3 }\n', ''));
+    expect(buildData(dir, PORTRAITS).warnings.join('\n')).toContain('butterfree: evolves from "metapod" but has no evolve requirement');
+  });
+
+  it('reports malformed floors', () => {
+    const dir = copy();
+    const file = join(dir, 'games/dx/pokemon.yaml');
+    const yaml = readFileSync(file, 'utf8');
+    writeFileSync(file, yaml.replace('floors: "8-9", level: 14', 'floors: "B8F", level: 14'));
+    expect(() => buildData(dir, PORTRAITS)).toThrow('floors look like "1-3, 5"');
+  });
+
+  it('reports a method in an unknown section', () => {
+    const dir = copy();
+    const file = join(dir, 'games/dx/game.yaml');
+    writeFileSync(file, readFileSync(file, 'utf8').replace('section: fainted }', 'section: nowhere }'));
+    expect(() => buildData(dir, PORTRAITS)).toThrow('method "fainted": unknown section "nowhere"');
   });
 
   it('warns about missing artwork unless it is marked `artwork: false`', () => {

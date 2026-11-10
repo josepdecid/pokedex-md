@@ -23,11 +23,16 @@ const TypesFile = z.array(id);
 const SpeciesFile = z
   .array(z.strictObject({ id, dex: z.number().int().positive(), evolvesFrom: id.optional() }))
   .superRefine(unique('species'));
+/** Built-in section listing each entry's `evolve`. */
+const EVOLVE_SECTION = 'evolve';
 const GameFile = z.strictObject({
   id,
   platform: z.string(),
   releaseYear: z.number().int(),
-  methods: z.array(z.strictObject({ id, dungeon: z.boolean() })).superRefine(unique('method')),
+  sections: z.array(id).min(1),
+  methods: z
+    .array(z.strictObject({ id, dungeon: z.boolean(), section: id }))
+    .superRefine(unique('method')),
   idAliases: z.record(id, id).default({}),
 });
 // `artwork: false`: Serebii has no artwork for it, so don't warn that it's missing.
@@ -42,7 +47,20 @@ const PokemonFile = z
       form: id.optional(),
       types: z.array(id).min(1).max(2),
       camp: id,
-      obtain: z.array(z.strictObject({ method: id, dungeon: id.optional() })),
+      evolve: z
+        .strictObject({ level: z.number().int().positive().optional(), item: id.optional(), count: z.number().int().positive().optional() })
+        .refine((e) => e.level !== undefined || e.item !== undefined, 'evolve needs a level or an item')
+        .refine((e) => e.count === undefined || e.item !== undefined, 'evolve count needs an item')
+        .optional(),
+      obtain: z.array(
+        z.strictObject({
+          method: id,
+          dungeon: id.optional(),
+          floors: z.string().regex(/^\d+(-\d+)?(, \d+(-\d+)?)*$/, 'floors look like "1-3, 5"').optional(),
+          level: z.number().int().positive().optional(),
+          rate: z.number().optional(),
+        }),
+      ),
     }),
   )
   .superRefine(unique('pokemon'));
@@ -169,13 +187,24 @@ export function buildData(
     };
 
     const methods = new Map(game.methods.map((m) => [m.id, m]));
+    const sectionSet = new Set(game.sections);
+    if (sectionSet.size !== game.sections.length) problems.push(`${where('game.yaml')}: sections has duplicates`);
+    for (const m of game.methods) {
+      if (!sectionSet.has(m.section)) problems.push(`${where('game.yaml')}: method "${m.id}": unknown section "${m.section}"`);
+      if (m.section === EVOLVE_SECTION) problems.push(`${where('game.yaml')}: method "${m.id}": section "${EVOLVE_SECTION}" is built in`);
+    }
     const dungeonSet = new Set(dungeons.map((d) => d.id));
     const campSet = new Set(camps.map((c) => c.id));
     const entryIds = new Set(pokemon.map((p) => p.id));
+    const speciesInGame = new Set(pokemon.map((p) => p.species ?? p.id));
+    // An evolution links to the species' first entry (its first form).
+    const entryOfSpecies = new Map<string, string>();
+    for (const p of pokemon) if (!entryOfSpecies.has(p.species ?? p.id)) entryOfSpecies.set(p.species ?? p.id, p.id);
     // Every key that must have an English name.
     const required = new Set<string>(['game.title', 'game.short']);
     for (const t of types) required.add(`type.${t}`);
     for (const m of game.methods) required.add(`method.${m.id}`);
+    for (const sec of game.sections) required.add(`section.${sec}`).add(`section-none.${sec}`);
     for (const d of dungeons) required.add(`dungeon.${d.id}`);
     for (const c of camps) required.add(`camp.${c.id}`);
 
@@ -192,8 +221,14 @@ export function buildData(
         else if (method.dungeon && !o.dungeon) problems.push(`${at}: method "${o.method}" needs a dungeon`);
         else if (!method.dungeon && o.dungeon) problems.push(`${at}: method "${o.method}" does not take a dungeon`);
         if (o.dungeon && !dungeonSet.has(o.dungeon)) problems.push(`${at}: unknown dungeon "${o.dungeon}"`);
+        if (!o.dungeon && (o.floors || o.level || o.rate !== undefined)) problems.push(`${at}: floors, level and rate need a dungeon`);
       }
-      if (p.obtain.length === 0) warnings.push(`${at}: no way to obtain listed`);
+      // Evolution: only from a pre-evolution that is in this game.
+      const preEvolution = s?.evolvesFrom && speciesInGame.has(s.evolvesFrom) ? s.evolvesFrom : undefined;
+      if (preEvolution && !p.evolve) warnings.push(`${at}: evolves from "${preEvolution}" but has no evolve requirement`);
+      if (!preEvolution && p.evolve) problems.push(`${at}: has evolve but doesn't evolve from a Pokémon in this game`);
+      if (p.evolve?.item) required.add(`item.${p.evolve.item}`);
+      if (p.obtain.length === 0 && !p.evolve) warnings.push(`${at}: no way to obtain listed`);
       // A form uses its own portrait when there is one, otherwise the species portrait.
       const formKey = p.form ? `${speciesId}-${p.form}` : undefined;
       if (formKey) portraitKeys.add(formKey);
@@ -209,6 +244,7 @@ export function buildData(
         ...(portrait ? { portrait } : {}),
         types: p.types,
         camp: p.camp,
+        ...(preEvolution && p.evolve ? { evolvesFrom: { from: entryOfSpecies.get(preEvolution)!, ...p.evolve } } : {}),
         obtain: p.obtain,
       };
     });
@@ -275,6 +311,7 @@ export function buildData(
       platform: game.platform,
       releaseYear: game.releaseYear,
       types: types.filter((t) => entries.some((e) => e.types.includes(t))),
+      sections: game.sections,
       methods: game.methods,
       pokemon: entries.map((e) => ({ ...e, familyOrder: familyIndex.get(e.id)! })),
       dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1, ...artwork('dungeons', d) })),

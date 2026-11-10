@@ -1,10 +1,10 @@
-import type { Camp, Dungeon, GameData, PokemonEntry } from './game-data.ts';
+import type { Camp, Dungeon, GameData, Obtain, PokemonEntry } from './game-data.ts';
 import type { ProgressStore } from './progress.svelte.ts';
 
 export interface DungeonEncounter {
   entry: PokemonEntry;
-  /** Method ids (dungeon, strong-foe, legendary...) for this Pokémon in this dungeon. */
-  methods: string[];
+  /** How this Pokémon shows up in this dungeon (recruit, strong foe, Mystery House...). */
+  obtains: Obtain[];
 }
 
 /** A loaded game: static data, lookups derived from it, and the player's progress. */
@@ -32,12 +32,12 @@ export class GameSession {
     const byCamp = new Map<string, PokemonEntry[]>(data.camps.map((c) => [c.id, []]));
     for (const entry of data.pokemon) {
       byCamp.get(entry.camp)?.push(entry);
-      const methodsHere = new Map<string, string[]>();
+      const here = new Map<string, Obtain[]>();
       for (const o of entry.obtain) {
         if (!o.dungeon) continue;
-        methodsHere.set(o.dungeon, [...(methodsHere.get(o.dungeon) ?? []), o.method]);
+        here.set(o.dungeon, [...(here.get(o.dungeon) ?? []), o]);
       }
-      for (const [dungeonId, methods] of methodsHere) byDungeon.get(dungeonId)?.push({ entry, methods });
+      for (const [dungeonId, obtains] of here) byDungeon.get(dungeonId)?.push({ entry, obtains });
     }
     this.encountersByDungeon = byDungeon;
     this.entriesByCamp = byCamp;
