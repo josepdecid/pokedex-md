@@ -35,6 +35,15 @@
   const hiddenActive = $derived(!filterPanel.open && (filters.type !== '' || filters.sort !== 'family'));
 
   const reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // The tools stay on screen mid-list, so a new filter starts its results from the top.
+  // Skips the first run, which would undo the router restoring the list's scroll position.
+  let filtersApplied = false;
+  $effect(() => {
+    void [filters.query, filters.status, filters.type, filters.sort];
+    if (filtersApplied) window.scrollTo(0, 0);
+    filtersApplied = true;
+  });
 </script>
 
 <div class="tools">
@@ -93,12 +102,12 @@
       </label>
     {/each}
   </div>
-</div>
 
-<p class="summary" aria-live="polite">
-  {t('pokedex.showing', { count: visible.length, total: session.data.pokemon.length })}
-  {#if filtered}<button type="button" class="link-button" onclick={clearFilters}>{t('pokedex.clear')}</button>{/if}
-</p>
+  <p class="summary" aria-live="polite">
+    {t('pokedex.showing', { count: visible.length, total: session.data.pokemon.length })}
+    {#if filtered}<button type="button" class="link-button" onclick={clearFilters}>{t('pokedex.clear')}</button>{/if}
+  </p>
+</div>
 
 {#if visible.length}
   <PokemonList entries={visible} {session} />
@@ -107,10 +116,32 @@
 {/if}
 
 <style>
+  /* Full-bleed over .page's gutter, so rows don't show beside it as they scroll under.
+     The top margin cancels .page's padding, so it rests where it pins and doesn't shift. */
   .tools {
     display: grid;
     gap: 0.6rem;
-    margin-bottom: 0.5rem;
+    margin: -1rem -16px var(--tools-fade);
+    padding: 0.5rem 16px 0;
+    background: var(--bg);
+    --tools-fade: 1rem;
+  }
+  /* Not on short screens (phones in landscape), where it would cover most of the list. */
+  @media (min-height: 480px) {
+    .tools {
+      position: sticky;
+      top: var(--topbar-h);
+      z-index: 5;
+    }
+    /* Rows fade out as they scroll under. Fills the margin above, so it's invisible at rest. */
+    .tools::after {
+      content: '';
+      position: absolute;
+      inset: 100% 0 auto;
+      height: var(--tools-fade);
+      background: linear-gradient(var(--bg), transparent);
+      pointer-events: none;
+    }
   }
   .search-row {
     display: flex;
@@ -219,7 +250,9 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    margin: 0.75rem 0.25rem 0.5rem;
+    margin: 0 0.25rem;
+    /* Room for the clear button, so the row doesn't grow and nudge the list when it appears. */
+    min-height: 1.75rem;
     font-size: 0.85rem;
     color: var(--muted);
   }
