@@ -40,7 +40,7 @@ export interface PokemonEntry {
   /** Position when sorting by family: dex order, with each evolution line kept together. */
   familyOrder: number;
   form?: string;
-  /** Portrait file name (portraits/<portrait>.png): the form's own portrait or the species one. Absent if none. */
+  /** Portrait path under public/ (portraits/<gameId>/<species>[-<form>].webp): the form's own or the species one. Absent if none. */
   portrait?: string;
   types: string[];
   camp: string;
@@ -78,8 +78,6 @@ export interface GameData {
   dungeons: Dungeon[];
   /** In unlock order. */
   camps: Camp[];
-  /** Portrait (entry.portrait) -> artists, for every portrait this game uses. */
-  portraitCredits: Record<string, string[]>;
   /** Old entry id -> current entry id, applied to saved progress on load. */
   idAliases: Record<string, string>;
 }

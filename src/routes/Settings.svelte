@@ -11,13 +11,6 @@
   let { session }: { session: GameSession } = $props();
 
   const gameName = $derived(i18n.name('game', 'short'));
-  // Everyone credited for at least one portrait in this game (CC BY-NC requires attribution).
-  const portraitArtists = $derived.by(() => {
-    const names = [...new Set(Object.values(session.data.portraitCredits).flat())];
-    const first = names.filter((n) => n === 'Spike Chunsoft');
-    const rest = names.filter((n) => n !== 'Spike Chunsoft').sort(i18n.collator.compare);
-    return new Intl.ListFormat(i18n.locale, { type: 'conjunction' }).format([...first, ...rest]);
-  });
   const total = $derived(session.data.pokemon.length);
 
   let persisted = $state(false);
@@ -188,11 +181,6 @@
 <section class="card">
   <h2>{t('about.title')}</h2>
   <p class="small">{t('about.sources')}</p>
-  <p class="small">
-    {t('about.portraits')}
-    <a href="https://github.com/PMDCollab/SpriteCollab" target="_blank" rel="noopener">{t('about.portraitsLink')}</a>
-  </p>
-  {#if portraitArtists}<p class="muted small">{t('about.portraitArtists', { artists: portraitArtists })}</p>{/if}
   <p class="small">
     <a href="https://www.serebii.net/dungeonrescueteamdx/" target="_blank" rel="noopener">{t('about.artwork')}</a>
   </p>

@@ -118,8 +118,5 @@ export const es: UiStrings = {
   'about.title': 'Acerca de',
   'about.disclaimer': 'Hecho por fans y no oficial. Sin relación con Nintendo, Creatures, GAME FREAK, The Pokémon Company ni Spike Chunsoft. Los nombres de los Pokémon son marcas registradas de sus respectivos propietarios.',
   'about.sources': 'Los datos de reclutamiento se basan en Serebii y Bulbapedia y pueden contener errores. Los nombres en español proceden de WikiDex y Bulbapedia.',
-  'about.portraits': 'Los retratos de los Pokémon proceden de SpriteCollab, de PMDCollab, y se comparten bajo la licencia CC BY-NC 4.0. La mayoría son de los juegos oficiales de Mundo misterioso de Spike Chunsoft.',
-  'about.artwork': 'Ilustraciones de los campamentos, capturas de los territorios e iconos de objetos de Serebii.net.',
-  'about.portraitArtists': 'Artistas de los retratos: {artists}.',
-  'about.portraitsLink': 'SpriteCollab en GitHub',
+  'about.artwork': 'Retratos de los Pokémon, ilustraciones de los campamentos, capturas de los territorios e iconos de objetos de Serebii.net.',
 };

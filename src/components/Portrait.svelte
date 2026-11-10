@@ -8,13 +8,13 @@
   }: {
     /** Checklist entry, used to match the same portrait across pages in view transitions. */
     entryId: string;
-    /** Portrait file name (entry.portrait); a placeholder is shown when undefined. */
+    /** Portrait path under public/ (entry.portrait); a placeholder is shown when undefined. */
     portrait: string | undefined;
     size: number;
   } = $props();
 
   let failed = $state(false);
-  const src = $derived(`${import.meta.env.BASE_URL}portraits/${portrait}.png`);
+  const src = $derived(`${import.meta.env.BASE_URL}${portrait}`);
   const morph = $derived(router.morphId === entryId);
 </script>
 
@@ -48,8 +48,6 @@
     height: var(--size);
     border-radius: calc(var(--size) / 5);
     background: var(--surface-2);
-    /* Pixel art: scale by whole multiples (40px source) and keep the pixels crisp. */
-    image-rendering: pixelated;
     box-shadow: 0 0 0 1px var(--border);
   }
   .placeholder {

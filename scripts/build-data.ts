@@ -65,7 +65,6 @@ const PokemonFile = z
     }),
   )
   .superRefine(unique('pokemon'));
-const PortraitCreditsFile = z.record(id, z.array(z.string().min(1)));
 /** `<kind>: { <id>: name }` */
 // Each kind is a map of names, or the string `english` to say this language uses the
 // English names on purpose (e.g. Pokémon names in Spanish), which silences the fallback warning.
@@ -117,11 +116,7 @@ const englishKinds = (file: z.infer<typeof LocaleFile> | undefined) =>
 const listDirs = (dir: string) =>
   existsSync(dir) ? readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).sort() : [];
 
-export function buildData(
-  dataDir: string,
-  portraitsDir = join(dataDir, '../public/portraits'),
-  artworkDir = join(dataDir, '../public'),
-): BuildResult {
+export function buildData(dataDir: string, artworkDir = join(dataDir, '../public')): BuildResult {
   const problems: string[] = [];
   const warnings: string[] = [];
 
@@ -148,16 +143,6 @@ export function buildData(
     lineBase.set(s.id, base.id);
   }
   const typeSet = new Set(types);
-
-  const creditsFile = join(dataDir, 'shared/portrait-credits.yaml');
-  const portraitCredits = existsSync(creditsFile) ? (readYaml(creditsFile, PortraitCreditsFile, problems) ?? {}) : {};
-  // Keys are a species id or `<species>-<form>`; form keys are checked once the games are read.
-  const portraitKeys = new Set<string>(speciesById.keys());
-  for (const key of Object.keys(portraitCredits)) {
-    if (!existsSync(join(portraitsDir, `${key}.png`))) {
-      problems.push(`public/portraits/${key}.png is missing (listed in portrait-credits.yaml); run npm run portraits`);
-    }
-  }
 
   const locales = listDirs(join(dataDir, 'locales'));
   if (!locales.includes(DEFAULT_LOCALE)) problems.push(`locales/${DEFAULT_LOCALE}/ is required`);
@@ -240,10 +225,10 @@ export function buildData(
       if (p.evolve?.item) required.add(`item.${p.evolve.item}`);
       if (p.obtain.length === 0 && !p.evolve) warnings.push(`${at}: no way to obtain listed`);
       // A form uses its own portrait when there is one, otherwise the species portrait.
-      const formKey = p.form ? `${speciesId}-${p.form}` : undefined;
-      if (formKey) portraitKeys.add(formKey);
-      const portrait = [formKey, speciesId].find((k) => k && portraitCredits[k]);
-      if (!portrait) warnings.push(`${at}: no portrait for species "${speciesId}"`);
+      const portrait = [p.form && `${speciesId}-${p.form}`, speciesId]
+        .map((k) => k && `portraits/${gameId}/${k}.webp`)
+        .find((path) => path && existsSync(join(artworkDir, path)));
+      if (!portrait) warnings.push(`${at}: public/portraits/${gameId}/${speciesId}.webp is missing; run npm run portraits`);
       required.add(`species.${speciesId}`);
       if (p.form) required.add(`form.${p.form}`);
       return {
@@ -327,16 +312,10 @@ export function buildData(
       pokemon: entries.map((e) => ({ ...e, familyOrder: familyIndex.get(e.id)! })),
       dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1, ...artwork('dungeons', d) })),
       camps: camps.map((c) => ({ id: c.id, ...artwork('camps', c) })),
-      portraitCredits: Object.fromEntries(
-        [...new Set(entries.flatMap((e) => (e.portrait ? [e.portrait] : [])))].map((k) => [k, portraitCredits[k]!]),
-      ),
       idAliases: game.idAliases,
     });
   }
 
-  for (const key of Object.keys(portraitCredits)) {
-    if (!portraitKeys.has(key)) problems.push(`shared/portrait-credits.yaml: "${key}" is not a species or a form used by any game`);
-  }
   if (games.length === 0) problems.push('no games found in data/games/');
   if (problems.length) throw new DataError(problems);
   return { games, dictionaries, warnings };
