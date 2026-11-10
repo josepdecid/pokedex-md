@@ -160,8 +160,10 @@ button:focus-visible {
 }
 
 .brand-name {
+  margin: 0;
   font-weight: 800;
   font-size: 1.05rem;
+  line-height: inherit;
   white-space: nowrap;
 }
 
