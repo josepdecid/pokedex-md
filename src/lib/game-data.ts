@@ -31,6 +31,8 @@ export interface Dungeon {
   id: string;
   /** 1-based unlock order. */
   order: number;
+  /** Artwork path under public/ (dungeons/<gameId>/<id>.webp). Absent if none. */
+  image?: string;
 }
 
 export interface Camp {
@@ -46,6 +48,7 @@ export interface GameData {
   types: string[];
   methods: ObtainMethod[];
   pokemon: PokemonEntry[];
+  /** In unlock order. */
   dungeons: Dungeon[];
   /** In unlock order. */
   camps: Camp[];

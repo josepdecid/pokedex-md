@@ -61,13 +61,16 @@ prefixed with the game id (`#/dx/...`), so games never collide.
 
 The initial DX roster (types, camps, recruit locations) was imported from
 [Serebii](https://www.serebii.net/dungeonrescueteamdx/pokemon.shtml) and the dungeon
-list and order from [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Mystery_Dungeon:_Rescue_Team_DX).
+list from [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Mystery_Dungeon:_Rescue_Team_DX).
 It has not been verified entry by entry in-game.
 
-Camp artwork (`public/camps/<gameId>/<camp-id>.webp`) and the camp order come from
-[Serebii](https://www.serebii.net/dungeonrescueteamdx/rescueteamcamp.shtml). Run
-`npm run camp-images` (needs `cwebp`) after adding a camp; it also warns if `camps.yaml`
-is out of Serebii's order. A camp without artwork just shows no image.
+Artwork (`public/camps/<gameId>/<camp-id>.webp`, `public/dungeons/<gameId>/<dungeon-id>.webp`)
+and the camp and dungeon order come from Serebii's
+[camp](https://www.serebii.net/dungeonrescueteamdx/rescueteamcamp.shtml) and
+[dungeon](https://www.serebii.net/dungeonrescueteamdx/dungeon/) lists. Run `npm run artwork`
+(needs `cwebp`) after adding a camp or dungeon; it also warns if `camps.yaml` or `dungeons.yaml`
+is out of Serebii's order. One without artwork shows a "?" placeholder; mark it `artwork: false`
+in the YAML when Serebii has none (Rock Path and Snow Path), so the build doesn't warn.
 
 `evolvesFrom` in `shared/species.yaml` comes from PokéAPI's `pokemon_species.csv`.
 

@@ -13,7 +13,7 @@ describe('shipped data', () => {
 
   it('builds DX', () => {
     expect(dx.pokemon.length).toBeGreaterThan(400);
-    expect(dx.dungeons[0]).toEqual({ id: 'tiny-woods', order: 1 });
+    expect(dx.dungeons[0]).toEqual({ id: 'tiny-woods', order: 1, image: 'dungeons/dx/tiny-woods.webp' });
   });
 
   it('has an English name for everything it references', () => {
@@ -26,6 +26,21 @@ describe('shipped data', () => {
     expect(dx.camps[0]?.id).toBe('wild-plains');
     expect(dx.camps.at(-1)?.id).toBe('enclosed-island');
     for (const c of dx.camps) expect(c.image, c.id).toBe(`camps/dx/${c.id}.webp`);
+  });
+
+  it('lists dungeons in unlock order, each with its artwork unless Serebii has none', () => {
+    const ids = dx.dungeons.map((d) => d.id);
+    expect(ids.at(-1)).toBe('illusory-grotto');
+    // Serebii's order: the post-game lake/sea dungeons come before Howling Forest.
+    expect(ids.indexOf('far-off-sea')).toBeLessThan(ids.indexOf('howling-forest'));
+    const noArtwork = ['rock-path', 'snow-path'];
+    for (const d of dx.dungeons) {
+      expect(d.image, d.id).toBe(noArtwork.includes(d.id) ? undefined : `dungeons/dx/${d.id}.webp`);
+    }
+  });
+
+  it('builds the shipped data without warnings', () => {
+    expect(result.warnings).toEqual([]);
   });
 
   it('has a credited portrait for every Pokémon', () => {
@@ -99,6 +114,14 @@ describe('validation', () => {
       expect(problems).toContain('unknown camp "nowhere"');
       expect(problems).toContain('unknown dungeon "atlantis"');
     }
+  });
+
+  it('warns about missing artwork unless it is marked `artwork: false`', () => {
+    const empty = mkdtempSync(join(tmpdir(), 'pokedex-md-artwork-'));
+    const missing = buildData(DATA, PORTRAITS, empty).warnings.filter((w) => w.includes('npm run artwork'));
+    expect(missing.some((w) => w.includes(': tiny-woods: '))).toBe(true);
+    expect(missing.some((w) => w.includes(': wild-plains: '))).toBe(true);
+    expect(missing.some((w) => w.includes(': rock-path: '))).toBe(false);
   });
 
   it('reports an unknown evolvesFrom', () => {

@@ -4,7 +4,7 @@ import { readValue, storageKeys, writeValue } from './storage.ts';
 interface SettingsData {
   locale?: string;
   installBannerDismissed?: boolean;
-  /** Keys of collapsible sections the user closed, e.g. `camps.complete`. */
+  /** Keys of collapsible sections the user closed, e.g. `camps.complete` (see CompletionSections). */
   collapsedSections?: string[];
 }
 

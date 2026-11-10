@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseHash, paths, sharedCamp, sharedEntry } from '../src/lib/router.svelte.ts';
+import { parseHash, paths, sharedCamp, sharedDungeon, sharedEntry } from '../src/lib/router.svelte.ts';
 
 describe('parseHash', () => {
   it('parses game-prefixed routes', () => {
@@ -52,5 +52,22 @@ describe('sharedCamp', () => {
     expect(sharedCamp(null, beau)).toBeNull();
     expect(sharedCamp(beau, pika)).toBeNull();
     expect(sharedCamp(pika, beau)).toBeNull();
+  });
+});
+
+describe('sharedDungeon', () => {
+  const dungeons = { name: 'dungeons', gameId: 'dx' } as const;
+  const woods = { name: 'dungeon', gameId: 'dx', id: 'tiny-woods' } as const;
+  const camps = { name: 'camps', gameId: 'dx' } as const;
+
+  it('morphs the dungeon going into and out of its page from the dungeon list', () => {
+    expect(sharedDungeon(dungeons, woods)).toBe('tiny-woods');
+    expect(sharedDungeon(woods, dungeons)).toBe('tiny-woods');
+  });
+
+  it('does not morph on first load or to other pages', () => {
+    expect(sharedDungeon(null, woods)).toBeNull();
+    expect(sharedDungeon(camps, woods)).toBeNull();
+    expect(sharedCamp(dungeons, woods)).toBeNull();
   });
 });

@@ -1,5 +1,5 @@
 # Rescue Team Camps (where each recruited Pokémon lives), in unlock order as listed by Serebii.
-# Artwork: public/camps/dx/<id>.webp, downloaded by `npm run camp-images`.
+# Artwork: public/camps/dx/<id>.webp, downloaded by `npm run artwork`.
 - id: wild-plains
 - id: sky-blue-plains
 - id: beau-plains

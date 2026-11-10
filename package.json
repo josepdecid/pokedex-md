@@ -12,7 +12,7 @@
     "test": "npm run data && vitest run",
     "portraits": "node scripts/fetch-portraits.ts",
     "icons": "node scripts/build-icons.ts",
-    "camp-images": "node scripts/fetch-camp-images.ts"
+    "artwork": "node scripts/fetch-artwork.ts"
   },
   "dependencies": {
     "idb-keyval": "^6.3.0"

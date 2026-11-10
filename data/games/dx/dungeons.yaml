@@ -1,4 +1,7 @@
-# Dungeons in the order they unlock (story first, then post-game).
+# Dungeons in the order they unlock (story first, then post-game), as listed by Serebii.
+# Artwork: public/dungeons/dx/<id>.webp, downloaded by `npm run artwork`.
+# Serebii doesn't list Rock Path or Snow Path (and has no artwork for them); they sit
+# where they unlock in the story, right after Lapis Cave and Mt. Blaze.
 - id: tiny-woods
 - id: thunderwave-cave
 - id: mt-steel
@@ -8,17 +11,25 @@
 - id: great-canyon
 - id: lapis-cave
 - id: rock-path
+  artwork: false
 - id: mt-blaze
 - id: snow-path
+  artwork: false
 - id: frosty-forest
 - id: mt-freeze
 - id: magma-cavern
 - id: sky-tower
 - id: uproar-forest
+- id: waterfall-pond
+- id: desert-region
+- id: southern-cavern
+- id: wyvern-hill
+- id: darknight-relic
+- id: unown-relic
+- id: grand-sea
+- id: far-off-sea
 - id: howling-forest
 - id: stormy-sea
-- id: silver-trench
-- id: meteor-cave
 - id: buried-relic
 - id: solar-cave
 - id: fiery-field
@@ -32,14 +43,8 @@
 - id: joyous-tower
 - id: purity-forest
 - id: murky-cave
-- id: desert-region
-- id: southern-cavern
-- id: waterfall-pond
-- id: wyvern-hill
-- id: darknight-relic
-- id: unown-relic
-- id: grand-sea
-- id: far-off-sea
+- id: silver-trench
+- id: meteor-cave
 - id: oddity-cave
 - id: remains-island
 - id: marvelous-sea

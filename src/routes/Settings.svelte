@@ -194,7 +194,7 @@
   </p>
   {#if portraitArtists}<p class="muted small">{t('about.portraitArtists', { artists: portraitArtists })}</p>{/if}
   <p class="small">
-    <a href="https://www.serebii.net/dungeonrescueteamdx/rescueteamcamp.shtml" target="_blank" rel="noopener">{t('about.campArt')}</a>
+    <a href="https://www.serebii.net/dungeonrescueteamdx/" target="_blank" rel="noopener">{t('about.artwork')}</a>
   </p>
   <p class="muted small">{t('about.disclaimer')}</p>
 </section>
