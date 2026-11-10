@@ -10,6 +10,9 @@ export const filters = $state({
   sort: 'family' as SortOrder,
 });
 
+// Whether the type and sort selects are shown. Hidden by default.
+export const filterPanel = $state({ open: false });
+
 export function clearFilters(): void {
   filters.query = '';
   filters.status = 'all';
