@@ -55,6 +55,8 @@ export const es: UiStrings = {
 
   'sections.incomplete': 'Incompletos',
   'sections.complete': 'Completos',
+  'sections.unrecruited': 'No reclutados',
+  'sections.recruited': 'Reclutados',
 
   'dungeons.intro': 'En orden de desbloqueo. El contador indica cuántos de los Pokémon que aparecen en cada uno has reclutado.',
   'dungeon.back': 'Territorios',

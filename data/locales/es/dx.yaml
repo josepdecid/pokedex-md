@@ -118,7 +118,7 @@ method:
   dungeon: "Reclutar en un territorio"
   legendary: "Encuentro con un legendario"
   strong-foe: "Superrival (puede ser variocolor)"
-  fainted: "Encontrado debilitado en un territorio"
+  fainted: "Debilitado"
   mystery-house: "Casa misteriosa"
   pokemon-square: "Plaza Pokémon (tras la historia principal)"
 section:

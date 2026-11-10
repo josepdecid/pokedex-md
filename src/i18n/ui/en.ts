@@ -54,6 +54,8 @@ export const en = {
 
   'sections.incomplete': 'Incomplete',
   'sections.complete': 'Complete',
+  'sections.unrecruited': 'Unrecruited',
+  'sections.recruited': 'Recruited',
 
   'dungeons.intro': 'In unlock order. The count is how many of the Pokémon found there you have recruited.',
   'dungeon.back': 'Dungeons',

@@ -1,7 +1,7 @@
 <script lang="ts">
   import ArtworkHero from '../components/ArtworkHero.svelte';
-  import PokemonList from '../components/PokemonList.svelte';
   import ProgressBar from '../components/ProgressBar.svelte';
+  import RecruitSections from '../components/RecruitSections.svelte';
   import { i18n, t } from '../i18n/i18n.svelte.ts';
   import { paths, router } from '../lib/router.svelte.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
@@ -23,7 +23,7 @@
     <ProgressBar {done} total={residents.length} label={t('progress.label', { done, total: residents.length })} />
   </div>
   <h2 class="visually-hidden">{t('camp.residents')}</h2>
-  <PokemonList entries={residents} {session} />
+  <RecruitSections entries={residents} {session} storageKey="camp" />
 {:else}
   <p class="muted">{t('camp.notFound')}</p>
 {/if}
