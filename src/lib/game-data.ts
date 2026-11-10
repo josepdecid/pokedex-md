@@ -17,6 +17,8 @@ export interface PokemonEntry {
   id: string;
   species: string;
   dex: number;
+  /** Position when sorting by family: dex order, with each evolution line kept together. */
+  familyOrder: number;
   form?: string;
   /** Portrait file name (portraits/<portrait>.png): the form's own portrait or the species one. Absent if none. */
   portrait?: string;

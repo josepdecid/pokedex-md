@@ -32,6 +32,7 @@ export const es: UiStrings = {
   'pokedex.type': 'Tipo',
   'pokedex.type.any': 'Todos los tipos',
   'pokedex.sort': 'Ordenar por',
+  'pokedex.sort.family': 'Familia',
   'pokedex.sort.dex': 'Número',
   'pokedex.sort.name': 'Nombre',
   'pokedex.showing': 'Mostrando {count} de {total}',

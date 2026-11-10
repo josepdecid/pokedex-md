@@ -54,6 +54,22 @@ describe('shipped data', () => {
     const dex = dx.pokemon.map((e) => e.dex);
     expect(dex).toEqual([...dex].sort((a, b) => a - b));
   });
+
+  it('keeps evolution lines together in family order', () => {
+    const byFamily = [...dx.pokemon].sort((a, b) => a.familyOrder - b.familyOrder).map((e) => e.species);
+    const run = (...ids: string[]) => {
+      const start = byFamily.indexOf(ids[0]!);
+      expect(byFamily.slice(start, start + ids.length)).toEqual(ids);
+      return start;
+    };
+    expect(byFamily[0]).toBe('bulbasaur');
+    // A line sits where its lowest-numbered member would: Elekid's line between Mr. Mime and Jynx's.
+    expect(run('elekid', 'electabuzz', 'electivire')).toBeGreaterThan(byFamily.indexOf('mr-mime'));
+    run('pichu', 'pikachu', 'raichu');
+    run('oddish', 'gloom', 'vileplume', 'bellossom');
+    run('wurmple', 'silcoon', 'beautifly', 'cascoon', 'dustox');
+    expect(new Set(dx.pokemon.map((e) => e.familyOrder)).size).toBe(dx.pokemon.length);
+  });
 });
 
 describe('validation', () => {
@@ -77,6 +93,12 @@ describe('validation', () => {
       expect(problems).toContain('unknown camp "nowhere"');
       expect(problems).toContain('unknown dungeon "atlantis"');
     }
+  });
+
+  it('reports an unknown evolvesFrom', () => {
+    const dir = copy();
+    writeFileSync(join(dir, 'shared/species.yaml'), '- { id: missingno, dex: 999, evolvesFrom: nobody }\n', { flag: 'a' });
+    expect(() => buildData(dir, PORTRAITS)).toThrow('unknown evolvesFrom "nobody"');
   });
 
   it('lets a game override a shared name and falls back to English for other locales', () => {

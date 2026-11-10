@@ -21,7 +21,7 @@ const unique = <T extends { id: string }>(label: string) => (items: T[], ctx: z.
 
 const TypesFile = z.array(id);
 const SpeciesFile = z
-  .array(z.strictObject({ id, dex: z.number().int().positive() }))
+  .array(z.strictObject({ id, dex: z.number().int().positive(), evolvesFrom: id.optional() }))
   .superRefine(unique('species'));
 const GameFile = z.strictObject({
   id,
@@ -103,6 +103,25 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
   const types = readYaml(join(dataDir, 'shared/types.yaml'), TypesFile, problems) ?? [];
   const species = readYaml(join(dataDir, 'shared/species.yaml'), SpeciesFile, problems) ?? [];
   const speciesById = new Map(species.map((s) => [s.id, s]));
+  const evolutions = new Map<string, string[]>();
+  for (const s of species) {
+    if (!s.evolvesFrom) continue;
+    if (!speciesById.has(s.evolvesFrom)) problems.push(`shared/species.yaml: ${s.id}: unknown evolvesFrom "${s.evolvesFrom}"`);
+    evolutions.set(s.evolvesFrom, [...(evolutions.get(s.evolvesFrom) ?? []), s.id]);
+  }
+  // Base of each species' evolution line (Elekid for Electivire).
+  const lineBase = new Map<string, string>();
+  for (const s of species) {
+    let base = s;
+    for (let steps = 0; base.evolvesFrom && speciesById.has(base.evolvesFrom); steps++) {
+      if (steps > species.length) {
+        problems.push(`shared/species.yaml: ${s.id}: evolvesFrom loops`);
+        break;
+      }
+      base = speciesById.get(base.evolvesFrom)!;
+    }
+    lineBase.set(s.id, base.id);
+  }
   const typeSet = new Set(types);
 
   const creditsFile = join(dataDir, 'shared/portrait-credits.yaml');
@@ -182,6 +201,23 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
     // Stable sort: forms sharing a dex number keep their pokemon.yaml order (Unown A-Z, !, ?).
     entries.sort((a, b) => a.dex - b.dex);
 
+    // Family order: dex order, but a whole evolution line sits where its lowest-numbered
+    // member would (Elekid, Electabuzz, Electivire at #125). Within a line, each species is
+    // followed by its evolutions in dex order (Oddish, Gloom, Vileplume, Bellossom).
+    const inGame = new Set(entries.map((e) => e.species));
+    const speciesRank = new Map<string, number>();
+    const visited = new Set<string>();
+    const visit = (speciesId: string) => {
+      if (visited.has(speciesId)) return;
+      visited.add(speciesId);
+      if (inGame.has(speciesId)) speciesRank.set(speciesId, speciesRank.size);
+      const next = [...(evolutions.get(speciesId) ?? [])].sort((a, b) => speciesById.get(a)!.dex - speciesById.get(b)!.dex);
+      for (const child of next) visit(child);
+    };
+    for (const e of entries) visit(lineBase.get(e.species) ?? e.species);
+    const familyOrder = [...entries].sort((a, b) => speciesRank.get(a.species)! - speciesRank.get(b.species)!);
+    const familyIndex = new Map(familyOrder.map((e, i) => [e.id, i]));
+
     for (const [from, to] of Object.entries(game.idAliases)) {
       if (!entryIds.has(to)) problems.push(`${where('game.yaml')}: idAliases.${from} points to unknown entry "${to}"`);
       if (entryIds.has(from)) problems.push(`${where('game.yaml')}: idAliases.${from} is still an entry id`);
@@ -226,7 +262,7 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
       releaseYear: game.releaseYear,
       types: types.filter((t) => entries.some((e) => e.types.includes(t))),
       methods: game.methods,
-      pokemon: entries,
+      pokemon: entries.map((e) => ({ ...e, familyOrder: familyIndex.get(e.id)! })),
       dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1 })),
       camps,
       portraitCredits: Object.fromEntries(

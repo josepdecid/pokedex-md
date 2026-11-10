@@ -31,6 +31,7 @@ export const en = {
   'pokedex.type': 'Type',
   'pokedex.type.any': 'All types',
   'pokedex.sort': 'Sort by',
+  'pokedex.sort.family': 'Family',
   'pokedex.sort.dex': 'Number',
   'pokedex.sort.name': 'Name',
   'pokedex.showing': 'Showing {count} of {total}',
