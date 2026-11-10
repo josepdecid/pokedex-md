@@ -58,22 +58,6 @@
     document.title = t('app.name');
   });
 
-  // The game's logo in the UI language, from public/logos/<gameId>/<locale>.webp.
-  // Falls back to the game's short name if there's no logo for that game or language.
-  const logo = $derived(`${import.meta.env.BASE_URL}logos/${gameId}/${i18n.locale}.webp`);
-  let missingLogo = $state<string | null>(null);
-  const showLogo = $derived(session !== null && missingLogo !== logo);
-
-  // Header count, e.g. "Pokédex: 12/473 (2%)". Rounded down so 100% only shows when it's all done.
-  const headerCount = $derived.by(() => {
-    if (!session) return '';
-    const done = session.recruitedCount;
-    const total = session.data.pokemon.length;
-    const ratio = total ? Math.floor((done / total) * 100) / 100 : 1;
-    const percent = new Intl.NumberFormat(i18n.locale, { style: 'percent' }).format(ratio);
-    return t('progress.header', { done, total, percent });
-  });
-
   // Suggest installing once someone is clearly using the app, not on their first visit.
   // The count is read when the Pokédex opens (untracked), so the banner never appears mid-list
   // and pushes rows away while someone is ticking them off.
@@ -90,24 +74,17 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href={paths.pokedex(gameId)}>
-      {#if showLogo}
-        <img class="brand-logo" src={logo} alt={i18n.name('game', 'title')} height="48" onerror={() => (missingLogo = logo)} />
-      {/if}
-      <div class="brand-text" class:visually-hidden={showLogo}>
-        <h1 class="brand-name">{t('app.name')}</h1>
-        {#if session && !showLogo}<span class="brand-game">{i18n.name('game', 'short')}</span>{/if}
-      </div>
+      <img class="brand-logo" src="{import.meta.env.BASE_URL}logos/pokemon.webp" alt="" height="48" />
+      <h1 class="visually-hidden">{t('app.name')}</h1>
     </a>
     {#if session}
       <div class="topbar-progress">
-        <p class="topbar-count" aria-hidden="true">
-          {headerCount}
-        </p>
+        <p class="topbar-game">{i18n.name('game', 'short')}</p>
         <ProgressBar
           done={session.recruitedCount}
           total={session.data.pokemon.length}
           label={t('progress.label', { done: session.recruitedCount, total: session.data.pokemon.length })}
-          count={false}
+          percent
         />
       </div>
     {/if}

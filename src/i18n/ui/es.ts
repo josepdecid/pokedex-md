@@ -17,7 +17,6 @@ export const es: UiStrings = {
   'nav.settings': 'Ajustes',
 
   'progress.label': '{done} de {total} reclutados',
-  'progress.header': 'Pokédex: {done}/{total} ({percent})',
 
   'toggle.mark': 'Marcar a {name} como reclutado',
   'toggle.unmark': 'Marcar a {name} como no reclutado',
