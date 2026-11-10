@@ -168,9 +168,11 @@ button:focus-visible {
   view-transition-name: topbar;
 }
 
+/* Logo on the left; on the right, the Pokédex count over the progress bar. */
 .topbar-inner {
-  display: grid;
-  gap: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   max-width: 720px;
   margin: 0 auto;
   padding: 0.6rem 16px 0.65rem;
@@ -188,7 +190,7 @@ button:focus-visible {
 .brand-logo {
   flex: none;
   width: auto;
-  height: 44px;
+  height: 48px;
 }
 
 .brand-text {
@@ -212,6 +214,22 @@ button:focus-visible {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.topbar-progress {
+  flex: 1;
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.topbar-count {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-align: right;
 }
 
 .page {
@@ -245,16 +263,26 @@ button:focus-visible {
   font-weight: 600;
 }
 
-.tabbar svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.tabbar img {
+  width: auto;
+  height: 30px;
+  opacity: 0.55;
+  filter: saturate(0.4);
+  transition:
+    opacity 0.15s,
+    filter 0.15s,
+    transform 0.15s;
 }
 
 .tabbar a[aria-current='page'] {
   color: var(--accent-text);
+}
+
+/* The current tab's icon in full colour, a little larger. */
+.tabbar a[aria-current='page'] img {
+  opacity: 1;
+  filter: none;
+  transform: scale(1.1);
 }
 
 .tabbar a:focus-visible {
@@ -442,5 +470,8 @@ button:focus-visible {
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
+  }
+  .tabbar img {
+    transition: none;
   }
 }

@@ -7,7 +7,7 @@ export interface ObtainMethod {
   dungeon: boolean | 'any';
   /** Section of the Pokémon page it is listed in (one of GameData.sections). */
   section: string;
-  /** Icon path under public/ (icons/<gameId>/<name>.png). Absent if none. */
+  /** Icon path under public/ (icons/<gameId>/<name>.webp). Absent if none. */
   icon?: string;
 }
 

@@ -178,10 +178,10 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
       return {};
     };
 
-    /** `{ icon }` if public/icons/<gameId>/<name>.png exists. */
+    /** `{ icon }` if public/icons/<gameId>/<name>.webp exists. */
     const icon = (name: string | undefined, what: string): { icon?: string } => {
       if (!name) return {};
-      const path = `icons/${gameId}/${name}.png`;
+      const path = `icons/${gameId}/${name}.webp`;
       if (existsSync(join(artworkDir, path))) return { icon: path };
       warnings.push(`${where('game.yaml')}: ${what}: public/${path} is missing`);
       return {};

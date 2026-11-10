@@ -48,10 +48,10 @@
     route.name === 'pokemon' ? 'pokedex' : route.name === 'dungeon' ? 'dungeons' : route.name === 'camp' ? 'camps' : route.name,
   );
   const tabs = $derived([
-    { id: 'pokedex', href: paths.pokedex(gameId), label: t('nav.pokedex'), icon: 'M4 6h16M4 12h16M4 18h10' },
-    { id: 'dungeons', href: paths.dungeons(gameId), label: t('nav.dungeons'), icon: 'M4 20h4v-4h4v-4h4V8h4' },
-    { id: 'camps', href: paths.camps(gameId), label: t('nav.camps'), icon: 'M3 20L12 5l9 15zM12 20v-5' },
-    { id: 'settings', href: paths.settings(gameId), label: t('nav.settings'), icon: 'M12 15a3 3 0 100-6 3 3 0 000 6zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1' },
+    { id: 'pokedex', href: paths.pokedex(gameId), label: t('nav.pokedex') },
+    { id: 'dungeons', href: paths.dungeons(gameId), label: t('nav.dungeons') },
+    { id: 'camps', href: paths.camps(gameId), label: t('nav.camps') },
+    { id: 'settings', href: paths.settings(gameId), label: t('nav.settings') },
   ] as const);
 
   $effect(() => {
@@ -62,6 +62,17 @@
   // Falls back to the game's short name if there's no logo for that game or language.
   const logo = $derived(`${import.meta.env.BASE_URL}logos/${gameId}/${i18n.locale}.webp`);
   let missingLogo = $state<string | null>(null);
+  const showLogo = $derived(session !== null && missingLogo !== logo);
+
+  // Header count, e.g. "Pokédex: 12/473 (2%)". Rounded down so 100% only shows when it's all done.
+  const headerCount = $derived.by(() => {
+    if (!session) return '';
+    const done = session.recruitedCount;
+    const total = session.data.pokemon.length;
+    const ratio = total ? Math.floor((done / total) * 100) / 100 : 1;
+    const percent = new Intl.NumberFormat(i18n.locale, { style: 'percent' }).format(ratio);
+    return t('progress.header', { done, total, percent });
+  });
 
   // Suggest installing once someone is clearly using the app, not on their first visit.
   // The count is read when the Pokédex opens (untracked), so the banner never appears mid-list
@@ -79,20 +90,26 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href={paths.pokedex(gameId)}>
-      {#if session && missingLogo !== logo}
-        <img class="brand-logo" src={logo} alt={i18n.name('game', 'title')} height="44" onerror={() => (missingLogo = logo)} />
+      {#if showLogo}
+        <img class="brand-logo" src={logo} alt={i18n.name('game', 'title')} height="48" onerror={() => (missingLogo = logo)} />
       {/if}
-      <div class="brand-text">
+      <div class="brand-text" class:visually-hidden={showLogo}>
         <h1 class="brand-name">{t('app.name')}</h1>
-        {#if session && missingLogo === logo}<span class="brand-game">{i18n.name('game', 'short')}</span>{/if}
+        {#if session && !showLogo}<span class="brand-game">{i18n.name('game', 'short')}</span>{/if}
       </div>
     </a>
     {#if session}
-      <ProgressBar
-        done={session.recruitedCount}
-        total={session.data.pokemon.length}
-        label={t('progress.label', { done: session.recruitedCount, total: session.data.pokemon.length })}
-      />
+      <div class="topbar-progress">
+        <p class="topbar-count" aria-hidden="true">
+          {headerCount}
+        </p>
+        <ProgressBar
+          done={session.recruitedCount}
+          total={session.data.pokemon.length}
+          label={t('progress.label', { done: session.recruitedCount, total: session.data.pokemon.length })}
+          count={false}
+        />
+      </div>
     {/if}
   </div>
 </header>
@@ -128,7 +145,7 @@
 <nav class="tabbar" aria-label={t('nav.label')}>
   {#each tabs as tab (tab.id)}
     <a href={tab.href} aria-current={section === tab.id ? 'page' : undefined}>
-      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d={tab.icon} /></svg>
+      <img src={`${import.meta.env.BASE_URL}icons/${gameId}/${tab.id}.webp`} alt="" width="151" height="96" />
       <span>{tab.label}</span>
     </a>
   {/each}

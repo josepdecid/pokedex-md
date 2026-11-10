@@ -16,6 +16,7 @@ export const en = {
   'nav.settings': 'Settings',
 
   'progress.label': '{done} of {total} recruited',
+  'progress.header': 'Pokédex: {done}/{total} ({percent})',
 
   'toggle.mark': 'Mark {name} as recruited',
   'toggle.unmark': 'Mark {name} as not recruited',
