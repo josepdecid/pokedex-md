@@ -26,6 +26,14 @@ describe('shipped data', () => {
     for (const e of dx.pokemon) expect(dx.portraitCredits[e.species]?.length, e.id).toBeGreaterThan(0);
   });
 
+  it('has a Spanish name for everything, with Pokémon names kept in English', () => {
+    const es = result.dictionaries.dx!.es!;
+    expect(result.warnings.filter((w) => w.startsWith('locales/es'))).toEqual([]);
+    expect(es['species.pikachu']).toBe('Pikachu');
+    expect(es['dungeon.murky-cave']).toBe('Cueva Tenebrosa');
+    expect(es['camp.gourd-swamp']).toBe('Ciénaga Calabaza');
+  });
+
   it('keeps entries in National Dex order', () => {
     const dex = dx.pokemon.map((e) => e.dex);
     expect(dex).toEqual([...dex].sort((a, b) => a - b));
@@ -58,11 +66,24 @@ describe('validation', () => {
   it('lets a game override a shared name and falls back to English for other locales', () => {
     const dir = copy();
     writeFileSync(join(dir, 'locales/en/dx.yaml'), `${'species:\n  pikachu: "Pika Override"\n'}`, { flag: 'a' });
-    mkdirSync(join(dir, 'locales/es'));
-    writeFileSync(join(dir, 'locales/es/shared.yaml'), 'type:\n  fire: "Fuego"\n');
+    mkdirSync(join(dir, 'locales/fr'));
+    writeFileSync(join(dir, 'locales/fr/shared.yaml'), 'type:\n  fire: "Feu"\n');
     const result = buildData(dir, PORTRAITS);
     expect(result.dictionaries.dx!.en!['species.pikachu']).toBe('Pika Override');
-    expect(result.dictionaries.dx!.es!['type.fire']).toBe('Fuego');
-    expect(result.dictionaries.dx!.es!['type.water']).toBe('Water');
+    expect(result.dictionaries.dx!.fr!['type.fire']).toBe('Feu');
+    expect(result.dictionaries.dx!.fr!['type.water']).toBe('Water');
+    expect(result.warnings.some((w) => w.startsWith('locales/fr: ') && w.includes('fall back to English'))).toBe(true);
+  });
+
+  it('does not warn about kinds a locale marks as `english`', () => {
+    const dir = copy();
+    mkdirSync(join(dir, 'locales/fr'));
+    cpSync(join(dir, 'locales/es/dx.yaml'), join(dir, 'locales/fr/dx.yaml'));
+    writeFileSync(join(dir, 'locales/fr/shared.yaml'), 'type:\n  fire: "Feu"\nspecies: english\n');
+    const result = buildData(dir, PORTRAITS);
+    const fallback = result.warnings.find((w) => w.startsWith('locales/fr: '));
+    // Only the 17 untranslated types fall back; species are English on purpose.
+    expect(fallback).toMatch(/^locales\/fr: 17\//);
+    expect(result.dictionaries.dx!.fr!['species.pikachu']).toBe('Pikachu');
   });
 });

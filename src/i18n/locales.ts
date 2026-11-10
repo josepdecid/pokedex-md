@@ -14,6 +14,7 @@ export const DEFAULT_LOCALE = 'en';
 
 export const LOCALES: readonly LocaleInfo[] = [
   { code: 'en', label: 'English', load: async () => en },
+  { code: 'es', label: 'Español', load: async () => (await import('./ui/es.ts')).es },
 ];
 
 export function pickLocale(preferred: readonly string[]): string {

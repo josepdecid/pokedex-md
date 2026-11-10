@@ -1,0 +1,23 @@
+# Spanish (Spain) names shared by every game. Official names, as listed on WikiDex
+# and Bulbapedia ("In other languages"); never machine-translated.
+type:
+  normal: "Normal"
+  fire: "Fuego"
+  water: "Agua"
+  electric: "Eléctrico"
+  grass: "Planta"
+  ice: "Hielo"
+  fighting: "Lucha"
+  poison: "Veneno"
+  ground: "Tierra"
+  flying: "Volador"
+  psychic: "Psíquico"
+  bug: "Bicho"
+  rock: "Roca"
+  ghost: "Fantasma"
+  dragon: "Dragón"
+  dark: "Siniestro"
+  steel: "Acero"
+  fairy: "Hada"
+# Pokémon keep their English names in Spanish.
+species: english

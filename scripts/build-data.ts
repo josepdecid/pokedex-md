@@ -46,7 +46,9 @@ const PokemonFile = z
   .superRefine(unique('pokemon'));
 const PortraitCreditsFile = z.record(id, z.array(z.string().min(1)));
 /** `<kind>: { <id>: name }` */
-const LocaleFile = z.record(id, z.record(id, z.string().min(1))).nullable();
+// Each kind is a map of names, or the string `english` to say this language uses the
+// English names on purpose (e.g. Pokémon names in Spanish), which silences the fallback warning.
+const LocaleFile = z.record(id, z.union([z.literal('english'), z.record(id, z.string().min(1))])).nullable();
 
 export interface BuildResult {
   games: GameData[];
@@ -81,10 +83,15 @@ function readYaml<T>(file: string, schema: z.ZodType<T>, problems: string[]): T 
 function flatten(file: z.infer<typeof LocaleFile> | undefined): Dictionary {
   const out: Dictionary = {};
   for (const [kind, names] of Object.entries(file ?? {})) {
+    if (names === 'english') continue;
     for (const [key, name] of Object.entries(names)) out[`${kind}.${key}`] = name;
   }
   return out;
 }
+
+/** Kinds a locale file marks as `english` (intentionally the same as English). */
+const englishKinds = (file: z.infer<typeof LocaleFile> | undefined) =>
+  Object.entries(file ?? {}).flatMap(([kind, names]) => (names === 'english' ? [kind] : []));
 
 const listDirs = (dir: string) =>
   existsSync(dir) ? readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).sort() : [];
@@ -109,9 +116,10 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
 
   const locales = listDirs(join(dataDir, 'locales'));
   if (!locales.includes(DEFAULT_LOCALE)) problems.push(`locales/${DEFAULT_LOCALE}/ is required`);
-  const sharedLocale = new Map(
-    locales.map((l) => [l, flatten(readYaml(join(dataDir, `locales/${l}/shared.yaml`), LocaleFile, problems))]),
+  const sharedLocaleFiles = new Map(
+    locales.map((l) => [l, readYaml(join(dataDir, `locales/${l}/shared.yaml`), LocaleFile, problems)]),
   );
+  const sharedLocale = new Map(locales.map((l) => [l, flatten(sharedLocaleFiles.get(l))]));
 
   const games: GameData[] = [];
   const dictionaries: BuildResult['dictionaries'] = {};
@@ -173,12 +181,15 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
     }
 
     // Dictionaries: <locale>/<game> overrides <locale>/shared, and every locale falls back to English.
-    const gameLocale = new Map(
+    const gameLocaleFiles = new Map(
       locales.map((l) => {
         const file = join(dataDir, `locales/${l}/${gameId}.yaml`);
-        return [l, existsSync(file) ? flatten(readYaml(file, LocaleFile, problems)) : {}];
+        return [l, existsSync(file) ? readYaml(file, LocaleFile, problems) : null];
       }),
     );
+    const gameLocale = new Map(locales.map((l) => [l, flatten(gameLocaleFiles.get(l))]));
+    const sameAsEnglish = (l: string) =>
+      new Set([...englishKinds(sharedLocaleFiles.get(l)), ...englishKinds(gameLocaleFiles.get(l))]);
     const merged = (l: string): Dictionary => ({ ...sharedLocale.get(l), ...gameLocale.get(l) });
     const english = merged(DEFAULT_LOCALE);
     for (const key of required) {
@@ -196,7 +207,8 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
       for (const key of required) dict[key] = own[key] ?? english[key] ?? key;
       dictionaries[gameId][l] = dict;
       if (l !== DEFAULT_LOCALE) {
-        const missing = [...required].filter((k) => !own[k]).length;
+        const inherited = sameAsEnglish(l);
+        const missing = [...required].filter((k) => !own[k] && !inherited.has(k.split('.')[0]!)).length;
         if (missing) warnings.push(`locales/${l}: ${missing}/${required.size} names for ${gameId} fall back to English`);
       }
     }
