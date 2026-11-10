@@ -58,6 +58,13 @@ export function sharedEntry(from: Route | null, to: Route): string | null {
   return null;
 }
 
+/** The camp whose artwork and name morph between the camp list and its page, either way. */
+export function sharedCamp(from: Route | null, to: Route): string | null {
+  if (from?.name === 'camps' && to.name === 'camp') return to.id;
+  if (from?.name === 'camp' && to.name === 'camps') return from.id;
+  return null;
+}
+
 const canAnimate = () =>
   typeof document.startViewTransition === 'function' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -72,6 +79,8 @@ class Router {
   route = $state<Route>({ name: 'pokedex', gameId: DEFAULT_GAME_ID });
   /** Entry id whose portrait/name carry a view-transition-name right now (see sharedEntry). */
   morphId = $state<string | null>(null);
+  /** Camp id whose artwork/name carry a view-transition-name right now (see sharedCamp). */
+  morphCampId = $state<string | null>(null);
   #scroll = new Map<string, number>();
   #current = '';
 
@@ -104,19 +113,23 @@ class Router {
 
     if (!from || !canAnimate()) {
       this.morphId = null;
+      this.morphCampId = null;
       await update();
       return;
     }
 
     // Name the shared elements on the old page before the browser snapshots it.
     this.morphId = sharedEntry(from, route);
+    this.morphCampId = sharedCamp(from, route);
     await tick();
     const transition = document.startViewTransition(async () => {
       await update();
-      if (this.morphId) await morphImagesReady();
+      if (this.morphId || this.morphCampId) await morphImagesReady();
     });
     transition.finished.finally(() => {
-      if (this.#current === hash) this.morphId = null;
+      if (this.#current !== hash) return;
+      this.morphId = null;
+      this.morphCampId = null;
     });
   }
 }

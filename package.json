@@ -11,7 +11,8 @@
     "check": "npm run data && svelte-check --tsconfig ./tsconfig.json",
     "test": "npm run data && vitest run",
     "portraits": "node scripts/fetch-portraits.ts",
-    "icons": "node scripts/build-icons.ts"
+    "icons": "node scripts/build-icons.ts",
+    "camp-images": "node scripts/fetch-camp-images.ts"
   },
   "dependencies": {
     "idb-keyval": "^6.3.0"

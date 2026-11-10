@@ -7,7 +7,7 @@ progress is saved on the device (IndexedDB) and can be backed up and restored as
 - **Pokédex**: all 418 recruitable Pokémon, with search, filter (missing / recruited / type) and sort.
 - **Pokémon pages**: a Mystery Dungeon portrait, how to get it (dungeon, strong foe, legendary encounter, Mystery House...) and its camp.
 - **Dungeons**: in unlock order, with which Pokémon you can recruit in each and how many you have.
-- **Camps**: which Pokémon live in each Rescue Team Camp.
+- **Camps**: in unlock order with their artwork, split into incomplete and complete, and which Pokémon live in each.
 - **Settings**: language, back up / restore / reset progress, install.
 
 ## Development
@@ -21,12 +21,14 @@ npm test          # data validation + unit tests
 npm run check     # svelte-check / TypeScript
 npm run build     # production build in dist/
 npm run portraits # re-download portraits + credits (only needed when species or forms are added)
+npm run camp-images # re-download camp artwork from Serebii (only needed when camps are added; needs cwebp)
 npm run icons     # regenerate the favicon and app icons in public/ from scripts/build-icons.ts
 ```
 
 List ↔ Pokémon page navigation uses the View Transition API: the router names the
 selected Pokémon's portrait and name on both pages so they morph (see `sharedEntry` in
-`src/lib/router.svelte.ts`). Browsers without the API, or with reduced motion on, just
+`src/lib/router.svelte.ts`). Camps do the same with their artwork and name between the camp
+list and the camp page (`sharedCamp`). Browsers without the API, or with reduced motion on, just
 switch pages.
 
 Stack: Vite, Svelte 5, TypeScript, vite-plugin-pwa (Workbox), idb-keyval, Zod + YAML for
@@ -69,6 +71,12 @@ portrait, like Unown letters) are 40×40 portraits from
 CC BY-NC 4.0: no commercial use, and artists must be credited. Most are original Spike
 Chunsoft portraits from earlier Mystery Dungeon games. Artist credits are in
 `data/shared/portrait-credits.yaml` and are listed in Settings → About.
+
+## Camp artwork
+
+`public/camps/<gameId>/<camp-id>.webp` is the official camp artwork (Spike Chunsoft),
+downloaded from [Serebii](https://www.serebii.net/dungeonrescueteamdx/rescueteamcamp.shtml)
+by `npm run camp-images` and credited in Settings → About.
 
 ## Data and disclaimer
 

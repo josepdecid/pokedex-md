@@ -14,7 +14,7 @@ data/
     game.yaml             # metadata, recruit methods, id aliases
     pokemon.yaml          # checklist entries
     dungeons.yaml         # dungeons, in unlock order
-    camps.yaml            # Rescue Team Camps / Friend Areas
+    camps.yaml            # Rescue Team Camps / Friend Areas, in unlock order
   locales/<lang>/         # display names, one folder per language
     shared.yaml           # names shared by every game (species, types)
     <gameId>.yaml         # names for one game; overrides shared.yaml
@@ -63,6 +63,11 @@ The initial DX roster (types, camps, recruit locations) was imported from
 [Serebii](https://www.serebii.net/dungeonrescueteamdx/pokemon.shtml) and the dungeon
 list and order from [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Mystery_Dungeon:_Rescue_Team_DX).
 It has not been verified entry by entry in-game.
+
+Camp artwork (`public/camps/<gameId>/<camp-id>.webp`) and the camp order come from
+[Serebii](https://www.serebii.net/dungeonrescueteamdx/rescueteamcamp.shtml). Run
+`npm run camp-images` (needs `cwebp`) after adding a camp; it also warns if `camps.yaml`
+is out of Serebii's order. A camp without artwork just shows no image.
 
 `evolvesFrom` in `shared/species.yaml` comes from PokéAPI's `pokemon_species.csv`.
 
