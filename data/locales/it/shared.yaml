@@ -1,0 +1,25 @@
+# Italian names shared by every game. Official names from PokéAPI's tables (taken from the games);
+# never machine-translated.
+type:
+  normal: "Normale"
+  fire: "Fuoco"
+  water: "Acqua"
+  electric: "Elettro"
+  grass: "Erba"
+  ice: "Ghiaccio"
+  fighting: "Lotta"
+  poison: "Veleno"
+  ground: "Terra"
+  flying: "Volante"
+  psychic: "Psico"
+  bug: "Coleottero"
+  rock: "Roccia"
+  ghost: "Spettro"
+  dragon: "Drago"
+  dark: "Buio"
+  steel: "Acciaio"
+  fairy: "Folletto"
+# Pokémon keep their English names in Italian.
+species: english
+# Unown letters are the same in every language.
+form: english

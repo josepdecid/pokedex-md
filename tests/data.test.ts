@@ -38,6 +38,24 @@ describe('shipped data', () => {
     }
   });
 
+  it('uses each language\'s own Pokémon names, keyed by the English id', () => {
+    const name = (locale: string) => result.dictionaries.dx![locale]!['species.bulbasaur'];
+    expect(name('fr')).toBe('Bulbizarre');
+    expect(name('de')).toBe('Bisasam');
+    expect(name('ja')).toBe('フシギダネ');
+    // Spanish and Italian keep the English names.
+    expect(name('es')).toBe('Bulbasaur');
+    expect(name('it')).toBe('Bulbasaur');
+  });
+
+  it('uses the DX names of places a remake renamed', () => {
+    const names = result.dictionaries.dx!;
+    expect(names.fr!['camp.mt-moonview']).toBe('Mont Clair de Lune');
+    expect(names.de!['camp.rub-a-dub-river']).toBe('Plätscherfluss');
+    expect(names.it!['camp.wild-plains']).toBe('Piana Selvaggia');
+    expect(names.ja!['dungeon.tiny-woods']).toBe('小さな森');
+  });
+
   it('builds the shipped data without warnings', () => {
     expect(result.warnings).toEqual([]);
   });
@@ -239,24 +257,24 @@ describe('validation', () => {
   it('lets a game override a shared name and falls back to English for other locales', () => {
     const dir = copy();
     writeFileSync(join(dir, 'locales/en/dx.yaml'), `${'species:\n  pikachu: "Pika Override"\n'}`, { flag: 'a' });
-    mkdirSync(join(dir, 'locales/fr'));
-    writeFileSync(join(dir, 'locales/fr/shared.yaml'), 'type:\n  fire: "Feu"\n');
+    mkdirSync(join(dir, 'locales/xx'));
+    writeFileSync(join(dir, 'locales/xx/shared.yaml'), 'type:\n  fire: "Feu"\n');
     const result = buildData(dir);
     expect(result.dictionaries.dx!.en!['species.pikachu']).toBe('Pika Override');
-    expect(result.dictionaries.dx!.fr!['type.fire']).toBe('Feu');
-    expect(result.dictionaries.dx!.fr!['type.water']).toBe('Water');
-    expect(result.warnings.some((w) => w.startsWith('locales/fr: ') && w.includes('fall back to English'))).toBe(true);
+    expect(result.dictionaries.dx!.xx!['type.fire']).toBe('Feu');
+    expect(result.dictionaries.dx!.xx!['type.water']).toBe('Water');
+    expect(result.warnings.some((w) => w.startsWith('locales/xx: ') && w.includes('fall back to English'))).toBe(true);
   });
 
   it('does not warn about kinds a locale marks as `english`', () => {
     const dir = copy();
-    mkdirSync(join(dir, 'locales/fr'));
-    cpSync(join(dir, 'locales/es/dx.yaml'), join(dir, 'locales/fr/dx.yaml'));
-    writeFileSync(join(dir, 'locales/fr/shared.yaml'), 'type:\n  fire: "Feu"\nspecies: english\nform: english\n');
+    mkdirSync(join(dir, 'locales/xx'));
+    cpSync(join(dir, 'locales/es/dx.yaml'), join(dir, 'locales/xx/dx.yaml'));
+    writeFileSync(join(dir, 'locales/xx/shared.yaml'), 'type:\n  fire: "Feu"\nspecies: english\nform: english\n');
     const result = buildData(dir);
-    const fallback = result.warnings.find((w) => w.startsWith('locales/fr: '));
+    const fallback = result.warnings.find((w) => w.startsWith('locales/xx: '));
     // Only the 17 untranslated types fall back; species and forms are English on purpose.
-    expect(fallback).toMatch(/^locales\/fr: 17\//);
-    expect(result.dictionaries.dx!.fr!['species.pikachu']).toBe('Pikachu');
+    expect(fallback).toMatch(/^locales\/xx: 17\//);
+    expect(result.dictionaries.dx!.xx!['species.pikachu']).toBe('Pikachu');
   });
 });
