@@ -39,8 +39,15 @@ New kinds (`move`, `item`, ...) need no code changes in the locale files: add a
 ## Adding a language
 
 1. Copy `locales/en/` to `locales/<lang>/` and translate the values (partial is fine).
-2. Add the UI strings in `src/i18n/ui/<lang>.ts` and register the language in
-   `src/i18n/locales.ts`.
+   Use the official names from the games, not your own translation: the wiki for that
+   language (e.g. WikiDex for Spanish) or Bulbapedia's "In other languages" tables.
+   Watch out for names a remake changed (DX renamed several places), and remember that
+   game terms are translated too (Spanish calls dungeons "territorios").
+2. If a whole kind keeps its English names (Pokémon names in Spanish), write
+   `species: english` instead of copying them. Otherwise the build warns about every
+   name that falls back to English.
+3. Add the UI strings in `src/i18n/ui/<lang>.ts` and register the language in
+   `src/i18n/locales.ts`. A test checks that every string and `{param}` is there.
 
 ## Adding a game
 
@@ -55,5 +62,10 @@ prefixed with the game id (`#/dx/...`), so games never collide.
 The initial DX roster (types, camps, recruit locations) was imported from
 [Serebii](https://www.serebii.net/dungeonrescueteamdx/pokemon.shtml) and the dungeon
 list and order from [Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Mystery_Dungeon:_Rescue_Team_DX).
-It has not been verified entry by entry in-game. Known gap: Celebi's strong-foe
+It has not been verified entry by entry in-game.
+
+Spanish names come from [WikiDex](https://www.wikidex.net/) (which marks the GBA and DX
+names separately) and were cross-checked with Bulbapedia, which agrees on every dungeon.
+For camps Bulbapedia sometimes gives only the GBA name. One real disagreement: Southern
+Island is "Isla Sureña" on WikiDex and "Isla del Sur" on Bulbapedia (we use WikiDex). Known gap: Celebi's strong-foe
 dungeon was missing from the source and was left out.
