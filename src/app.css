@@ -168,7 +168,7 @@ button:focus-visible {
   view-transition-name: topbar;
 }
 
-/* Logo on the left; on the right, the Pokédex count over the progress bar. */
+/* Logo on the left; on the right, the game's name over the progress bar and its count. */
 .topbar-inner {
   display: flex;
   align-items: center;
@@ -193,29 +193,6 @@ button:focus-visible {
   height: 48px;
 }
 
-.brand-text {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  min-width: 0;
-}
-
-.brand-name {
-  margin: 0;
-  font-weight: 800;
-  font-size: 1.05rem;
-  line-height: inherit;
-  white-space: nowrap;
-}
-
-.brand-game {
-  font-size: 0.8rem;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .topbar-progress {
   flex: 1;
   display: grid;
@@ -223,12 +200,14 @@ button:focus-visible {
   min-width: 0;
 }
 
-.topbar-count {
+.topbar-game {
   margin: 0;
-  font-size: 0.9rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: right;
 }
 
