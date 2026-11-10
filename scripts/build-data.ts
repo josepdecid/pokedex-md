@@ -30,8 +30,10 @@ const GameFile = z.strictObject({
   methods: z.array(z.strictObject({ id, dungeon: z.boolean() })).superRefine(unique('method')),
   idAliases: z.record(id, id).default({}),
 });
-const DungeonsFile = z.array(z.strictObject({ id })).superRefine(unique('dungeon'));
-const CampsFile = z.array(z.strictObject({ id })).superRefine(unique('camp'));
+// `artwork: false`: Serebii has no artwork for it, so don't warn that it's missing.
+const Place = z.strictObject({ id, artwork: z.literal(false).optional() });
+const DungeonsFile = z.array(Place).superRefine(unique('dungeon'));
+const CampsFile = z.array(Place).superRefine(unique('camp'));
 const PokemonFile = z
   .array(
     z.strictObject({
@@ -99,7 +101,7 @@ const listDirs = (dir: string) =>
 export function buildData(
   dataDir: string,
   portraitsDir = join(dataDir, '../public/portraits'),
-  campImagesDir = join(dataDir, '../public/camps'),
+  artworkDir = join(dataDir, '../public'),
 ): BuildResult {
   const problems: string[] = [];
   const warnings: string[] = [];
@@ -157,6 +159,14 @@ export function buildData(
     const pokemon = readYaml(join(dir, 'pokemon.yaml'), PokemonFile, problems) ?? [];
     if (!game) continue;
     if (game.id !== gameId) problems.push(`${where('game.yaml')}: id "${game.id}" must match folder name "${gameId}"`);
+
+    /** `{ image }` if public/<kind>/<gameId>/<id>.webp exists (see scripts/fetch-artwork.ts). */
+    const artwork = (kind: 'camps' | 'dungeons', item: z.infer<typeof Place>): { image?: string } => {
+      const image = `${kind}/${gameId}/${item.id}.webp`;
+      if (existsSync(join(artworkDir, image))) return { image };
+      if (item.artwork !== false) warnings.push(`${where(`${kind}.yaml`)}: ${item.id}: public/${image} is missing; run npm run artwork`);
+      return {};
+    };
 
     const methods = new Map(game.methods.map((m) => [m.id, m]));
     const dungeonSet = new Set(dungeons.map((d) => d.id));
@@ -267,13 +277,8 @@ export function buildData(
       types: types.filter((t) => entries.some((e) => e.types.includes(t))),
       methods: game.methods,
       pokemon: entries.map((e) => ({ ...e, familyOrder: familyIndex.get(e.id)! })),
-      dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1 })),
-      camps: camps.map((c) => {
-        const image = `camps/${gameId}/${c.id}.webp`;
-        if (existsSync(join(campImagesDir, gameId, `${c.id}.webp`))) return { id: c.id, image };
-        warnings.push(`${where('camps.yaml')}: ${c.id}: public/${image} is missing; run npm run camp-images`);
-        return { id: c.id };
-      }),
+      dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1, ...artwork('dungeons', d) })),
+      camps: camps.map((c) => ({ id: c.id, ...artwork('camps', c) })),
       portraitCredits: Object.fromEntries(
         [...new Set(entries.flatMap((e) => (e.portrait ? [e.portrait] : [])))].map((k) => [k, portraitCredits[k]!]),
       ),

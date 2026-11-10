@@ -1,6 +1,7 @@
 <script lang="ts">
   let { done, total, label }: { done: number; total: number; label: string } = $props();
-  const pct = $derived(total ? Math.round((done / total) * 100) : 0);
+  // Nothing to do (0/0) is done: a full bar.
+  const pct = $derived(total ? Math.round((done / total) * 100) : 100);
 </script>
 
 <div class="progress" role="img" aria-label={label}>

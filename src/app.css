@@ -300,20 +300,6 @@ button:focus-visible {
   border-color: var(--accent);
 }
 
-.card-link .order {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background: var(--surface-2);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
 .card-link .body {
   flex: 1;
   min-width: 0;
@@ -403,8 +389,8 @@ button:focus-visible {
 }
 
 /* Page transitions (View Transition API). The router names one Pokémon's portrait and
-   name on both pages, so they morph between the list and the Pokémon page. Camps do the
-   same with their artwork and name between the camp list and the camp page. */
+   name on both pages, so they morph between the list and the Pokémon page. Camps and
+   dungeons do the same with their artwork and name between their list and their page. */
 
 ::view-transition-group(*) {
   animation-duration: 260ms;
@@ -419,15 +405,15 @@ button:focus-visible {
 /* Text: scale proportionally from the left instead of stretching to the box. */
 ::view-transition-old(pokemon-name),
 ::view-transition-new(pokemon-name),
-::view-transition-old(camp-name),
-::view-transition-new(camp-name) {
+::view-transition-old(artwork-title),
+::view-transition-new(artwork-title) {
   width: auto;
   height: 100%;
 }
 
 /* Artwork: the card shows a crop of the header image; fill the box instead of stretching. */
-::view-transition-old(camp-image),
-::view-transition-new(camp-image) {
+::view-transition-old(artwork),
+::view-transition-new(artwork) {
   height: 100%;
   object-fit: cover;
 }

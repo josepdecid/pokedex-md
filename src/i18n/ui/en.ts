@@ -46,6 +46,9 @@ export const en = {
   'pokemon.next': 'Next',
   'pokemon.notFound': "That Pokémon isn't in this game.",
 
+  'sections.incomplete': 'Incomplete',
+  'sections.complete': 'Complete',
+
   'dungeons.intro': 'In unlock order. The count is how many of the Pokémon found there you have recruited.',
   'dungeon.back': 'Dungeons',
   'dungeon.number': 'Dungeon {n}',
@@ -53,8 +56,6 @@ export const en = {
   'dungeon.notFound': "That dungeon isn't in this game.",
 
   'camps.intro': 'In unlock order. Every recruited Pokémon lives in one of these camps.',
-  'camps.incomplete': 'Incomplete',
-  'camps.complete': 'Complete',
   'camp.back': 'Camps',
   'camp.residents': 'Pokémon that live here',
   'camp.notFound': "That camp isn't in this game.",
@@ -107,7 +108,7 @@ export const en = {
   'about.disclaimer': 'Fan-made and unofficial. Not affiliated with Nintendo, Creatures, GAME FREAK, The Pokémon Company or Spike Chunsoft. Pokémon names are trademarks of their respective owners.',
   'about.sources': 'Recruitment data is based on Serebii and Bulbapedia and may contain mistakes.',
   'about.portraits': "Pokémon portraits come from PMDCollab's SpriteCollab and are shared under CC BY-NC 4.0. Most are from the official Mystery Dungeon games by Spike Chunsoft.",
-  'about.campArt': 'Camp artwork from Serebii.net.',
+  'about.artwork': 'Camp artwork and dungeon screenshots from Serebii.net.',
   'about.portraitArtists': 'Portrait artists: {artists}.',
   'about.portraitsLink': 'SpriteCollab on GitHub',
 } as const;

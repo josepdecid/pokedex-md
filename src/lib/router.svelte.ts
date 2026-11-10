@@ -58,12 +58,18 @@ export function sharedEntry(from: Route | null, to: Route): string | null {
   return null;
 }
 
-/** The camp whose artwork and name morph between the camp list and its page, either way. */
-export function sharedCamp(from: Route | null, to: Route): string | null {
-  if (from?.name === 'camps' && to.name === 'camp') return to.id;
-  if (from?.name === 'camp' && to.name === 'camps') return from.id;
+/** The id shown on both pages when moving between a list and one of its items, either way. */
+function sharedItem(list: 'camps' | 'dungeons', item: 'camp' | 'dungeon', from: Route | null, to: Route): string | null {
+  if (from?.name === list && to.name === item) return to.id;
+  if (from?.name === item && to.name === list) return from.id;
   return null;
 }
+
+/** The camp whose artwork and name morph between the camp list and its page, either way. */
+export const sharedCamp = (from: Route | null, to: Route) => sharedItem('camps', 'camp', from, to);
+
+/** The dungeon whose artwork and name morph between the dungeon list and its page, either way. */
+export const sharedDungeon = (from: Route | null, to: Route) => sharedItem('dungeons', 'dungeon', from, to);
 
 const canAnimate = () =>
   typeof document.startViewTransition === 'function' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -81,6 +87,8 @@ class Router {
   morphId = $state<string | null>(null);
   /** Camp id whose artwork/name carry a view-transition-name right now (see sharedCamp). */
   morphCampId = $state<string | null>(null);
+  /** Dungeon id whose artwork/name carry a view-transition-name right now (see sharedDungeon). */
+  morphDungeonId = $state<string | null>(null);
   #scroll = new Map<string, number>();
   #current = '';
 
@@ -114,6 +122,7 @@ class Router {
     if (!from || !canAnimate()) {
       this.morphId = null;
       this.morphCampId = null;
+      this.morphDungeonId = null;
       await update();
       return;
     }
@@ -121,15 +130,17 @@ class Router {
     // Name the shared elements on the old page before the browser snapshots it.
     this.morphId = sharedEntry(from, route);
     this.morphCampId = sharedCamp(from, route);
+    this.morphDungeonId = sharedDungeon(from, route);
     await tick();
     const transition = document.startViewTransition(async () => {
       await update();
-      if (this.morphId || this.morphCampId) await morphImagesReady();
+      if (this.morphId || this.morphCampId || this.morphDungeonId) await morphImagesReady();
     });
     transition.finished.finally(() => {
       if (this.#current !== hash) return;
       this.morphId = null;
       this.morphCampId = null;
+      this.morphDungeonId = null;
     });
   }
 }
