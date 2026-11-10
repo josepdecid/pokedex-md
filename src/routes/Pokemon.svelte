@@ -1,10 +1,12 @@
 <script lang="ts">
+  import EntryName from '../components/EntryName.svelte';
+  import MethodIcon from '../components/MethodIcon.svelte';
   import Portrait from '../components/Portrait.svelte';
   import RecruitToggle from '../components/RecruitToggle.svelte';
   import TypeBadge from '../components/TypeBadge.svelte';
   import { i18n, t } from '../i18n/i18n.svelte.ts';
   import { dexLabel } from '../lib/format.ts';
-  import { obtainDetails } from '../lib/obtain.ts';
+  import { formatFloors, formatRate } from '../lib/obtain.ts';
   import { paths, router } from '../lib/router.svelte.ts';
   import type { Evolution, Obtain } from '../lib/game-data.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
@@ -29,7 +31,7 @@
       // Evolve has its own icon; the others use their default method's.
       const icon = id === EVOLVE ? session.data.evolveIcon : session.methodById.get(methods[0]!)?.icon;
       return { id, items, empty, defaultMethod: methods[0], icon };
-    });
+    }).filter((s) => !(entry.shiny && s.empty)); // A Shiny one lists only how it shows up.
   });
   const evolvesFrom = $derived(entry?.evolvesFrom ? session.entryById.get(entry.evolvesFrom.from) : undefined);
 
@@ -49,7 +51,7 @@
       <Portrait entryId={entry.id} portrait={entry.portrait} size={120} />
       <div class="heading">
         <span class="dex">{dexLabel(entry.dex)}</span>
-        <h1 style:view-transition-name={router.morphId === entry.id ? 'pokemon-name' : undefined}>{i18n.entryName(entry)}</h1>
+        <h1 style:view-transition-name={router.morphId === entry.id ? 'pokemon-name' : undefined}><EntryName {entry} /></h1>
         <div class="types">
           {#each entry.types as type (type)}<TypeBadge {type} />{/each}
         </div>
@@ -83,19 +85,29 @@
                 </li>
               {/if}
               {#each section.items as o, i (i)}
-                {@const details = obtainDetails(o)}
+                <!-- The section's default method (plain "Recruit in dungeon") needs no icon. -->
+                {@const showIcon = !!o.dungeon && o.method !== section.defaultMethod}
                 <li>
-                  <span class="where">
-                    {#if o.dungeon}
-                      <a href={paths.dungeon(session.id, o.dungeon)}>{i18n.name('dungeon', o.dungeon)}</a>
-                    {:else}
-                      <span>{i18n.name('method', o.method)}</span>
-                    {/if}
-                    {#if o.dungeon && o.method !== section.defaultMethod}
+                  {#if o.dungeon}
+                    <a href={paths.dungeon(session.id, o.dungeon)}>{i18n.name('dungeon', o.dungeon)}</a>
+                  {:else if session.methodById.get(o.method)?.dungeon === 'any'}
+                    <span class="where">
+                      <span>{t('obtain.anyDungeon')}</span>
                       <small class="label">{i18n.name('method', o.method)}</small>
+                    </span>
+                  {:else}
+                    <span>{i18n.name('method', o.method)}</span>
+                  {/if}
+                  <span class="details">
+                    {#if showIcon}<MethodIcon method={o.method} icon={session.methodById.get(o.method)?.icon} />{/if}
+                    {#if o.floors}<span>{formatFloors(o.floors)}</span>{/if}
+                    {#if o.level !== undefined}<span>{t('obtain.level', { level: o.level })}</span>{/if}
+                    {#if o.rate !== undefined}
+                      <span class="rate" class:blocked={o.rate < 0} title={t('obtain.rateLabel')}>
+                        {t('obtain.rateShort', { rate: formatRate(o.rate) })}
+                      </span>
                     {/if}
                   </span>
-                  {#if details}<span class="label details">{details}</span>{/if}
                 </li>
               {/each}
             </ul>
@@ -110,12 +122,12 @@
   <nav class="pager" aria-label="{t('pokemon.prev')} / {t('pokemon.next')}">
     {#if prev}
       <a href={paths.pokemon(session.id, prev.id)} rel="prev">
-        <small>‹ {t('pokemon.prev')}</small>{i18n.entryName(prev)}
+        <small>‹ {t('pokemon.prev')}</small><span><EntryName entry={prev} /></span>
       </a>
     {:else}<span></span>{/if}
     {#if next}
       <a href={paths.pokemon(session.id, next.id)} rel="next" class="next">
-        <small>{t('pokemon.next')} ›</small>{i18n.entryName(next)}
+        <small>{t('pokemon.next')} ›</small><span><EntryName entry={next} /></span>
       </a>
     {/if}
   </nav>
@@ -198,8 +210,28 @@
     gap: 0.1rem;
   }
   .details {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     font-size: 0.9rem;
     font-variant-numeric: tabular-nums;
+    color: var(--muted);
+  }
+  .details > span + span::before {
+    content: '·';
+    padding: 0 0.4em;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+  .details > :global(.method-icon) {
+    margin-right: 0.4em;
+  }
+  .rate {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .rate.blocked {
+    color: var(--danger);
   }
   .from {
     display: inline-flex;

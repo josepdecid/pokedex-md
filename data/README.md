@@ -88,6 +88,12 @@ come from the Rescue Team DX tables on Bulbapedia's dungeon pages (Rock Path and
 have none). Where Serebii and Bulbapedia disagreed on which Pokémon appear in a dungeon (a
 handful of rows), we follow Bulbapedia.
 
+Which Pokémon can be Shiny (`shiny:` in `pokemon.yaml`) comes from Serebii's
+[Shiny Pokémon](https://www.serebii.net/dungeonrescueteamdx/shinypokemon.shtml) page: the 27 strong
+foes, each Shiny only as that strong foe, plus Celebi, whose Shiny one only shows up in a Mystery
+House (after recruiting Celebi and unlocking Healing Forest). The build adds each Shiny one as its own
+entry (`<id>-shiny`) right after the regular one; its portrait is Serebii's `pokemon/shiny/<dex>.png`.
+
 Mystery House dungeons come from Bulbapedia's [Mystery House](https://bulbapedia.bulbagarden.net/wiki/Mystery_House)
 pools. Serebii also lists a Mystery House for 22 evolved Pokémon that are in none of those pools
 (Ivysaur, Venusaur...), apparently as a generic label for Pokémon that can't be recruited in a

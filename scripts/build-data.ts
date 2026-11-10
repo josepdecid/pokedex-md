@@ -31,7 +31,8 @@ const GameFile = z.strictObject({
   releaseYear: z.number().int(),
   sections: z.array(id).min(1),
   methods: z
-    .array(z.strictObject({ id, dungeon: z.boolean(), section: id, icon: id.optional() }))
+    // dungeon: whether its obtain entries name a dungeon, or `any` for "in any dungeon" (none named).
+    .array(z.strictObject({ id, dungeon: z.union([z.boolean(), z.literal('any')]), section: id, icon: id.optional() }))
     .superRefine(unique('method')),
   evolveIcon: id.optional(),
   idAliases: z.record(id, id).default({}),
@@ -62,6 +63,8 @@ const PokemonFile = z
           rate: z.number().optional(),
         }),
       ),
+      // It can be Shiny: the methods (from its own `obtain`) by which the Shiny one shows up.
+      shiny: z.array(id).min(1).optional(),
     }),
   )
   .superRefine(unique('pokemon'));
@@ -69,6 +72,9 @@ const PokemonFile = z
 // Each kind is a map of names, or the string `english` to say this language uses the
 // English names on purpose (e.g. Pokémon names in Spanish), which silences the fallback warning.
 const LocaleFile = z.record(id, z.union([z.literal('english'), z.record(id, z.string().min(1))])).nullable();
+
+/** Id of the generated Shiny entry of an entry that can be Shiny. */
+const shinyId = (entryId: string) => `${entryId}-shiny`;
 
 export interface BuildResult {
   games: GameData[];
@@ -190,7 +196,10 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
     }
     const dungeonSet = new Set(dungeons.map((d) => d.id));
     const campSet = new Set(camps.map((c) => c.id));
-    const entryIds = new Set(pokemon.map((p) => p.id));
+    const entryIds = new Set(pokemon.flatMap((p) => (p.shiny ? [p.id, shinyId(p.id)] : [p.id])));
+    for (const p of pokemon) {
+      if (p.shiny && pokemon.some((q) => q.id === shinyId(p.id))) problems.push(`${where('pokemon.yaml')}: ${p.id}: its Shiny id "${shinyId(p.id)}" is already an entry id`);
+    }
     const speciesInGame = new Set(pokemon.map((p) => p.species ?? p.id));
     // An evolution links to the species' first entry (its first form).
     const entryOfSpecies = new Map<string, string>();
@@ -203,7 +212,7 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
     for (const d of dungeons) required.add(`dungeon.${d.id}`);
     for (const c of camps) required.add(`camp.${c.id}`);
 
-    const entries = pokemon.map((p) => {
+    const entries = pokemon.flatMap((p) => {
       const at = `${where('pokemon.yaml')}: ${p.id}`;
       const speciesId = p.species ?? p.id;
       const s = speciesById.get(speciesId);
@@ -213,10 +222,11 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
       for (const o of p.obtain) {
         const method = methods.get(o.method);
         if (!method) problems.push(`${at}: unknown method "${o.method}"`);
-        else if (method.dungeon && !o.dungeon) problems.push(`${at}: method "${o.method}" needs a dungeon`);
-        else if (!method.dungeon && o.dungeon) problems.push(`${at}: method "${o.method}" does not take a dungeon`);
+        else if (method.dungeon === true && !o.dungeon) problems.push(`${at}: method "${o.method}" needs a dungeon`);
+        else if (method.dungeon !== true && o.dungeon) problems.push(`${at}: method "${o.method}" does not take a dungeon`);
         if (o.dungeon && !dungeonSet.has(o.dungeon)) problems.push(`${at}: unknown dungeon "${o.dungeon}"`);
-        if (!o.dungeon && (o.floors || o.level || o.rate !== undefined)) problems.push(`${at}: floors, level and rate need a dungeon`);
+        if (!o.dungeon && o.floors) problems.push(`${at}: floors need a dungeon`);
+        if (method && method.dungeon === false && (o.level || o.rate !== undefined)) problems.push(`${at}: level and rate need a dungeon`);
       }
       // Evolution: only from a pre-evolution that is in this game.
       const preEvolution = s?.evolvesFrom && speciesInGame.has(s.evolvesFrom) ? s.evolvesFrom : undefined;
@@ -231,7 +241,7 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
       if (!portrait) warnings.push(`${at}: public/portraits/${gameId}/${speciesId}.webp is missing; run npm run portraits`);
       required.add(`species.${speciesId}`);
       if (p.form) required.add(`form.${p.form}`);
-      return {
+      const entry = {
         id: p.id,
         species: speciesId,
         dex: s?.dex ?? 0,
@@ -242,6 +252,27 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
         ...(preEvolution && p.evolve ? { evolvesFrom: { from: entryOfSpecies.get(preEvolution)!, ...p.evolve } } : {}),
         obtain: p.obtain,
       };
+      if (!p.shiny) return [entry];
+
+      // The Shiny one is its own entry, right after this one, and only shows up by the
+      // methods in `shiny` (never by evolving: it isn't listed as anyone's evolution).
+      for (const m of p.shiny) {
+        if (!p.obtain.some((o) => o.method === m)) problems.push(`${at}: shiny method "${m}" is not in its obtain list`);
+      }
+      const shinyPortrait = `portraits/${gameId}/${p.form ? `${speciesId}-${p.form}` : speciesId}-shiny.webp`;
+      const hasShinyPortrait = existsSync(join(artworkDir, shinyPortrait));
+      if (!hasShinyPortrait) warnings.push(`${at}: public/${shinyPortrait} is missing; run npm run portraits`);
+      const { evolvesFrom: _evolvesFrom, portrait: _portrait, ...base } = entry;
+      return [
+        entry,
+        {
+          ...base,
+          id: shinyId(p.id),
+          shiny: true as const,
+          ...(hasShinyPortrait ? { portrait: shinyPortrait } : {}),
+          obtain: p.obtain.filter((o) => p.shiny!.includes(o.method)),
+        },
+      ];
     });
     // Stable sort: forms sharing a dex number keep their pokemon.yaml order (Unown A-Z, !, ?).
     entries.sort((a, b) => a.dex - b.dex);

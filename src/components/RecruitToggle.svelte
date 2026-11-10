@@ -6,7 +6,7 @@
   let { entry, session, large = false }: { entry: PokemonEntry; session: GameSession; large?: boolean } = $props();
 
   const on = $derived(session.progress.isRecruited(entry.id));
-  const name = $derived(i18n.entryName(entry));
+  const name = $derived(i18n.entryLabel(entry));
 </script>
 
 <button

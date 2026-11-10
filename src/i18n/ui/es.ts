@@ -40,6 +40,9 @@ export const es: UiStrings = {
   'pokedex.clear': 'Quitar filtros',
 
   'pokemon.back': 'Pokédex',
+  // "Variocolor" is the official Spanish term for Shiny.
+  'pokemon.shiny': 'Variocolor',
+  'pokemon.shinyName': '{name} (variocolor)',
   'pokemon.obtain': 'Cómo conseguirlo',
   'pokemon.evolveLevel': 'Nivel {level}',
   'pokemon.evolveItem': '{count} × {item}',
@@ -51,7 +54,7 @@ export const es: UiStrings = {
   'obtain.floor': 'Piso {floors}',
   'obtain.floors': 'Pisos {floors}',
   'obtain.level': 'Nv. {level}',
-  'obtain.rate': 'Reclutamiento: {rate} %',
+  'obtain.anyDungeon': 'Cualquier territorio',
   'obtain.rateShort': '{rate} %',
   'obtain.rateLabel': 'Probabilidad de reclutamiento',
 

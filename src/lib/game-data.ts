@@ -3,8 +3,8 @@
 
 export interface ObtainMethod {
   id: string;
-  /** Whether obtain entries using this method name a dungeon. */
-  dungeon: boolean;
+  /** Whether obtain entries using this method name a dungeon, or `any`: it happens in any dungeon (none named). */
+  dungeon: boolean | 'any';
   /** Section of the Pokémon page it is listed in (one of GameData.sections). */
   section: string;
   /** Icon path under public/ (icons/<gameId>/<name>.png). Absent if none. */
@@ -40,7 +40,9 @@ export interface PokemonEntry {
   /** Position when sorting by family: dex order, with each evolution line kept together. */
   familyOrder: number;
   form?: string;
-  /** Portrait path under public/ (portraits/<gameId>/<species>[-<form>].webp): the form's own or the species one. Absent if none. */
+  /** The Shiny one of another entry (generated as `<id>-shiny`, right after it). Only obtainable by the `obtain` it lists. */
+  shiny?: true;
+  /** Portrait path under public/ (portraits/<gameId>/<species>[-<form>][-shiny].webp): the form's own or the species one. Absent if none. */
   portrait?: string;
   types: string[];
   camp: string;

@@ -2,7 +2,8 @@
 // public/portraits/<gameId>/<portrait>.webp (re-encoded with `cwebp`).
 //
 // <portrait> is the species id, or `<species-id>-<form>` for an entry with a form (Unown B ->
-// unown-b): one file per checklist entry in data/games/<gameId>/pokemon.yaml.
+// unown-b): one file per checklist entry in data/games/<gameId>/pokemon.yaml. An entry that can be
+// Shiny (`shiny:`) also gets `<portrait>-shiny`.
 //
 // Run manually with `npm run portraits` when Pokémon are added; the output is committed,
 // so builds don't depend on Serebii being reachable. Needs `cwebp` (brew install webp).
@@ -17,17 +18,18 @@ import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 
 interface Source {
-  /** Portrait URL for a National Dex number and, for an entry with a form, the form id. */
-  url: (dex: number, form: string | undefined) => string;
+  /** Portrait URL for a National Dex number, the form id of an entry with a form, and whether it's the Shiny one. */
+  url: (dex: number, form: string | undefined, shiny: boolean) => string;
 }
 
 /** Portrait source per game. */
 const SOURCES: Record<string, Source> = {
   dx: {
     // pokemon/025.png; forms are pokemon/201-b.png, with ! and ? as "em" and "qm".
-    url: (dex, form) => {
+    // Shiny ones are pokemon/shiny/012.png.
+    url: (dex, form, shiny) => {
       const suffix = form ? `-${{ exclamation: 'em', question: 'qm' }[form] ?? form}` : '';
-      return `https://www.serebii.net/dungeonrescueteamdx/pokemon/${String(dex).padStart(3, '0')}${suffix}.png`;
+      return `https://www.serebii.net/dungeonrescueteamdx/pokemon/${shiny ? 'shiny/' : ''}${String(dex).padStart(3, '0')}${suffix}.png`;
     },
   },
 };
@@ -50,14 +52,17 @@ const tmp = mkdtempSync(join(tmpdir(), 'portraits-'));
 const failed: string[] = [];
 
 for (const [gameId, { url }] of Object.entries(SOURCES)) {
-  const entries = readYaml(`data/games/${gameId}/pokemon.yaml`) as { id: string; species?: string; form?: string }[];
+  const entries = readYaml(`data/games/${gameId}/pokemon.yaml`) as { id: string; species?: string; form?: string; shiny?: string[] }[];
   const outDir = join(root, 'public/portraits', gameId);
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
 
-  const queue = entries.map((e) => {
+  const queue = entries.flatMap((e) => {
     const speciesId = e.species ?? e.id;
-    return { name: e.form ? `${speciesId}-${e.form}` : speciesId, url: url(dexById.get(speciesId) ?? 0, e.form) };
+    const name = e.form ? `${speciesId}-${e.form}` : speciesId;
+    const dex = dexById.get(speciesId) ?? 0;
+    const portrait = { name, url: url(dex, e.form, false) };
+    return e.shiny ? [portrait, { name: `${name}-shiny`, url: url(dex, e.form, true) }] : [portrait];
   });
   const total = queue.length;
   let done = 0;

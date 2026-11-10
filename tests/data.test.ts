@@ -70,6 +70,29 @@ describe('shipped data', () => {
     expect(dx.idAliases.unown).toBe('unown-a');
   });
 
+  it('adds each Shiny one right after its Pokémon, obtainable only as a strong foe', () => {
+    const shinies = dx.pokemon.filter((e) => e.shiny);
+    // Serebii: 27 strong foes, plus Celebi in a Mystery House.
+    expect(shinies.length).toBe(28);
+    for (const shiny of shinies) {
+      const base = dx.pokemon[dx.pokemon.indexOf(shiny) - 1]!;
+      expect(shiny.id, shiny.id).toBe(`${base.id}-shiny`);
+      expect(shiny.portrait, shiny.id).toBe(`portraits/dx/${base.species}-shiny.webp`);
+      expect(shiny.evolvesFrom, shiny.id).toBeUndefined();
+      expect(shiny.familyOrder, shiny.id).toBe(base.familyOrder + 1);
+      expect(shiny.obtain.length, shiny.id).toBeGreaterThan(0);
+      // The base one can still be recruited the same way.
+      for (const o of shiny.obtain) expect(base.obtain, shiny.id).toContainEqual(o);
+    }
+    const byId = new Map(dx.pokemon.map((e) => [e.id, e]));
+    expect(byId.get('gyarados-shiny')!.obtain).toEqual([
+      { method: 'strong-foe', dungeon: 'waterfall-pond', floors: '5-18', level: 60, rate: -6.4 },
+    ]);
+    expect(byId.get('celebi-shiny')!.obtain.map((o) => o.method)).toEqual(['mystery-house']);
+    const strongFoes = dx.pokemon.filter((e) => !e.shiny && e.obtain.some((o) => o.method === 'strong-foe'));
+    for (const e of strongFoes) expect(byId.get(`${e.id}-shiny`)?.obtain.every((o) => o.method === 'strong-foe'), e.id).toBe(true);
+  });
+
   it('says how each evolved Pokémon evolves, and only those', () => {
     const byId = new Map(dx.pokemon.map((e) => [e.id, e]));
     expect(byId.get('beedrill')!.evolvesFrom).toEqual({ from: 'kakuna', level: 10 });
@@ -105,6 +128,9 @@ describe('shipped data', () => {
     expect(obtain('beedrill')).toContainEqual({ method: 'dungeon', dungeon: 'silent-chasm', floors: '8-9', level: 14, rate: 14.4 });
     expect(obtain('gligar')).toContainEqual({ method: 'fainted', dungeon: 'silent-chasm', floors: '2-9', level: 15, rate: 100 });
     expect(obtain('metagross')).toContainEqual({ method: 'strong-foe', dungeon: 'silent-chasm', floors: '6, 8-9', level: 45, rate: -6.4 });
+    // Kecleon also joins after stealing from its shop, in any dungeon.
+    expect(obtain('kecleon')).toContainEqual({ method: 'shop-thief', level: 90, rate: -50 });
+    expect(dx.methods.find((m) => m.id === 'shop-thief')?.dungeon).toBe('any');
     // Every fainted Pokémon is tied to a dungeon now (Serebii only said "fainted in a dungeon").
     const fainted = dx.pokemon.flatMap((e) => e.obtain).filter((o) => o.method === 'fainted');
     expect(fainted.length).toBeGreaterThan(400);
@@ -174,6 +200,13 @@ describe('validation', () => {
     const yaml = readFileSync(file, 'utf8');
     writeFileSync(file, yaml.replace('floors: "8-9", level: 14', 'floors: "B8F", level: 14'));
     expect(() => buildData(dir)).toThrow('floors look like "1-3, 5"');
+  });
+
+  it('reports a shiny method the Pokémon does not have', () => {
+    const dir = copy();
+    const file = join(dir, 'games/dx/pokemon.yaml');
+    writeFileSync(file, readFileSync(file, 'utf8').replace('  shiny: [strong-foe]\n', '  shiny: [legendary]\n'));
+    expect(() => buildData(dir)).toThrow('butterfree: shiny method "legendary" is not in its obtain list');
   });
 
   it('reports a method in an unknown section', () => {

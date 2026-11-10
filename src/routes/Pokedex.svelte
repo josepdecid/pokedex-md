@@ -9,7 +9,7 @@
   const statuses: StatusFilter[] = ['all', 'missing', 'recruited'];
 
   const searchable = $derived(
-    session.data.pokemon.map((entry) => ({ entry, text: normalize(i18n.entryName(entry)) })),
+    session.data.pokemon.map((entry) => ({ entry, text: normalize(i18n.entryLabel(entry)) })),
   );
 
   const visible = $derived.by(() => {
