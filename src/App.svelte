@@ -84,6 +84,7 @@
           done={session.recruitedCount}
           total={session.data.pokemon.length}
           label={t('progress.label', { done: session.recruitedCount, total: session.data.pokemon.length })}
+          percent
         />
       </div>
     {/if}
