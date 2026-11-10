@@ -1,119 +1,84 @@
-// Downloads one Mystery Dungeon portrait per species from PMDCollab's SpriteCollab
-// (https://github.com/PMDCollab/SpriteCollab) into public/portraits/<species-id>.png,
-// and writes the artist credits to data/shared/portrait-credits.yaml.
+// Downloads each game's own Pokémon portraits from Serebii into
+// public/portraits/<gameId>/<portrait>.webp (re-encoded with `cwebp`).
 //
-// Forms used by any game (`form:` in games/*/pokemon.yaml) get their own portrait at
-// public/portraits/<species-id>-<form>.png when SpriteCollab has a form with that name
-// (e.g. Unown "B" -> unown-b). Otherwise the form uses the species portrait (Unown A is
-// the base Unown portrait).
+// <portrait> is the species id, or `<species-id>-<form>` for an entry with a form (Unown B ->
+// unown-b): one file per checklist entry in data/games/<gameId>/pokemon.yaml.
 //
-// Run manually with `npm run portraits` when species or forms are added; the output is committed,
-// so builds don't depend on GitHub being reachable.
+// Run manually with `npm run portraits` when Pokémon are added; the output is committed,
+// so builds don't depend on Serebii being reachable. Needs `cwebp` (brew install webp).
 //
-// License: SpriteCollab content is CC BY-NC 4.0 and must be credited. Portraits credited
-// to CHUNSOFT are from the official Mystery Dungeon games.
+// The portraits are from the official games by Spike Chunsoft; Serebii is credited in the app.
 
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 
-const REPO = 'https://raw.githubusercontent.com/PMDCollab/SpriteCollab/master';
-const EMOTION = 'Normal';
-const CONCURRENCY = 12;
+interface Source {
+  /** Portrait URL for a National Dex number and, for an entry with a form, the form id. */
+  url: (dex: number, form: string | undefined) => string;
+}
 
-interface TrackerNode {
-  name: string;
-  portrait_files: Record<string, boolean>;
-  portrait_credit: { primary: string; secondary: string[] };
-  subgroups: Record<string, TrackerNode>;
+/** Portrait source per game. */
+const SOURCES: Record<string, Source> = {
+  dx: {
+    // pokemon/025.png; forms are pokemon/201-b.png, with ! and ? as "em" and "qm".
+    url: (dex, form) => {
+      const suffix = form ? `-${{ exclamation: 'em', question: 'qm' }[form] ?? form}` : '';
+      return `https://www.serebii.net/dungeonrescueteamdx/pokemon/${String(dex).padStart(3, '0')}${suffix}.png`;
+    },
+  },
+};
+const QUALITY = '80';
+const CONCURRENCY = 6;
+const HEADERS = { 'User-Agent': 'Mozilla/5.0 (compatible; pokedex-md asset script)' };
+
+try {
+  execFileSync('cwebp', ['-version'], { stdio: 'ignore' });
+} catch {
+  console.error('cwebp not found. Install it first (macOS: brew install webp; Debian/Ubuntu: apt install webp).');
+  process.exit(1);
 }
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const outDir = join(root, 'public/portraits');
-mkdirSync(outDir, { recursive: true });
-
 const readYaml = (path: string) => parse(readFileSync(join(root, path), 'utf8'));
 const species = readYaml('data/shared/species.yaml') as { id: string; dex: number }[];
 const dexById = new Map(species.map((s) => [s.id, s.dex]));
-
-// Every species + form pair used by any game.
-const forms = new Map<string, { species: string; form: string }>();
-for (const game of readdirSync(join(root, 'data/games'))) {
-  for (const p of readYaml(`data/games/${game}/pokemon.yaml`) as { id: string; species?: string; form?: string }[]) {
-    if (p.form) forms.set(`${p.species ?? p.id}-${p.form}`, { species: p.species ?? p.id, form: p.form });
-  }
-}
-
-const getText = async (path: string) => {
-  const res = await fetch(`${REPO}/${path}`);
-  if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
-  return res.text();
-};
-
-const tracker = JSON.parse(await getText('tracker.json')) as Record<string, TrackerNode>;
-// credit_names.txt: tab-separated "Name  Discord  Contact"; credits in tracker.json use the Discord column.
-const creditNames = new Map(
-  (await getText('credit_names.txt'))
-    .split('\n')
-    .slice(1)
-    .map((line) => line.split('\t'))
-    .filter((cols) => cols.length >= 2 && cols[0]?.trim())
-    .map(([name, discord]) => [discord!.trim(), name!.trim()]),
-);
-// Artists without a public profile can't be named; the SpriteCollab link in the app covers them.
-const creditName = (id: string) => (id === 'CHUNSOFT' ? 'Spike Chunsoft' : creditNames.get(id));
-
-const credits: Record<string, string[]> = {};
+const tmp = mkdtempSync(join(tmpdir(), 'portraits-'));
 const failed: string[] = [];
-const notes: string[] = [];
 
-/** `id` is the portrait file name; `path` the SpriteCollab folder, e.g. `0201` or `0201/0001`. */
-async function fetchOne({ id, path, node }: { id: string; path: string; node: TrackerNode | undefined }) {
-  if (!node || !(EMOTION in node.portrait_files)) {
-    failed.push(`${id} (no ${EMOTION} portrait in SpriteCollab)`);
-    return;
-  }
-  const res = await fetch(`${REPO}/portrait/${path}/${EMOTION}.png`);
-  if (!res.ok) {
-    failed.push(`${id} (HTTP ${res.status})`);
-    return;
-  }
-  writeFileSync(join(outDir, `${id}.png`), Buffer.from(await res.arrayBuffer()));
-  const { primary, secondary } = node.portrait_credit;
-  credits[id] = [...new Set([primary, ...secondary].map(creditName).filter((n): n is string => !!n))];
+for (const [gameId, { url }] of Object.entries(SOURCES)) {
+  const entries = readYaml(`data/games/${gameId}/pokemon.yaml`) as { id: string; species?: string; form?: string }[];
+  const outDir = join(root, 'public/portraits', gameId);
+  rmSync(outDir, { recursive: true, force: true });
+  mkdirSync(outDir, { recursive: true });
+
+  const queue = entries.map((e) => {
+    const speciesId = e.species ?? e.id;
+    return { name: e.form ? `${speciesId}-${e.form}` : speciesId, url: url(dexById.get(speciesId) ?? 0, e.form) };
+  });
+  const total = queue.length;
+  let done = 0;
+  await Promise.all(
+    Array.from({ length: CONCURRENCY }, async () => {
+      for (let p = queue.shift(); p; p = queue.shift()) {
+        const res = await fetch(p.url, { headers: HEADERS });
+        // Serebii answers a missing image with an HTML page.
+        if (!res.ok || !res.headers.get('content-type')?.startsWith('image/')) {
+          failed.push(`${gameId}/${p.name} (${p.url}: HTTP ${res.status})`);
+          continue;
+        }
+        const png = join(tmp, `${gameId}-${p.name}.png`);
+        writeFileSync(png, Buffer.from(await res.arrayBuffer()));
+        execFileSync('cwebp', ['-quiet', '-q', QUALITY, '-alpha_q', '100', '-metadata', 'none', png, '-o', join(outDir, `${p.name}.webp`)]);
+        done++;
+      }
+    }),
+  );
+  console.log(`portraits: ${gameId}: ${done}/${total} downloaded`);
 }
 
-const slug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const jobs: Parameters<typeof fetchOne>[0][] = species.map(({ id, dex }) => {
-  const key = String(dex).padStart(4, '0');
-  return { id, path: key, node: tracker[key] };
-});
-for (const [id, { species: speciesId, form }] of forms) {
-  const key = String(dexById.get(speciesId) ?? 0).padStart(4, '0');
-  const match = Object.entries(tracker[key]?.subgroups ?? {}).find(([, node]) => slug(node.name) === form);
-  if (match) jobs.push({ id, path: `${key}/${match[0]}`, node: match[1] });
-  else notes.push(`${id}: no SpriteCollab form named "${form}", uses the ${speciesId} portrait`);
-}
-
-const queue = [...jobs];
-await Promise.all(
-  Array.from({ length: CONCURRENCY }, async () => {
-    for (let s = queue.shift(); s; s = queue.shift()) await fetchOne(s);
-  }),
-);
-
-const yaml = [
-  '# Portrait artists per species (<species-id>) or form (<species-id>-<form>), generated by',
-  '# `npm run portraits` from PMDCollab SpriteCollab.',
-  '# Portraits are CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/). Do not edit by hand.',
-  ...jobs
-    .filter((j) => credits[j.id])
-    .map((j) => `${j.id}: [${credits[j.id]!.map((c) => JSON.stringify(c)).join(', ')}]`),
-  '',
-].join('\n');
-writeFileSync(join(root, 'data/shared/portrait-credits.yaml'), yaml);
-
-console.log(`portraits: ${Object.keys(credits).length}/${jobs.length} downloaded`);
-for (const n of notes) console.log(`note: ${n}`);
+rmSync(tmp, { recursive: true, force: true });
 for (const f of failed) console.warn(`warning: ${f}`);

@@ -5,7 +5,6 @@ import { describe, expect, it } from 'vitest';
 import { buildData, DataError } from '../scripts/build-data.ts';
 
 const DATA = resolve(__dirname, '../data');
-const PORTRAITS = resolve(__dirname, '../public/portraits');
 
 describe('shipped data', () => {
   const result = buildData(DATA);
@@ -43,15 +42,15 @@ describe('shipped data', () => {
     expect(result.warnings).toEqual([]);
   });
 
-  it('has a credited portrait for every Pokémon', () => {
-    for (const e of dx.pokemon) expect(dx.portraitCredits[e.portrait!]?.length, e.id).toBeGreaterThan(0);
+  it('has a DX portrait for every Pokémon', () => {
+    for (const e of dx.pokemon) expect(e.portrait, e.id).toMatch(/^portraits\/dx\/[a-z0-9-]+\.webp$/);
+    expect(dx.pokemon.find((e) => e.id === 'pikachu')?.portrait).toBe('portraits/dx/pikachu.webp');
   });
 
-  it('gives each Unown form its own portrait, with A using the species one', () => {
+  it('gives each Unown form its own portrait', () => {
     const portraits = dx.pokemon.filter((e) => e.species === 'unown').map((e) => e.portrait);
-    expect(portraits[0]).toBe('unown');
-    expect(portraits[1]).toBe('unown-b');
-    expect(portraits.at(-1)).toBe('unown-question');
+    expect(portraits[0]).toBe('portraits/dx/unown-a.webp');
+    expect(portraits.at(-1)).toBe('portraits/dx/unown-question.webp');
     expect(new Set(portraits).size).toBe(28);
   });
 
@@ -147,9 +146,9 @@ describe('validation', () => {
       join(dir, 'games/dx/pokemon.yaml'),
       '- id: pikachu\n  types: [electric]\n  camp: nowhere\n  obtain:\n    - { method: dungeon, dungeon: atlantis }\n',
     );
-    expect(() => buildData(dir, PORTRAITS)).toThrow(DataError);
+    expect(() => buildData(dir)).toThrow(DataError);
     try {
-      buildData(dir, PORTRAITS);
+      buildData(dir);
     } catch (err) {
       const problems = (err as DataError).problems.join('\n');
       expect(problems).toContain('unknown camp "nowhere"');
@@ -164,9 +163,9 @@ describe('validation', () => {
       .replace('- id: weedle\n  types: [bug, poison]\n  camp: stump-forest\n', '- id: weedle\n  types: [bug, poison]\n  camp: stump-forest\n  evolve: { level: 3 }\n')
       .replace('  evolve: { level: 10 }\n', '');
     writeFileSync(file, yaml);
-    expect(() => buildData(dir, PORTRAITS)).toThrow('weedle: has evolve but doesn\'t evolve from a Pokémon in this game');
+    expect(() => buildData(dir)).toThrow('weedle: has evolve but doesn\'t evolve from a Pokémon in this game');
     writeFileSync(file, yaml.replace('  evolve: { level: 3 }\n', ''));
-    expect(buildData(dir, PORTRAITS).warnings.join('\n')).toContain('butterfree: evolves from "metapod" but has no evolve requirement');
+    expect(buildData(dir).warnings.join('\n')).toContain('butterfree: evolves from "metapod" but has no evolve requirement');
   });
 
   it('reports malformed floors', () => {
@@ -174,28 +173,34 @@ describe('validation', () => {
     const file = join(dir, 'games/dx/pokemon.yaml');
     const yaml = readFileSync(file, 'utf8');
     writeFileSync(file, yaml.replace('floors: "8-9", level: 14', 'floors: "B8F", level: 14'));
-    expect(() => buildData(dir, PORTRAITS)).toThrow('floors look like "1-3, 5"');
+    expect(() => buildData(dir)).toThrow('floors look like "1-3, 5"');
   });
 
   it('reports a method in an unknown section', () => {
     const dir = copy();
     const file = join(dir, 'games/dx/game.yaml');
     writeFileSync(file, readFileSync(file, 'utf8').replace('section: fainted', 'section: nowhere'));
-    expect(() => buildData(dir, PORTRAITS)).toThrow('method "fainted": unknown section "nowhere"');
+    expect(() => buildData(dir)).toThrow('method "fainted": unknown section "nowhere"');
   });
 
   it('warns about missing artwork unless it is marked `artwork: false`', () => {
     const empty = mkdtempSync(join(tmpdir(), 'pokedex-md-artwork-'));
-    const missing = buildData(DATA, PORTRAITS, empty).warnings.filter((w) => w.includes('npm run artwork'));
+    const missing = buildData(DATA, empty).warnings.filter((w) => w.includes('npm run artwork'));
     expect(missing.some((w) => w.includes(': tiny-woods: '))).toBe(true);
     expect(missing.some((w) => w.includes(': wild-plains: '))).toBe(true);
     expect(missing.some((w) => w.includes(': rock-path: '))).toBe(false);
   });
 
+  it('warns about missing portraits', () => {
+    const empty = mkdtempSync(join(tmpdir(), 'pokedex-md-artwork-'));
+    const missing = buildData(DATA, empty).warnings.filter((w) => w.includes('npm run portraits'));
+    expect(missing.some((w) => w.includes('public/portraits/dx/pikachu.webp'))).toBe(true);
+  });
+
   it('reports an unknown evolvesFrom', () => {
     const dir = copy();
     writeFileSync(join(dir, 'shared/species.yaml'), '- { id: missingno, dex: 999, evolvesFrom: nobody }\n', { flag: 'a' });
-    expect(() => buildData(dir, PORTRAITS)).toThrow('unknown evolvesFrom "nobody"');
+    expect(() => buildData(dir)).toThrow('unknown evolvesFrom "nobody"');
   });
 
   it('lets a game override a shared name and falls back to English for other locales', () => {
@@ -203,7 +208,7 @@ describe('validation', () => {
     writeFileSync(join(dir, 'locales/en/dx.yaml'), `${'species:\n  pikachu: "Pika Override"\n'}`, { flag: 'a' });
     mkdirSync(join(dir, 'locales/fr'));
     writeFileSync(join(dir, 'locales/fr/shared.yaml'), 'type:\n  fire: "Feu"\n');
-    const result = buildData(dir, PORTRAITS);
+    const result = buildData(dir);
     expect(result.dictionaries.dx!.en!['species.pikachu']).toBe('Pika Override');
     expect(result.dictionaries.dx!.fr!['type.fire']).toBe('Feu');
     expect(result.dictionaries.dx!.fr!['type.water']).toBe('Water');
@@ -215,7 +220,7 @@ describe('validation', () => {
     mkdirSync(join(dir, 'locales/fr'));
     cpSync(join(dir, 'locales/es/dx.yaml'), join(dir, 'locales/fr/dx.yaml'));
     writeFileSync(join(dir, 'locales/fr/shared.yaml'), 'type:\n  fire: "Feu"\nspecies: english\nform: english\n');
-    const result = buildData(dir, PORTRAITS);
+    const result = buildData(dir);
     const fallback = result.warnings.find((w) => w.startsWith('locales/fr: '));
     // Only the 17 untranslated types fall back; species and forms are English on purpose.
     expect(fallback).toMatch(/^locales\/fr: 17\//);

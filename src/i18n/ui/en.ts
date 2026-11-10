@@ -117,10 +117,7 @@ export const en = {
   'about.title': 'About',
   'about.disclaimer': 'Fan-made and unofficial. Not affiliated with Nintendo, Creatures, GAME FREAK, The Pokémon Company or Spike Chunsoft. Pokémon names are trademarks of their respective owners.',
   'about.sources': 'Recruitment data is based on Serebii and Bulbapedia and may contain mistakes.',
-  'about.portraits': "Pokémon portraits come from PMDCollab's SpriteCollab and are shared under CC BY-NC 4.0. Most are from the official Mystery Dungeon games by Spike Chunsoft.",
-  'about.artwork': 'Camp artwork, dungeon screenshots and item icons from Serebii.net.',
-  'about.portraitArtists': 'Portrait artists: {artists}.',
-  'about.portraitsLink': 'SpriteCollab on GitHub',
+  'about.artwork': 'Pokémon portraits, camp artwork, dungeon screenshots and item icons from Serebii.net.',
 } as const;
 
 export type UiKey = keyof typeof en;
