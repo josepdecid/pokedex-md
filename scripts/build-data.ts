@@ -96,7 +96,11 @@ const englishKinds = (file: z.infer<typeof LocaleFile> | undefined) =>
 const listDirs = (dir: string) =>
   existsSync(dir) ? readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).sort() : [];
 
-export function buildData(dataDir: string, portraitsDir = join(dataDir, '../public/portraits')): BuildResult {
+export function buildData(
+  dataDir: string,
+  portraitsDir = join(dataDir, '../public/portraits'),
+  campImagesDir = join(dataDir, '../public/camps'),
+): BuildResult {
   const problems: string[] = [];
   const warnings: string[] = [];
 
@@ -264,7 +268,12 @@ export function buildData(dataDir: string, portraitsDir = join(dataDir, '../publ
       methods: game.methods,
       pokemon: entries.map((e) => ({ ...e, familyOrder: familyIndex.get(e.id)! })),
       dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1 })),
-      camps,
+      camps: camps.map((c) => {
+        const image = `camps/${gameId}/${c.id}.webp`;
+        if (existsSync(join(campImagesDir, gameId, `${c.id}.webp`))) return { id: c.id, image };
+        warnings.push(`${where('camps.yaml')}: ${c.id}: public/${image} is missing; run npm run camp-images`);
+        return { id: c.id };
+      }),
       portraitCredits: Object.fromEntries(
         [...new Set(entries.flatMap((e) => (e.portrait ? [e.portrait] : [])))].map((k) => [k, portraitCredits[k]!]),
       ),

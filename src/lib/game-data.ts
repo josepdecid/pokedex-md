@@ -35,6 +35,8 @@ export interface Dungeon {
 
 export interface Camp {
   id: string;
+  /** Artwork path under public/ (camps/<gameId>/<id>.webp). Absent if none. */
+  image?: string;
 }
 
 export interface GameData {
@@ -45,6 +47,7 @@ export interface GameData {
   methods: ObtainMethod[];
   pokemon: PokemonEntry[];
   dungeons: Dungeon[];
+  /** In unlock order. */
   camps: Camp[];
   /** Portrait (entry.portrait) -> artists, for every portrait this game uses. */
   portraitCredits: Record<string, string[]>;

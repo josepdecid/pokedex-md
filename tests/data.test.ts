@@ -22,6 +22,12 @@ describe('shipped data', () => {
     expect(names['dungeon.mt-steel']).toBe('Mt. Steel');
   });
 
+  it('lists camps in unlock order, each with its artwork', () => {
+    expect(dx.camps[0]?.id).toBe('wild-plains');
+    expect(dx.camps.at(-1)?.id).toBe('enclosed-island');
+    for (const c of dx.camps) expect(c.image, c.id).toBe(`camps/dx/${c.id}.webp`);
+  });
+
   it('has a credited portrait for every Pokémon', () => {
     for (const e of dx.pokemon) expect(dx.portraitCredits[e.portrait!]?.length, e.id).toBeGreaterThan(0);
   });

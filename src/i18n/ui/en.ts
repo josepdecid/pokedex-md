@@ -52,7 +52,9 @@ export const en = {
   'dungeon.none': 'No recruitable Pokémon are listed for this dungeon yet.',
   'dungeon.notFound': "That dungeon isn't in this game.",
 
-  'camps.intro': 'Every recruited Pokémon lives in one of these camps.',
+  'camps.intro': 'In unlock order. Every recruited Pokémon lives in one of these camps.',
+  'camps.incomplete': 'Incomplete',
+  'camps.complete': 'Complete',
   'camp.back': 'Camps',
   'camp.residents': 'Pokémon that live here',
   'camp.notFound': "That camp isn't in this game.",
@@ -105,6 +107,7 @@ export const en = {
   'about.disclaimer': 'Fan-made and unofficial. Not affiliated with Nintendo, Creatures, GAME FREAK, The Pokémon Company or Spike Chunsoft. Pokémon names are trademarks of their respective owners.',
   'about.sources': 'Recruitment data is based on Serebii and Bulbapedia and may contain mistakes.',
   'about.portraits': "Pokémon portraits come from PMDCollab's SpriteCollab and are shared under CC BY-NC 4.0. Most are from the official Mystery Dungeon games by Spike Chunsoft.",
+  'about.campArt': 'Camp artwork from Serebii.net.',
   'about.portraitArtists': 'Portrait artists: {artists}.',
   'about.portraitsLink': 'SpriteCollab on GitHub',
 } as const;

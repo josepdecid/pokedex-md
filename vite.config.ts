@@ -42,7 +42,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,json,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,webp,json,webmanifest}'],
         // Only link-preview crawlers fetch the share image; don't precache it.
         globIgnores: ['og-image.png'],
       },
