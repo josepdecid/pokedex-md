@@ -171,13 +171,17 @@
   {#if resetMessage}<p class="status" role="status">{resetMessage}</p>{/if}
 </section>
 
-{#if install.available}
+{#if install.method}
   <section class="card">
     <h2>{t('install.title')}</h2>
     <p class="muted small">{t('install.hint')}</p>
-    <div class="actions">
-      <button type="button" class="button primary" onclick={() => install.prompt()}>{t('install.button')}</button>
-    </div>
+    {#if install.method === 'prompt'}
+      <div class="actions">
+        <button type="button" class="button primary" onclick={() => install.prompt()}>{t('install.button')}</button>
+      </div>
+    {:else}
+      <p class="small">{t('install.ios')}</p>
+    {/if}
   </section>
 {/if}
 

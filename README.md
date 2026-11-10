@@ -21,6 +21,7 @@ npm test          # data validation + unit tests
 npm run check     # svelte-check / TypeScript
 npm run build     # production build in dist/
 npm run portraits # re-download portraits + credits (only needed when species are added)
+npm run icons     # regenerate the favicon and app icons in public/ from scripts/build-icons.ts
 ```
 
 List ↔ Pokémon page navigation uses the View Transition API: the router names the
