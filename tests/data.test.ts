@@ -114,12 +114,12 @@ describe('shipped data', () => {
 
   it('resolves method and evolve icons to files in public/', () => {
     const icon = (id: string) => dx.methods.find((m) => m.id === id)?.icon;
-    expect(icon('dungeon')).toBe('icons/dx/band.png');
-    expect(icon('mystery-house')).toBe('icons/dx/invitation.png');
-    expect(icon('fainted')).toBe('icons/dx/apple.png');
-    expect(icon('strong-foe')).toBe('icons/dx/strong-foe.png');
+    expect(icon('dungeon')).toBe('icons/dx/band.webp');
+    expect(icon('mystery-house')).toBe('icons/dx/invitation.webp');
+    expect(icon('fainted')).toBe('icons/dx/apple.webp');
+    expect(icon('strong-foe')).toBe('icons/dx/strong-foe.webp');
     expect(icon('legendary')).toBeUndefined();
-    expect(dx.evolveIcon).toBe('icons/dx/evolution-crystal.png');
+    expect(dx.evolveIcon).toBe('icons/dx/evolution-crystal.webp');
     expect(result.warnings.filter((w) => w.includes('icons/'))).toEqual([]);
   });
 

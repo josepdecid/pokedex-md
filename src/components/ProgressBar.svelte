@@ -1,12 +1,13 @@
 <script lang="ts">
-  let { done, total, label }: { done: number; total: number; label: string } = $props();
+  // `count: false` hides the "done/total" text, for places that show it elsewhere.
+  let { done, total, label, count = true }: { done: number; total: number; label: string; count?: boolean } = $props();
   // Nothing to do (0/0) is done: a full bar.
   const pct = $derived(total ? Math.round((done / total) * 100) : 100);
 </script>
 
 <div class="progress" role="img" aria-label={label}>
   <div class="track"><div class="fill" style:width="{pct}%"></div></div>
-  <span class="count" aria-hidden="true">{done}/{total}</span>
+  {#if count}<span class="count" aria-hidden="true">{done}/{total}</span>{/if}
 </div>
 
 <style>

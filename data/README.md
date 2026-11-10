@@ -71,9 +71,15 @@ and the camp and dungeon order come from Serebii's
 is out of Serebii's order. One without artwork shows a "?" placeholder; mark it `artwork: false`
 in the YAML when Serebii has none (Rock Path and Snow Path), so the build doesn't warn.
 
-Method and evolve icons (`public/icons/<gameId>/<name>.png`, set with `icon` and `evolveIcon` in
+Method and evolve icons (`public/icons/<gameId>/<name>.webp`, set with `icon` and `evolveIcon` in
 `game.yaml`) are item icons from Serebii's `/dungeonrescueteamdx/items/icon/` folder, downloaded by
 hand: Explorer Band (wild), Invitation (Mystery House), Apple (fainted) and Evolution Crystal.
+They're converted to lossless WebP: `cwebp -lossless -z 9 -exact -metadata none <name>.png -o <name>.webp`.
+
+The same folder holds the Shiny icon (`shiny.webp`) and the bottom navigation icons
+(`pokedex`, `dungeons`, `camps`, `settings`). The navigation ones are trimmed to their content
+and resized to 96px tall before converting:
+`magick <name>.png -trim +repage -resize x96 small.png && cwebp -q 85 -alpha_q 100 -metadata none small.png -o <name>.webp`.
 
 `evolvesFrom` in `shared/species.yaml` comes from PokéAPI's `pokemon_species.csv`.
 

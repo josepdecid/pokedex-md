@@ -1,8 +1,9 @@
 <script lang="ts">
+  import { slide } from 'svelte/transition';
   import PokemonList from '../components/PokemonList.svelte';
   import { i18n, normalize, t } from '../i18n/i18n.svelte.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
-  import { clearFilters, filters, type StatusFilter } from './pokedex-filters.svelte.ts';
+  import { clearFilters, filterPanel, filters, type StatusFilter } from './pokedex-filters.svelte.ts';
 
   let { session }: { session: GameSession } = $props();
 
@@ -30,14 +31,59 @@
     [...session.data.types].sort((a, b) => i18n.collator.compare(i18n.name('type', a), i18n.name('type', b))),
   );
   const filtered = $derived(filters.query !== '' || filters.status !== 'all' || filters.type !== '');
+  // Flags the filters button while the panel is closed but still narrowing or reordering the list.
+  const hiddenActive = $derived(!filterPanel.open && (filters.type !== '' || filters.sort !== 'family'));
+
+  const reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 </script>
 
 <div class="tools">
-  <label class="search">
-    <span class="visually-hidden">{t('pokedex.search')}</span>
-    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
-    <input type="search" bind:value={filters.query} placeholder={t('pokedex.search')} autocomplete="off" enterkeyhint="search" />
-  </label>
+  <div class="search-row">
+    <label class="search">
+      <span class="visually-hidden">{t('pokedex.search')}</span>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+      <input type="search" bind:value={filters.query} placeholder={t('pokedex.search')} autocomplete="off" enterkeyhint="search" />
+    </label>
+    <button
+      type="button"
+      class="filters-button"
+      class:open={filterPanel.open}
+      aria-expanded={filterPanel.open}
+      aria-controls="pokedex-filters"
+      aria-label={t('pokedex.filters')}
+      title={t('pokedex.filters')}
+      onclick={() => (filterPanel.open = !filterPanel.open)}
+    >
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path d="M4 7h10M18 7h2M4 17h2M10 17h10" />
+        <circle cx="16" cy="7" r="2" />
+        <circle cx="8" cy="17" r="2" />
+      </svg>
+      {#if hiddenActive}<span class="dot" aria-hidden="true"></span>{/if}
+    </button>
+  </div>
+
+  {#if filterPanel.open}
+    <div class="selects" id="pokedex-filters" transition:slide={{ duration: reducedMotion ? 0 : 180 }}>
+      <label>
+        <span class="visually-hidden">{t('pokedex.type')}</span>
+        <select bind:value={filters.type}>
+          <option value="">{t('pokedex.type.any')}</option>
+          {#each types as type (type)}
+            <option value={type}>{i18n.name('type', type)}</option>
+          {/each}
+        </select>
+      </label>
+      <label>
+        <span class="visually-hidden">{t('pokedex.sort')}</span>
+        <select bind:value={filters.sort}>
+          <option value="family">{t('pokedex.sort')}: {t('pokedex.sort.family')}</option>
+          <option value="dex">{t('pokedex.sort')}: {t('pokedex.sort.dex')}</option>
+          <option value="name">{t('pokedex.sort')}: {t('pokedex.sort.name')}</option>
+        </select>
+      </label>
+    </div>
+  {/if}
 
   <div class="segmented" role="radiogroup" aria-label={t('pokedex.status')}>
     {#each statuses as status (status)}
@@ -46,26 +92,6 @@
         {t(`pokedex.status.${status}`)}
       </label>
     {/each}
-  </div>
-
-  <div class="selects">
-    <label>
-      <span class="visually-hidden">{t('pokedex.type')}</span>
-      <select bind:value={filters.type}>
-        <option value="">{t('pokedex.type.any')}</option>
-        {#each types as type (type)}
-          <option value={type}>{i18n.name('type', type)}</option>
-        {/each}
-      </select>
-    </label>
-    <label>
-      <span class="visually-hidden">{t('pokedex.sort')}</span>
-      <select bind:value={filters.sort}>
-        <option value="family">{t('pokedex.sort')}: {t('pokedex.sort.family')}</option>
-        <option value="dex">{t('pokedex.sort')}: {t('pokedex.sort.dex')}</option>
-        <option value="name">{t('pokedex.sort')}: {t('pokedex.sort.name')}</option>
-      </select>
-    </label>
   </div>
 </div>
 
@@ -86,9 +112,15 @@
     gap: 0.6rem;
     margin-bottom: 0.5rem;
   }
+  .search-row {
+    display: flex;
+    gap: 0.5rem;
+  }
   .search {
     position: relative;
     display: block;
+    flex: 1;
+    min-width: 0;
   }
   .search svg {
     position: absolute;
@@ -103,6 +135,41 @@
   .search input {
     width: 100%;
     padding-left: 2.6rem;
+  }
+  .filters-button {
+    position: relative;
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 12px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .filters-button svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  .filters-button.open {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-text);
+  }
+  .dot {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 2px var(--surface);
   }
   .segmented {
     display: grid;
@@ -134,10 +201,15 @@
   .segmented label:has(input:focus-visible) {
     outline: 3px solid var(--focus);
   }
+  /* One select per line on phones, side by side from tablet width up. */
   .selects {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 0.6rem;
+  }
+  @media (min-width: 600px) {
+    .selects {
+      grid-template-columns: 1fr 1fr;
+    }
   }
   .selects select {
     width: 100%;

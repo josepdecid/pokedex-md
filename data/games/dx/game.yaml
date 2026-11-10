@@ -10,7 +10,7 @@ sections: [recruit, evolve, mystery-house, fainted]
 # Ways to recruit or obtain a Pokémon in this game, and the section each one is listed in.
 # `dungeon: true` means an `obtain` entry with this method must name the dungeon where it happens;
 # `dungeon: any` means it happens in any dungeon (no dungeon named, shown as "Any dungeon").
-# `icon`: optional public/icons/<gameId>/<icon>.png (DX item icons from Serebii). Methods without
+# `icon`: optional public/icons/<gameId>/<icon>.webp (DX item icons from Serebii). Methods without
 # one get a generic icon.
 methods:
   - { id: dungeon, dungeon: true, section: recruit, icon: band }
