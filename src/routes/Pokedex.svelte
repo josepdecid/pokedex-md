@@ -21,7 +21,8 @@
       if (filters.status !== 'all' && session.progress.isRecruited(entry.id) !== (filters.status === 'recruited')) return false;
       return true;
     });
-    if (filters.sort === 'name') rows.sort((a, b) => i18n.collator.compare(a.text, b.text));
+    if (filters.sort === 'family') rows.sort((a, b) => a.entry.familyOrder - b.entry.familyOrder);
+    else if (filters.sort === 'name') rows.sort((a, b) => i18n.collator.compare(a.text, b.text));
     return rows.map((r) => r.entry);
   });
 
@@ -60,6 +61,7 @@
     <label>
       <span class="visually-hidden">{t('pokedex.sort')}</span>
       <select bind:value={filters.sort}>
+        <option value="family">{t('pokedex.sort')}: {t('pokedex.sort.family')}</option>
         <option value="dex">{t('pokedex.sort')}: {t('pokedex.sort.dex')}</option>
         <option value="name">{t('pokedex.sort')}: {t('pokedex.sort.name')}</option>
       </select>

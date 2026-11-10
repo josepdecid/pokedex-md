@@ -1,381 +1,382 @@
 # Species shared by every game: stable id + National Pokédex number.
+# evolvesFrom: the species it evolves from (used to keep evolution lines together when sorting).
 # Ids follow PokéAPI slugs. Never change an id once published: saved progress references it.
 - { id: bulbasaur, dex: 1 }
-- { id: ivysaur, dex: 2 }
-- { id: venusaur, dex: 3 }
+- { id: ivysaur, dex: 2, evolvesFrom: bulbasaur }
+- { id: venusaur, dex: 3, evolvesFrom: ivysaur }
 - { id: charmander, dex: 4 }
-- { id: charmeleon, dex: 5 }
-- { id: charizard, dex: 6 }
+- { id: charmeleon, dex: 5, evolvesFrom: charmander }
+- { id: charizard, dex: 6, evolvesFrom: charmeleon }
 - { id: squirtle, dex: 7 }
-- { id: wartortle, dex: 8 }
-- { id: blastoise, dex: 9 }
+- { id: wartortle, dex: 8, evolvesFrom: squirtle }
+- { id: blastoise, dex: 9, evolvesFrom: wartortle }
 - { id: caterpie, dex: 10 }
-- { id: metapod, dex: 11 }
-- { id: butterfree, dex: 12 }
+- { id: metapod, dex: 11, evolvesFrom: caterpie }
+- { id: butterfree, dex: 12, evolvesFrom: metapod }
 - { id: weedle, dex: 13 }
-- { id: kakuna, dex: 14 }
-- { id: beedrill, dex: 15 }
+- { id: kakuna, dex: 14, evolvesFrom: weedle }
+- { id: beedrill, dex: 15, evolvesFrom: kakuna }
 - { id: pidgey, dex: 16 }
-- { id: pidgeotto, dex: 17 }
-- { id: pidgeot, dex: 18 }
+- { id: pidgeotto, dex: 17, evolvesFrom: pidgey }
+- { id: pidgeot, dex: 18, evolvesFrom: pidgeotto }
 - { id: rattata, dex: 19 }
-- { id: raticate, dex: 20 }
+- { id: raticate, dex: 20, evolvesFrom: rattata }
 - { id: spearow, dex: 21 }
-- { id: fearow, dex: 22 }
+- { id: fearow, dex: 22, evolvesFrom: spearow }
 - { id: ekans, dex: 23 }
-- { id: arbok, dex: 24 }
-- { id: pikachu, dex: 25 }
-- { id: raichu, dex: 26 }
+- { id: arbok, dex: 24, evolvesFrom: ekans }
+- { id: pikachu, dex: 25, evolvesFrom: pichu }
+- { id: raichu, dex: 26, evolvesFrom: pikachu }
 - { id: sandshrew, dex: 27 }
-- { id: sandslash, dex: 28 }
+- { id: sandslash, dex: 28, evolvesFrom: sandshrew }
 - { id: nidoran-f, dex: 29 }
-- { id: nidorina, dex: 30 }
-- { id: nidoqueen, dex: 31 }
+- { id: nidorina, dex: 30, evolvesFrom: nidoran-f }
+- { id: nidoqueen, dex: 31, evolvesFrom: nidorina }
 - { id: nidoran-m, dex: 32 }
-- { id: nidorino, dex: 33 }
-- { id: nidoking, dex: 34 }
-- { id: clefairy, dex: 35 }
-- { id: clefable, dex: 36 }
+- { id: nidorino, dex: 33, evolvesFrom: nidoran-m }
+- { id: nidoking, dex: 34, evolvesFrom: nidorino }
+- { id: clefairy, dex: 35, evolvesFrom: cleffa }
+- { id: clefable, dex: 36, evolvesFrom: clefairy }
 - { id: vulpix, dex: 37 }
-- { id: ninetales, dex: 38 }
-- { id: jigglypuff, dex: 39 }
-- { id: wigglytuff, dex: 40 }
+- { id: ninetales, dex: 38, evolvesFrom: vulpix }
+- { id: jigglypuff, dex: 39, evolvesFrom: igglybuff }
+- { id: wigglytuff, dex: 40, evolvesFrom: jigglypuff }
 - { id: zubat, dex: 41 }
-- { id: golbat, dex: 42 }
+- { id: golbat, dex: 42, evolvesFrom: zubat }
 - { id: oddish, dex: 43 }
-- { id: gloom, dex: 44 }
-- { id: vileplume, dex: 45 }
+- { id: gloom, dex: 44, evolvesFrom: oddish }
+- { id: vileplume, dex: 45, evolvesFrom: gloom }
 - { id: paras, dex: 46 }
-- { id: parasect, dex: 47 }
+- { id: parasect, dex: 47, evolvesFrom: paras }
 - { id: venonat, dex: 48 }
-- { id: venomoth, dex: 49 }
+- { id: venomoth, dex: 49, evolvesFrom: venonat }
 - { id: diglett, dex: 50 }
-- { id: dugtrio, dex: 51 }
+- { id: dugtrio, dex: 51, evolvesFrom: diglett }
 - { id: meowth, dex: 52 }
-- { id: persian, dex: 53 }
+- { id: persian, dex: 53, evolvesFrom: meowth }
 - { id: psyduck, dex: 54 }
-- { id: golduck, dex: 55 }
+- { id: golduck, dex: 55, evolvesFrom: psyduck }
 - { id: mankey, dex: 56 }
-- { id: primeape, dex: 57 }
+- { id: primeape, dex: 57, evolvesFrom: mankey }
 - { id: growlithe, dex: 58 }
-- { id: arcanine, dex: 59 }
+- { id: arcanine, dex: 59, evolvesFrom: growlithe }
 - { id: poliwag, dex: 60 }
-- { id: poliwhirl, dex: 61 }
-- { id: poliwrath, dex: 62 }
+- { id: poliwhirl, dex: 61, evolvesFrom: poliwag }
+- { id: poliwrath, dex: 62, evolvesFrom: poliwhirl }
 - { id: abra, dex: 63 }
-- { id: kadabra, dex: 64 }
-- { id: alakazam, dex: 65 }
+- { id: kadabra, dex: 64, evolvesFrom: abra }
+- { id: alakazam, dex: 65, evolvesFrom: kadabra }
 - { id: machop, dex: 66 }
-- { id: machoke, dex: 67 }
-- { id: machamp, dex: 68 }
+- { id: machoke, dex: 67, evolvesFrom: machop }
+- { id: machamp, dex: 68, evolvesFrom: machoke }
 - { id: bellsprout, dex: 69 }
-- { id: weepinbell, dex: 70 }
-- { id: victreebel, dex: 71 }
+- { id: weepinbell, dex: 70, evolvesFrom: bellsprout }
+- { id: victreebel, dex: 71, evolvesFrom: weepinbell }
 - { id: tentacool, dex: 72 }
-- { id: tentacruel, dex: 73 }
+- { id: tentacruel, dex: 73, evolvesFrom: tentacool }
 - { id: geodude, dex: 74 }
-- { id: graveler, dex: 75 }
-- { id: golem, dex: 76 }
+- { id: graveler, dex: 75, evolvesFrom: geodude }
+- { id: golem, dex: 76, evolvesFrom: graveler }
 - { id: ponyta, dex: 77 }
-- { id: rapidash, dex: 78 }
+- { id: rapidash, dex: 78, evolvesFrom: ponyta }
 - { id: slowpoke, dex: 79 }
-- { id: slowbro, dex: 80 }
+- { id: slowbro, dex: 80, evolvesFrom: slowpoke }
 - { id: magnemite, dex: 81 }
-- { id: magneton, dex: 82 }
+- { id: magneton, dex: 82, evolvesFrom: magnemite }
 - { id: farfetchd, dex: 83 }
 - { id: doduo, dex: 84 }
-- { id: dodrio, dex: 85 }
+- { id: dodrio, dex: 85, evolvesFrom: doduo }
 - { id: seel, dex: 86 }
-- { id: dewgong, dex: 87 }
+- { id: dewgong, dex: 87, evolvesFrom: seel }
 - { id: grimer, dex: 88 }
-- { id: muk, dex: 89 }
+- { id: muk, dex: 89, evolvesFrom: grimer }
 - { id: shellder, dex: 90 }
-- { id: cloyster, dex: 91 }
+- { id: cloyster, dex: 91, evolvesFrom: shellder }
 - { id: gastly, dex: 92 }
-- { id: haunter, dex: 93 }
-- { id: gengar, dex: 94 }
+- { id: haunter, dex: 93, evolvesFrom: gastly }
+- { id: gengar, dex: 94, evolvesFrom: haunter }
 - { id: onix, dex: 95 }
 - { id: drowzee, dex: 96 }
-- { id: hypno, dex: 97 }
+- { id: hypno, dex: 97, evolvesFrom: drowzee }
 - { id: krabby, dex: 98 }
-- { id: kingler, dex: 99 }
+- { id: kingler, dex: 99, evolvesFrom: krabby }
 - { id: voltorb, dex: 100 }
-- { id: electrode, dex: 101 }
+- { id: electrode, dex: 101, evolvesFrom: voltorb }
 - { id: exeggcute, dex: 102 }
-- { id: exeggutor, dex: 103 }
+- { id: exeggutor, dex: 103, evolvesFrom: exeggcute }
 - { id: cubone, dex: 104 }
-- { id: marowak, dex: 105 }
-- { id: hitmonlee, dex: 106 }
-- { id: hitmonchan, dex: 107 }
+- { id: marowak, dex: 105, evolvesFrom: cubone }
+- { id: hitmonlee, dex: 106, evolvesFrom: tyrogue }
+- { id: hitmonchan, dex: 107, evolvesFrom: tyrogue }
 - { id: lickitung, dex: 108 }
 - { id: koffing, dex: 109 }
-- { id: weezing, dex: 110 }
+- { id: weezing, dex: 110, evolvesFrom: koffing }
 - { id: rhyhorn, dex: 111 }
-- { id: rhydon, dex: 112 }
-- { id: chansey, dex: 113 }
+- { id: rhydon, dex: 112, evolvesFrom: rhyhorn }
+- { id: chansey, dex: 113, evolvesFrom: happiny }
 - { id: tangela, dex: 114 }
 - { id: kangaskhan, dex: 115 }
 - { id: horsea, dex: 116 }
-- { id: seadra, dex: 117 }
+- { id: seadra, dex: 117, evolvesFrom: horsea }
 - { id: goldeen, dex: 118 }
-- { id: seaking, dex: 119 }
+- { id: seaking, dex: 119, evolvesFrom: goldeen }
 - { id: staryu, dex: 120 }
-- { id: starmie, dex: 121 }
-- { id: mr-mime, dex: 122 }
+- { id: starmie, dex: 121, evolvesFrom: staryu }
+- { id: mr-mime, dex: 122, evolvesFrom: mime-jr }
 - { id: scyther, dex: 123 }
-- { id: jynx, dex: 124 }
-- { id: electabuzz, dex: 125 }
-- { id: magmar, dex: 126 }
+- { id: jynx, dex: 124, evolvesFrom: smoochum }
+- { id: electabuzz, dex: 125, evolvesFrom: elekid }
+- { id: magmar, dex: 126, evolvesFrom: magby }
 - { id: pinsir, dex: 127 }
 - { id: tauros, dex: 128 }
 - { id: magikarp, dex: 129 }
-- { id: gyarados, dex: 130 }
+- { id: gyarados, dex: 130, evolvesFrom: magikarp }
 - { id: lapras, dex: 131 }
 - { id: ditto, dex: 132 }
 - { id: eevee, dex: 133 }
-- { id: vaporeon, dex: 134 }
-- { id: jolteon, dex: 135 }
-- { id: flareon, dex: 136 }
+- { id: vaporeon, dex: 134, evolvesFrom: eevee }
+- { id: jolteon, dex: 135, evolvesFrom: eevee }
+- { id: flareon, dex: 136, evolvesFrom: eevee }
 - { id: porygon, dex: 137 }
 - { id: omanyte, dex: 138 }
-- { id: omastar, dex: 139 }
+- { id: omastar, dex: 139, evolvesFrom: omanyte }
 - { id: kabuto, dex: 140 }
-- { id: kabutops, dex: 141 }
+- { id: kabutops, dex: 141, evolvesFrom: kabuto }
 - { id: aerodactyl, dex: 142 }
-- { id: snorlax, dex: 143 }
+- { id: snorlax, dex: 143, evolvesFrom: munchlax }
 - { id: articuno, dex: 144 }
 - { id: zapdos, dex: 145 }
 - { id: moltres, dex: 146 }
 - { id: dratini, dex: 147 }
-- { id: dragonair, dex: 148 }
-- { id: dragonite, dex: 149 }
+- { id: dragonair, dex: 148, evolvesFrom: dratini }
+- { id: dragonite, dex: 149, evolvesFrom: dragonair }
 - { id: mewtwo, dex: 150 }
 - { id: mew, dex: 151 }
 - { id: chikorita, dex: 152 }
-- { id: bayleef, dex: 153 }
-- { id: meganium, dex: 154 }
+- { id: bayleef, dex: 153, evolvesFrom: chikorita }
+- { id: meganium, dex: 154, evolvesFrom: bayleef }
 - { id: cyndaquil, dex: 155 }
-- { id: quilava, dex: 156 }
-- { id: typhlosion, dex: 157 }
+- { id: quilava, dex: 156, evolvesFrom: cyndaquil }
+- { id: typhlosion, dex: 157, evolvesFrom: quilava }
 - { id: totodile, dex: 158 }
-- { id: croconaw, dex: 159 }
-- { id: feraligatr, dex: 160 }
+- { id: croconaw, dex: 159, evolvesFrom: totodile }
+- { id: feraligatr, dex: 160, evolvesFrom: croconaw }
 - { id: sentret, dex: 161 }
-- { id: furret, dex: 162 }
+- { id: furret, dex: 162, evolvesFrom: sentret }
 - { id: hoothoot, dex: 163 }
-- { id: noctowl, dex: 164 }
+- { id: noctowl, dex: 164, evolvesFrom: hoothoot }
 - { id: ledyba, dex: 165 }
-- { id: ledian, dex: 166 }
+- { id: ledian, dex: 166, evolvesFrom: ledyba }
 - { id: spinarak, dex: 167 }
-- { id: ariados, dex: 168 }
-- { id: crobat, dex: 169 }
+- { id: ariados, dex: 168, evolvesFrom: spinarak }
+- { id: crobat, dex: 169, evolvesFrom: golbat }
 - { id: chinchou, dex: 170 }
-- { id: lanturn, dex: 171 }
+- { id: lanturn, dex: 171, evolvesFrom: chinchou }
 - { id: pichu, dex: 172 }
 - { id: cleffa, dex: 173 }
 - { id: igglybuff, dex: 174 }
 - { id: togepi, dex: 175 }
-- { id: togetic, dex: 176 }
+- { id: togetic, dex: 176, evolvesFrom: togepi }
 - { id: natu, dex: 177 }
-- { id: xatu, dex: 178 }
+- { id: xatu, dex: 178, evolvesFrom: natu }
 - { id: mareep, dex: 179 }
-- { id: flaaffy, dex: 180 }
-- { id: ampharos, dex: 181 }
-- { id: bellossom, dex: 182 }
-- { id: marill, dex: 183 }
-- { id: azumarill, dex: 184 }
-- { id: sudowoodo, dex: 185 }
-- { id: politoed, dex: 186 }
+- { id: flaaffy, dex: 180, evolvesFrom: mareep }
+- { id: ampharos, dex: 181, evolvesFrom: flaaffy }
+- { id: bellossom, dex: 182, evolvesFrom: gloom }
+- { id: marill, dex: 183, evolvesFrom: azurill }
+- { id: azumarill, dex: 184, evolvesFrom: marill }
+- { id: sudowoodo, dex: 185, evolvesFrom: bonsly }
+- { id: politoed, dex: 186, evolvesFrom: poliwhirl }
 - { id: hoppip, dex: 187 }
-- { id: skiploom, dex: 188 }
-- { id: jumpluff, dex: 189 }
+- { id: skiploom, dex: 188, evolvesFrom: hoppip }
+- { id: jumpluff, dex: 189, evolvesFrom: skiploom }
 - { id: aipom, dex: 190 }
 - { id: sunkern, dex: 191 }
-- { id: sunflora, dex: 192 }
+- { id: sunflora, dex: 192, evolvesFrom: sunkern }
 - { id: yanma, dex: 193 }
 - { id: wooper, dex: 194 }
-- { id: quagsire, dex: 195 }
-- { id: espeon, dex: 196 }
-- { id: umbreon, dex: 197 }
+- { id: quagsire, dex: 195, evolvesFrom: wooper }
+- { id: espeon, dex: 196, evolvesFrom: eevee }
+- { id: umbreon, dex: 197, evolvesFrom: eevee }
 - { id: murkrow, dex: 198 }
-- { id: slowking, dex: 199 }
+- { id: slowking, dex: 199, evolvesFrom: slowpoke }
 - { id: misdreavus, dex: 200 }
 - { id: unown, dex: 201 }
-- { id: wobbuffet, dex: 202 }
+- { id: wobbuffet, dex: 202, evolvesFrom: wynaut }
 - { id: girafarig, dex: 203 }
 - { id: pineco, dex: 204 }
-- { id: forretress, dex: 205 }
+- { id: forretress, dex: 205, evolvesFrom: pineco }
 - { id: dunsparce, dex: 206 }
 - { id: gligar, dex: 207 }
-- { id: steelix, dex: 208 }
+- { id: steelix, dex: 208, evolvesFrom: onix }
 - { id: snubbull, dex: 209 }
-- { id: granbull, dex: 210 }
+- { id: granbull, dex: 210, evolvesFrom: snubbull }
 - { id: qwilfish, dex: 211 }
-- { id: scizor, dex: 212 }
+- { id: scizor, dex: 212, evolvesFrom: scyther }
 - { id: shuckle, dex: 213 }
 - { id: heracross, dex: 214 }
 - { id: sneasel, dex: 215 }
 - { id: teddiursa, dex: 216 }
-- { id: ursaring, dex: 217 }
+- { id: ursaring, dex: 217, evolvesFrom: teddiursa }
 - { id: slugma, dex: 218 }
-- { id: magcargo, dex: 219 }
+- { id: magcargo, dex: 219, evolvesFrom: slugma }
 - { id: swinub, dex: 220 }
-- { id: piloswine, dex: 221 }
+- { id: piloswine, dex: 221, evolvesFrom: swinub }
 - { id: corsola, dex: 222 }
 - { id: remoraid, dex: 223 }
-- { id: octillery, dex: 224 }
+- { id: octillery, dex: 224, evolvesFrom: remoraid }
 - { id: delibird, dex: 225 }
-- { id: mantine, dex: 226 }
+- { id: mantine, dex: 226, evolvesFrom: mantyke }
 - { id: skarmory, dex: 227 }
 - { id: houndour, dex: 228 }
-- { id: houndoom, dex: 229 }
-- { id: kingdra, dex: 230 }
+- { id: houndoom, dex: 229, evolvesFrom: houndour }
+- { id: kingdra, dex: 230, evolvesFrom: seadra }
 - { id: phanpy, dex: 231 }
-- { id: donphan, dex: 232 }
-- { id: porygon2, dex: 233 }
+- { id: donphan, dex: 232, evolvesFrom: phanpy }
+- { id: porygon2, dex: 233, evolvesFrom: porygon }
 - { id: stantler, dex: 234 }
 - { id: smeargle, dex: 235 }
 - { id: tyrogue, dex: 236 }
-- { id: hitmontop, dex: 237 }
+- { id: hitmontop, dex: 237, evolvesFrom: tyrogue }
 - { id: smoochum, dex: 238 }
 - { id: elekid, dex: 239 }
 - { id: magby, dex: 240 }
 - { id: miltank, dex: 241 }
-- { id: blissey, dex: 242 }
+- { id: blissey, dex: 242, evolvesFrom: chansey }
 - { id: raikou, dex: 243 }
 - { id: entei, dex: 244 }
 - { id: suicune, dex: 245 }
 - { id: larvitar, dex: 246 }
-- { id: pupitar, dex: 247 }
-- { id: tyranitar, dex: 248 }
+- { id: pupitar, dex: 247, evolvesFrom: larvitar }
+- { id: tyranitar, dex: 248, evolvesFrom: pupitar }
 - { id: lugia, dex: 249 }
 - { id: ho-oh, dex: 250 }
 - { id: celebi, dex: 251 }
 - { id: treecko, dex: 252 }
-- { id: grovyle, dex: 253 }
-- { id: sceptile, dex: 254 }
+- { id: grovyle, dex: 253, evolvesFrom: treecko }
+- { id: sceptile, dex: 254, evolvesFrom: grovyle }
 - { id: torchic, dex: 255 }
-- { id: combusken, dex: 256 }
-- { id: blaziken, dex: 257 }
+- { id: combusken, dex: 256, evolvesFrom: torchic }
+- { id: blaziken, dex: 257, evolvesFrom: combusken }
 - { id: mudkip, dex: 258 }
-- { id: marshtomp, dex: 259 }
-- { id: swampert, dex: 260 }
+- { id: marshtomp, dex: 259, evolvesFrom: mudkip }
+- { id: swampert, dex: 260, evolvesFrom: marshtomp }
 - { id: poochyena, dex: 261 }
-- { id: mightyena, dex: 262 }
+- { id: mightyena, dex: 262, evolvesFrom: poochyena }
 - { id: zigzagoon, dex: 263 }
-- { id: linoone, dex: 264 }
+- { id: linoone, dex: 264, evolvesFrom: zigzagoon }
 - { id: wurmple, dex: 265 }
-- { id: silcoon, dex: 266 }
-- { id: beautifly, dex: 267 }
-- { id: cascoon, dex: 268 }
-- { id: dustox, dex: 269 }
+- { id: silcoon, dex: 266, evolvesFrom: wurmple }
+- { id: beautifly, dex: 267, evolvesFrom: silcoon }
+- { id: cascoon, dex: 268, evolvesFrom: wurmple }
+- { id: dustox, dex: 269, evolvesFrom: cascoon }
 - { id: lotad, dex: 270 }
-- { id: lombre, dex: 271 }
-- { id: ludicolo, dex: 272 }
+- { id: lombre, dex: 271, evolvesFrom: lotad }
+- { id: ludicolo, dex: 272, evolvesFrom: lombre }
 - { id: seedot, dex: 273 }
-- { id: nuzleaf, dex: 274 }
-- { id: shiftry, dex: 275 }
+- { id: nuzleaf, dex: 274, evolvesFrom: seedot }
+- { id: shiftry, dex: 275, evolvesFrom: nuzleaf }
 - { id: taillow, dex: 276 }
-- { id: swellow, dex: 277 }
+- { id: swellow, dex: 277, evolvesFrom: taillow }
 - { id: wingull, dex: 278 }
-- { id: pelipper, dex: 279 }
+- { id: pelipper, dex: 279, evolvesFrom: wingull }
 - { id: ralts, dex: 280 }
-- { id: kirlia, dex: 281 }
-- { id: gardevoir, dex: 282 }
+- { id: kirlia, dex: 281, evolvesFrom: ralts }
+- { id: gardevoir, dex: 282, evolvesFrom: kirlia }
 - { id: surskit, dex: 283 }
-- { id: masquerain, dex: 284 }
+- { id: masquerain, dex: 284, evolvesFrom: surskit }
 - { id: shroomish, dex: 285 }
-- { id: breloom, dex: 286 }
+- { id: breloom, dex: 286, evolvesFrom: shroomish }
 - { id: slakoth, dex: 287 }
-- { id: vigoroth, dex: 288 }
-- { id: slaking, dex: 289 }
+- { id: vigoroth, dex: 288, evolvesFrom: slakoth }
+- { id: slaking, dex: 289, evolvesFrom: vigoroth }
 - { id: nincada, dex: 290 }
-- { id: ninjask, dex: 291 }
-- { id: shedinja, dex: 292 }
+- { id: ninjask, dex: 291, evolvesFrom: nincada }
+- { id: shedinja, dex: 292, evolvesFrom: nincada }
 - { id: whismur, dex: 293 }
-- { id: loudred, dex: 294 }
-- { id: exploud, dex: 295 }
+- { id: loudred, dex: 294, evolvesFrom: whismur }
+- { id: exploud, dex: 295, evolvesFrom: loudred }
 - { id: makuhita, dex: 296 }
-- { id: hariyama, dex: 297 }
+- { id: hariyama, dex: 297, evolvesFrom: makuhita }
 - { id: azurill, dex: 298 }
 - { id: nosepass, dex: 299 }
 - { id: skitty, dex: 300 }
-- { id: delcatty, dex: 301 }
+- { id: delcatty, dex: 301, evolvesFrom: skitty }
 - { id: sableye, dex: 302 }
 - { id: mawile, dex: 303 }
 - { id: aron, dex: 304 }
-- { id: lairon, dex: 305 }
-- { id: aggron, dex: 306 }
+- { id: lairon, dex: 305, evolvesFrom: aron }
+- { id: aggron, dex: 306, evolvesFrom: lairon }
 - { id: meditite, dex: 307 }
-- { id: medicham, dex: 308 }
+- { id: medicham, dex: 308, evolvesFrom: meditite }
 - { id: electrike, dex: 309 }
-- { id: manectric, dex: 310 }
+- { id: manectric, dex: 310, evolvesFrom: electrike }
 - { id: plusle, dex: 311 }
 - { id: minun, dex: 312 }
 - { id: volbeat, dex: 313 }
 - { id: illumise, dex: 314 }
-- { id: roselia, dex: 315 }
+- { id: roselia, dex: 315, evolvesFrom: budew }
 - { id: gulpin, dex: 316 }
-- { id: swalot, dex: 317 }
+- { id: swalot, dex: 317, evolvesFrom: gulpin }
 - { id: carvanha, dex: 318 }
-- { id: sharpedo, dex: 319 }
+- { id: sharpedo, dex: 319, evolvesFrom: carvanha }
 - { id: wailmer, dex: 320 }
-- { id: wailord, dex: 321 }
+- { id: wailord, dex: 321, evolvesFrom: wailmer }
 - { id: numel, dex: 322 }
-- { id: camerupt, dex: 323 }
+- { id: camerupt, dex: 323, evolvesFrom: numel }
 - { id: torkoal, dex: 324 }
 - { id: spoink, dex: 325 }
-- { id: grumpig, dex: 326 }
+- { id: grumpig, dex: 326, evolvesFrom: spoink }
 - { id: spinda, dex: 327 }
 - { id: trapinch, dex: 328 }
-- { id: vibrava, dex: 329 }
-- { id: flygon, dex: 330 }
+- { id: vibrava, dex: 329, evolvesFrom: trapinch }
+- { id: flygon, dex: 330, evolvesFrom: vibrava }
 - { id: cacnea, dex: 331 }
-- { id: cacturne, dex: 332 }
+- { id: cacturne, dex: 332, evolvesFrom: cacnea }
 - { id: swablu, dex: 333 }
-- { id: altaria, dex: 334 }
+- { id: altaria, dex: 334, evolvesFrom: swablu }
 - { id: zangoose, dex: 335 }
 - { id: seviper, dex: 336 }
 - { id: lunatone, dex: 337 }
 - { id: solrock, dex: 338 }
 - { id: barboach, dex: 339 }
-- { id: whiscash, dex: 340 }
+- { id: whiscash, dex: 340, evolvesFrom: barboach }
 - { id: corphish, dex: 341 }
-- { id: crawdaunt, dex: 342 }
+- { id: crawdaunt, dex: 342, evolvesFrom: corphish }
 - { id: baltoy, dex: 343 }
-- { id: claydol, dex: 344 }
+- { id: claydol, dex: 344, evolvesFrom: baltoy }
 - { id: lileep, dex: 345 }
-- { id: cradily, dex: 346 }
+- { id: cradily, dex: 346, evolvesFrom: lileep }
 - { id: anorith, dex: 347 }
-- { id: armaldo, dex: 348 }
+- { id: armaldo, dex: 348, evolvesFrom: anorith }
 - { id: feebas, dex: 349 }
-- { id: milotic, dex: 350 }
+- { id: milotic, dex: 350, evolvesFrom: feebas }
 - { id: castform, dex: 351 }
 - { id: kecleon, dex: 352 }
 - { id: shuppet, dex: 353 }
-- { id: banette, dex: 354 }
+- { id: banette, dex: 354, evolvesFrom: shuppet }
 - { id: duskull, dex: 355 }
-- { id: dusclops, dex: 356 }
+- { id: dusclops, dex: 356, evolvesFrom: duskull }
 - { id: tropius, dex: 357 }
-- { id: chimecho, dex: 358 }
+- { id: chimecho, dex: 358, evolvesFrom: chingling }
 - { id: absol, dex: 359 }
 - { id: wynaut, dex: 360 }
 - { id: snorunt, dex: 361 }
-- { id: glalie, dex: 362 }
+- { id: glalie, dex: 362, evolvesFrom: snorunt }
 - { id: spheal, dex: 363 }
-- { id: sealeo, dex: 364 }
-- { id: walrein, dex: 365 }
+- { id: sealeo, dex: 364, evolvesFrom: spheal }
+- { id: walrein, dex: 365, evolvesFrom: sealeo }
 - { id: clamperl, dex: 366 }
-- { id: huntail, dex: 367 }
-- { id: gorebyss, dex: 368 }
+- { id: huntail, dex: 367, evolvesFrom: clamperl }
+- { id: gorebyss, dex: 368, evolvesFrom: clamperl }
 - { id: relicanth, dex: 369 }
 - { id: luvdisc, dex: 370 }
 - { id: bagon, dex: 371 }
-- { id: shelgon, dex: 372 }
-- { id: salamence, dex: 373 }
+- { id: shelgon, dex: 372, evolvesFrom: bagon }
+- { id: salamence, dex: 373, evolvesFrom: shelgon }
 - { id: beldum, dex: 374 }
-- { id: metang, dex: 375 }
-- { id: metagross, dex: 376 }
+- { id: metang, dex: 375, evolvesFrom: beldum }
+- { id: metagross, dex: 376, evolvesFrom: metang }
 - { id: regirock, dex: 377 }
 - { id: regice, dex: 378 }
 - { id: registeel, dex: 379 }
@@ -387,34 +388,34 @@
 - { id: jirachi, dex: 385 }
 - { id: deoxys, dex: 386 }
 - { id: budew, dex: 406 }
-- { id: roserade, dex: 407 }
-- { id: ambipom, dex: 424 }
-- { id: mismagius, dex: 429 }
-- { id: honchkrow, dex: 430 }
+- { id: roserade, dex: 407, evolvesFrom: roselia }
+- { id: ambipom, dex: 424, evolvesFrom: aipom }
+- { id: mismagius, dex: 429, evolvesFrom: misdreavus }
+- { id: honchkrow, dex: 430, evolvesFrom: murkrow }
 - { id: chingling, dex: 433 }
 - { id: bonsly, dex: 438 }
 - { id: mime-jr, dex: 439 }
 - { id: happiny, dex: 440 }
 - { id: munchlax, dex: 446 }
 - { id: riolu, dex: 447 }
-- { id: lucario, dex: 448 }
+- { id: lucario, dex: 448, evolvesFrom: riolu }
 - { id: mantyke, dex: 458 }
-- { id: weavile, dex: 461 }
-- { id: magnezone, dex: 462 }
-- { id: lickilicky, dex: 463 }
-- { id: rhyperior, dex: 464 }
-- { id: tangrowth, dex: 465 }
-- { id: electivire, dex: 466 }
-- { id: magmortar, dex: 467 }
-- { id: togekiss, dex: 468 }
-- { id: yanmega, dex: 469 }
-- { id: leafeon, dex: 470 }
-- { id: glaceon, dex: 471 }
-- { id: gliscor, dex: 472 }
-- { id: mamoswine, dex: 473 }
-- { id: porygon-z, dex: 474 }
-- { id: gallade, dex: 475 }
-- { id: probopass, dex: 476 }
-- { id: dusknoir, dex: 477 }
-- { id: froslass, dex: 478 }
-- { id: sylveon, dex: 700 }
+- { id: weavile, dex: 461, evolvesFrom: sneasel }
+- { id: magnezone, dex: 462, evolvesFrom: magneton }
+- { id: lickilicky, dex: 463, evolvesFrom: lickitung }
+- { id: rhyperior, dex: 464, evolvesFrom: rhydon }
+- { id: tangrowth, dex: 465, evolvesFrom: tangela }
+- { id: electivire, dex: 466, evolvesFrom: electabuzz }
+- { id: magmortar, dex: 467, evolvesFrom: magmar }
+- { id: togekiss, dex: 468, evolvesFrom: togetic }
+- { id: yanmega, dex: 469, evolvesFrom: yanma }
+- { id: leafeon, dex: 470, evolvesFrom: eevee }
+- { id: glaceon, dex: 471, evolvesFrom: eevee }
+- { id: gliscor, dex: 472, evolvesFrom: gligar }
+- { id: mamoswine, dex: 473, evolvesFrom: piloswine }
+- { id: porygon-z, dex: 474, evolvesFrom: porygon2 }
+- { id: gallade, dex: 475, evolvesFrom: kirlia }
+- { id: probopass, dex: 476, evolvesFrom: nosepass }
+- { id: dusknoir, dex: 477, evolvesFrom: dusclops }
+- { id: froslass, dex: 478, evolvesFrom: snorunt }
+- { id: sylveon, dex: 700, evolvesFrom: eevee }
