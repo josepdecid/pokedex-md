@@ -3,16 +3,19 @@
 id: dx
 platform: switch
 releaseYear: 2020
-# Ways to recruit or obtain a Pokémon in this game. `dungeon: true` means an
-# `obtain` entry with this method must name the dungeon where it happens.
+# Sections of "How to get it" on a Pokémon's page, in display order. Every section is
+# always shown, with a "none" message when it's empty. `evolve` is built in: it comes
+# from each entry's `evolve`. Names live in locales under `section` and `section-none`.
+sections: [recruit, evolve, mystery-house, fainted]
+# Ways to recruit or obtain a Pokémon in this game, and the section each one is listed in.
+# `dungeon: true` means an `obtain` entry with this method must name the dungeon where it happens.
 methods:
-  - { id: dungeon, dungeon: true }
-  - { id: strong-foe, dungeon: true }
-  - { id: legendary, dungeon: true }
-  - { id: fainted, dungeon: false }
-  - { id: evolution, dungeon: false }
-  - { id: mystery-house, dungeon: false }
-  - { id: pokemon-square, dungeon: false }
+  - { id: dungeon, dungeon: true, section: recruit }
+  - { id: strong-foe, dungeon: true, section: recruit }
+  - { id: legendary, dungeon: true, section: recruit }
+  - { id: pokemon-square, dungeon: false, section: recruit }
+  - { id: mystery-house, dungeon: true, section: mystery-house }
+  - { id: fainted, dungeon: true, section: fainted }
 # If an entry id ever has to change, map the old id to the new one here so
 # saved progress keeps working. Never reuse an old id for something else.
 idAliases:

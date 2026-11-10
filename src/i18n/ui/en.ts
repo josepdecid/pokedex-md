@@ -40,11 +40,17 @@ export const en = {
 
   'pokemon.back': 'Pokédex',
   'pokemon.obtain': 'How to get it',
-  'pokemon.obtainNone': 'No recruitment info yet.',
+  'pokemon.evolveLevel': 'Level {level}',
+  'pokemon.evolveItem': '{count} × {item}',
   'pokemon.camp': 'Lives in',
   'pokemon.prev': 'Previous',
   'pokemon.next': 'Next',
   'pokemon.notFound': "That Pokémon isn't in this game.",
+
+  'obtain.floor': 'Floor {floors}',
+  'obtain.floors': 'Floors {floors}',
+  'obtain.level': 'Lv. {level}',
+  'obtain.rate': '{rate}% recruit rate',
 
   'sections.incomplete': 'Incomplete',
   'sections.complete': 'Complete',

@@ -113,12 +113,23 @@ camp:
   wild-plains: "Pradera Salvaje"
   withering-desert: "Desierto Abrasador"
 # In-game terms: territorio (dungeon), superrival (strong foe), variocolor (Shiny),
-# casa misteriosa (Mystery House), Plaza Pokémon (Pokémon Square).
+# casa misteriosa (Mystery House), Plaza Pokémon (Pokémon Square), evolito (Evolution Crystal).
 method:
   dungeon: "Reclutar en un territorio"
   legendary: "Encuentro con un legendario"
   strong-foe: "Superrival (puede ser variocolor)"
   fainted: "Encontrado debilitado en un territorio"
-  evolution: "Hacer evolucionar a un miembro del equipo"
   mystery-house: "Casa misteriosa"
   pokemon-square: "Plaza Pokémon (tras la historia principal)"
+section:
+  recruit: "Reclutar"
+  evolve: "Evolucionar"
+  mystery-house: "Casa misteriosa"
+  fainted: "Encontrado debilitado"
+section-none:
+  recruit: "No se puede reclutar en ningún territorio."
+  evolve: "No evoluciona de otro Pokémon."
+  mystery-house: "Nunca aparece en una casa misteriosa."
+  fainted: "Nunca se encuentra debilitado en un territorio."
+item:
+  evolution-crystal: "Evolito"

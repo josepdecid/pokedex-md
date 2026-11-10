@@ -4,7 +4,9 @@
   import TypeBadge from '../components/TypeBadge.svelte';
   import { i18n, t } from '../i18n/i18n.svelte.ts';
   import { dexLabel } from '../lib/format.ts';
+  import { obtainDetails } from '../lib/obtain.ts';
   import { paths, router } from '../lib/router.svelte.ts';
+  import type { Evolution, Obtain } from '../lib/game-data.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
 
   let { session, id }: { session: GameSession; id: string } = $props();
@@ -13,6 +15,28 @@
   const index = $derived(entry ? session.data.pokemon.indexOf(entry) : -1);
   const prev = $derived(index > 0 ? session.data.pokemon[index - 1] : undefined);
   const next = $derived(index >= 0 ? session.data.pokemon[index + 1] : undefined);
+
+  const EVOLVE = 'evolve';
+  /** Each section of "How to get it", with its obtain entries in dungeon unlock order (no dungeon last). */
+  const sections = $derived.by(() => {
+    if (!entry) return [];
+    const order = (o: Obtain) => (o.dungeon ? (session.dungeonById.get(o.dungeon)?.order ?? 0) : Infinity);
+    return session.data.sections.map((id) => {
+      const methods = session.data.methods.filter((m) => m.section === id).map((m) => m.id);
+      const items = entry.obtain.filter((o) => methods.includes(o.method)).sort((a, b) => order(a) - order(b));
+      // The section's first method is its default (plain "Recruit in dungeon"), so only the others get a note.
+      const empty = id === EVOLVE ? !entry.evolvesFrom : items.length === 0;
+      return { id, items, empty, defaultMethod: methods[0] };
+    });
+  });
+  const evolvesFrom = $derived(entry?.evolvesFrom ? session.entryById.get(entry.evolvesFrom.from) : undefined);
+
+  function requirement({ level, item, count = 1 }: Evolution): string {
+    const parts: string[] = [];
+    if (level !== undefined) parts.push(t('pokemon.evolveLevel', { level }));
+    if (item) parts.push(count === 1 ? i18n.name('item', item) : t('pokemon.evolveItem', { count, item: i18n.name('item', item) }));
+    return parts.join(' + ');
+  }
 </script>
 
 <a class="back" href={paths.pokedex(session.id)}>‹ {t('pokemon.back')}</a>
@@ -30,29 +54,51 @@
       </div>
     </header>
 
+    <p class="lives">
+      <span class="muted">{t('pokemon.camp')}</span>
+      <a href={paths.camp(session.id, entry.camp)}>{i18n.name('camp', entry.camp)}</a>
+    </p>
+
     <RecruitToggle {entry} {session} large />
 
-    <section>
+    <section class="obtain">
       <h2>{t('pokemon.obtain')}</h2>
-      {#if entry.obtain.length}
-        <ul class="facts">
-          {#each entry.obtain as o, i (i)}
-            <li>
-              <span class="label">{i18n.name('method', o.method)}</span>
-              {#if o.dungeon}
-                <a href={paths.dungeon(session.id, o.dungeon)}>{i18n.name('dungeon', o.dungeon)}</a>
+      {#each sections as section (section.id)}
+        <section>
+          <h3>{i18n.name('section', section.id)}</h3>
+          {#if !section.empty}
+            <ul class="facts">
+              {#if section.id === EVOLVE && entry.evolvesFrom}
+                <li>
+                  <a class="from" href={paths.pokemon(session.id, entry.evolvesFrom.from)}>
+                    {#if evolvesFrom}<Portrait entryId={evolvesFrom.id} portrait={evolvesFrom.portrait} size={32} />{/if}
+                    {evolvesFrom ? i18n.entryName(evolvesFrom) : entry.evolvesFrom.from}
+                  </a>
+                  <span class="label">{requirement(entry.evolvesFrom)}</span>
+                </li>
               {/if}
-            </li>
-          {/each}
-        </ul>
-      {:else}
-        <p class="muted">{t('pokemon.obtainNone')}</p>
-      {/if}
-    </section>
-
-    <section>
-      <h2>{t('pokemon.camp')}</h2>
-      <p><a href={paths.camp(session.id, entry.camp)}>{i18n.name('camp', entry.camp)}</a></p>
+              {#each section.items as o, i (i)}
+                {@const details = obtainDetails(o)}
+                <li>
+                  <span class="where">
+                    {#if o.dungeon}
+                      <a href={paths.dungeon(session.id, o.dungeon)}>{i18n.name('dungeon', o.dungeon)}</a>
+                    {:else}
+                      <span>{i18n.name('method', o.method)}</span>
+                    {/if}
+                    {#if o.dungeon && o.method !== section.defaultMethod}
+                      <small class="label">{i18n.name('method', o.method)}</small>
+                    {/if}
+                  </span>
+                  {#if details}<span class="label details">{details}</span>{/if}
+                </li>
+              {/each}
+            </ul>
+          {:else}
+            <p class="muted">{i18n.name('section-none', section.id)}</p>
+          {/if}
+        </section>
+      {/each}
     </section>
   </article>
 
@@ -106,9 +152,27 @@
     display: grid;
     gap: 0.5rem;
   }
+  .lives {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+  .obtain {
+    gap: 1rem;
+  }
+  h3 {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
   .facts li {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
     gap: 0.25rem 1rem;
     padding: 0.6rem 0.75rem;
@@ -117,6 +181,19 @@
   }
   .label {
     color: var(--muted);
+  }
+  .where {
+    display: grid;
+    gap: 0.1rem;
+  }
+  .details {
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .from {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   .pager {
     display: grid;

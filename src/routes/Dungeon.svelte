@@ -3,6 +3,7 @@
   import PokemonList from '../components/PokemonList.svelte';
   import ProgressBar from '../components/ProgressBar.svelte';
   import { i18n, t } from '../i18n/i18n.svelte.ts';
+  import { obtainDetails } from '../lib/obtain.ts';
   import { paths, router } from '../lib/router.svelte.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
 
@@ -11,14 +12,13 @@
   const dungeon = $derived(session.dungeonById.get(id));
   const encounters = $derived(session.encountersByDungeon.get(id) ?? []);
   const entries = $derived(encounters.map((e) => e.entry));
-  const methodsById = $derived(new Map(encounters.map((e) => [e.entry.id, e.methods])));
+  const obtainsById = $derived(new Map(encounters.map((e) => [e.entry.id, e.obtains])));
   const done = $derived(session.countRecruited(entries));
   const morph = $derived(router.morphDungeonId === id);
-  // "Recruit in dungeon" is the default, so only call out the special ones.
+  // "Recruit in dungeon" is the default, so only the special ones are named.
   const note = (entry: { id: string }) =>
-    (methodsById.get(entry.id) ?? [])
-      .filter((m) => m !== 'dungeon')
-      .map((m) => i18n.name('method', m))
+    (obtainsById.get(entry.id) ?? [])
+      .map((o) => [o.method === 'dungeon' ? '' : i18n.name('method', o.method), obtainDetails(o)].filter(Boolean).join(': '))
       .join(' · ');
 </script>
 
