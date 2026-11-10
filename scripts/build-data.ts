@@ -31,8 +31,9 @@ const GameFile = z.strictObject({
   releaseYear: z.number().int(),
   sections: z.array(id).min(1),
   methods: z
-    .array(z.strictObject({ id, dungeon: z.boolean(), section: id }))
+    .array(z.strictObject({ id, dungeon: z.boolean(), section: id, icon: id.optional() }))
     .superRefine(unique('method')),
+  evolveIcon: id.optional(),
   idAliases: z.record(id, id).default({}),
 });
 // `artwork: false`: Serebii has no artwork for it, so don't warn that it's missing.
@@ -186,6 +187,15 @@ export function buildData(
       return {};
     };
 
+    /** `{ icon }` if public/icons/<gameId>/<name>.png exists. */
+    const icon = (name: string | undefined, what: string): { icon?: string } => {
+      if (!name) return {};
+      const path = `icons/${gameId}/${name}.png`;
+      if (existsSync(join(artworkDir, path))) return { icon: path };
+      warnings.push(`${where('game.yaml')}: ${what}: public/${path} is missing`);
+      return {};
+    };
+
     const methods = new Map(game.methods.map((m) => [m.id, m]));
     const sectionSet = new Set(game.sections);
     if (sectionSet.size !== game.sections.length) problems.push(`${where('game.yaml')}: sections has duplicates`);
@@ -312,7 +322,8 @@ export function buildData(
       releaseYear: game.releaseYear,
       types: types.filter((t) => entries.some((e) => e.types.includes(t))),
       sections: game.sections,
-      methods: game.methods,
+      methods: game.methods.map(({ icon: name, ...m }) => ({ ...m, ...icon(name, `method "${m.id}"`) })),
+      ...(game.evolveIcon && { evolveIcon: icon(game.evolveIcon, 'evolveIcon').icon }),
       pokemon: entries.map((e) => ({ ...e, familyOrder: familyIndex.get(e.id)! })),
       dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1, ...artwork('dungeons', d) })),
       camps: camps.map((c) => ({ id: c.id, ...artwork('camps', c) })),

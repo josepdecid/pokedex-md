@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { t } from '../i18n/i18n.svelte.ts';
   import type { PokemonEntry } from '../lib/game-data.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
@@ -12,13 +13,13 @@
     entries,
     session,
     storageKey,
-    note,
+    details,
   }: {
     entries: readonly PokemonEntry[];
     session: GameSession;
     /** Prefix of the remembered collapsed state: `<storageKey>.unrecruited` / `.recruited`. */
     storageKey: string;
-    note?: (entry: PokemonEntry) => string;
+    details?: Snippet<[PokemonEntry]>;
   } = $props();
 
   const unrecruited = $derived(entries.filter((e) => !session.progress.isRecruited(e.id)));
@@ -28,9 +29,9 @@
 {#if unrecruited.length && recruited.length}
   {#each [['unrecruited', unrecruited], ['recruited', recruited]] as const as [which, entries] (which)}
     <CollapsibleSection title={t(`sections.${which}`)} count={entries.length} collapseKey={`${storageKey}.${which}`}>
-      <PokemonList {entries} {session} {note} />
+      <PokemonList {entries} {session} {details} />
     </CollapsibleSection>
   {/each}
 {:else}
-  <PokemonList {entries} {session} {note} />
+  <PokemonList {entries} {session} {details} />
 {/if}

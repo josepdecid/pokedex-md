@@ -51,6 +51,8 @@ export const en = {
   'obtain.floors': 'Floors {floors}',
   'obtain.level': 'Lv. {level}',
   'obtain.rate': '{rate}% recruit rate',
+  'obtain.rateShort': '{rate}%',
+  'obtain.rateLabel': 'Recruit rate',
 
   'sections.incomplete': 'Incomplete',
   'sections.complete': 'Complete',
@@ -116,7 +118,7 @@ export const en = {
   'about.disclaimer': 'Fan-made and unofficial. Not affiliated with Nintendo, Creatures, GAME FREAK, The Pokémon Company or Spike Chunsoft. Pokémon names are trademarks of their respective owners.',
   'about.sources': 'Recruitment data is based on Serebii and Bulbapedia and may contain mistakes.',
   'about.portraits': "Pokémon portraits come from PMDCollab's SpriteCollab and are shared under CC BY-NC 4.0. Most are from the official Mystery Dungeon games by Spike Chunsoft.",
-  'about.artwork': 'Camp artwork and dungeon screenshots from Serebii.net.',
+  'about.artwork': 'Camp artwork, dungeon screenshots and item icons from Serebii.net.',
   'about.portraitArtists': 'Portrait artists: {artists}.',
   'about.portraitsLink': 'SpriteCollab on GitHub',
 } as const;

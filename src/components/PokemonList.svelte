@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
   import { i18n } from '../i18n/i18n.svelte.ts';
   import type { PokemonEntry } from '../lib/game-data.ts';
   import { dexLabel } from '../lib/format.ts';
@@ -11,8 +12,13 @@
   let {
     entries,
     session,
-    note,
-  }: { entries: readonly PokemonEntry[]; session: GameSession; note?: (entry: PokemonEntry) => string } = $props();
+    details,
+  }: {
+    entries: readonly PokemonEntry[];
+    session: GameSession;
+    /** Extra lines under each row's name and types. */
+    details?: Snippet<[PokemonEntry]>;
+  } = $props();
 </script>
 
 <ul class="list">
@@ -27,8 +33,8 @@
           <span class="meta">
             <span class="dex">{dexLabel(entry.dex)}</span>
             {#each entry.types as type (type)}<TypeBadge {type} />{/each}
-            {#if note}<span class="note">{note(entry)}</span>{/if}
           </span>
+          {#if details}{@render details(entry)}{/if}
         </span>
       </a>
       <RecruitToggle {entry} {session} />
@@ -100,10 +106,6 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.3rem;
-  }
-  .note {
-    font-size: 0.78rem;
-    color: var(--muted);
   }
   .done .name {
     color: var(--muted);
