@@ -1,0 +1,32 @@
+{
+  "name": "pokedex-md",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "data": "node scripts/build-data.ts",
+    "dev": "npm run data && vite",
+    "build": "npm run data && vite build",
+    "preview": "vite preview",
+    "check": "npm run data && svelte-check --tsconfig ./tsconfig.json",
+    "test": "npm run data && vitest run",
+    "portraits": "node scripts/fetch-portraits.ts"
+  },
+  "dependencies": {
+    "idb-keyval": "^6.3.0"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@tsconfig/svelte": "^5.0.8",
+    "@types/node": "^26.6.6",
+    "svelte": "^5.57.3",
+    "svelte-check": "^4.7.8",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.7",
+    "vite-plugin-pwa": "^2.0.0",
+    "vitest": "^5.1.0",
+    "workbox-window": "^7.4.1",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  }
+}

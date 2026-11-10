@@ -1,0 +1,19 @@
+# Type ids shared by every game. Names live in data/locales/<lang>/shared.yaml.
+- normal
+- fire
+- water
+- electric
+- grass
+- ice
+- fighting
+- poison
+- ground
+- flying
+- psychic
+- bug
+- rock
+- ghost
+- dragon
+- dark
+- steel
+- fairy

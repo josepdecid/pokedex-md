@@ -1,0 +1,409 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --surface-2: #f1eee6;
+  --text: #1d2422;
+  --muted: #5f6b67;
+  --border: #e3ded2;
+  --border-strong: #b9b3a5;
+  --track: #e8e3d8;
+  --accent: #1f7a63;
+  --accent-soft: #dcefe8;
+  --accent-text: #155a48;
+  --focus: #f0a020;
+  --danger: #b3261e;
+  --danger-soft: #f9e1df;
+  --radius: 14px;
+  --tabbar-h: 60px;
+
+  --type-normal: #8f8f73;
+  --type-fire: #e0662b;
+  --type-water: #4a7fe0;
+  --type-electric: #d6a500;
+  --type-grass: #4f9e3b;
+  --type-ice: #4bb3c4;
+  --type-fighting: #b03a2e;
+  --type-poison: #9046a3;
+  --type-ground: #b28a3c;
+  --type-flying: #7f89d8;
+  --type-psychic: #e04e7c;
+  --type-bug: #8b9c1c;
+  --type-rock: #a08a3c;
+  --type-ghost: #67558f;
+  --type-dragon: #5d3fd3;
+  --type-dark: #5d4b3f;
+  --type-steel: #7f8c9c;
+  --type-fairy: #d26aa7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111816;
+    --surface: #18211e;
+    --surface-2: #202b27;
+    --text: #e8eeeb;
+    --muted: #9aa8a3;
+    --border: #2a3632;
+    --border-strong: #4c5c56;
+    --track: #2a3632;
+    --accent: #3fae8e;
+    --accent-soft: #1d3a31;
+    --accent-text: #8fdcc4;
+    --danger: #f2827a;
+    --danger-soft: #3a1f1d;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+a {
+  color: var(--accent-text);
+}
+
+h1 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Layout */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-top: env(safe-area-inset-top);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  /* Stays put during page transitions instead of crossfading. */
+  view-transition-name: topbar;
+}
+
+.topbar-inner {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0.6rem 16px 0.65rem;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 0;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.brand-game {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem 16px calc(var(--tabbar-h) + env(safe-area-inset-bottom) + 1.5rem);
+}
+
+.tabbar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+  padding: 0 max(0px, (100% - 720px) / 2) env(safe-area-inset-bottom);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  view-transition-name: tabbar;
+}
+
+.tabbar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.tabbar svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tabbar a[aria-current='page'] {
+  color: var(--accent-text);
+}
+
+.tabbar a:focus-visible {
+  outline-offset: -4px;
+}
+
+.center {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+/* Shared bits */
+
+.card {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.card > h2,
+.card section h2 {
+  margin: 0;
+}
+
+.card p {
+  margin: 0;
+}
+
+.card section {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.card-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.card-link.complete {
+  border-color: var(--accent);
+}
+
+.card-link .order {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--surface-2);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.card-link .body {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.card-link .title {
+  font-weight: 600;
+}
+
+.intro {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.eyebrow {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.headline-progress {
+  margin: 0.25rem 0 1rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.button.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.button.ghost {
+  border-color: transparent;
+  background: none;
+}
+
+.button.danger {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: #fff;
+}
+
+.button:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.link-button {
+  padding: 0.25rem 0;
+  border: 0;
+  background: none;
+  color: var(--accent-text);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Page transitions (View Transition API). The router names one Pokémon's portrait and
+   name on both pages, so they morph between the list and the Pokémon page. */
+
+::view-transition-group(*) {
+  animation-duration: 260ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+}
+
+/* Text: scale proportionally from the left instead of stretching to the box. */
+::view-transition-old(pokemon-name),
+::view-transition-new(pokemon-name) {
+  width: auto;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

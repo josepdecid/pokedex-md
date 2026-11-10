@@ -1,0 +1,2884 @@
+# Recruitable Pokémon in PMD: Rescue Team DX, in National Dex order.
+# id: stable entry id used for saved progress (defaults to the species id; forms get a suffix).
+# species: shared species id (omitted when equal to id).
+# obtain: how to get it. `method` must be one of the methods in game.yaml.
+- id: bulbasaur
+  types: [grass, poison]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: ivysaur
+  types: [grass, poison]
+  camp: beau-plains
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: venusaur
+  types: [grass, poison]
+  camp: beau-plains
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: charmander
+  types: [fire]
+  camp: mt-cleft
+  obtain:
+    - { method: dungeon, dungeon: fiery-field }
+- id: charmeleon
+  types: [fire]
+  camp: mt-cleft
+  obtain:
+    - { method: dungeon, dungeon: fiery-field }
+- id: charizard
+  types: [fire, flying]
+  camp: mt-cleft
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: squirtle
+  types: [water]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: wartortle
+  types: [water]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+- id: blastoise
+  types: [water]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: caterpie
+  types: [bug]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: purity-forest }
+- id: metapod
+  types: [bug]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: butterfree
+  types: [bug, flying]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: strong-foe, dungeon: howling-forest }
+- id: weedle
+  types: [bug, poison]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: kakuna
+  types: [bug, poison]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: beedrill
+  types: [bug, poison]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: pidgey
+  types: [normal, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: tiny-woods }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: pidgeotto
+  types: [normal, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+- id: pidgeot
+  types: [normal, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: mt-blaze }
+    - { method: dungeon, dungeon: northern-range }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: rattata
+  types: [normal]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: thunderwave-cave }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: raticate
+  types: [normal]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: pitfall-valley }
+- id: spearow
+  types: [normal, flying]
+  camp: ravaged-field
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: purity-forest }
+- id: fearow
+  types: [normal, flying]
+  camp: ravaged-field
+  obtain:
+    - { method: dungeon, dungeon: mt-blaze }
+    - { method: dungeon, dungeon: northern-range }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: ekans
+  types: [poison]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: wish-cave }
+- id: arbok
+  types: [poison]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: pikachu
+  types: [electric]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: lightning-field }
+- id: raichu
+  types: [electric]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: lightning-field }
+- id: sandshrew
+  types: [ground]
+  camp: withering-desert
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: sandslash
+  types: [ground]
+  camp: withering-desert
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: nidoran-f
+  types: [poison]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: thunderwave-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: nidorina
+  types: [poison]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: lapis-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: nidoqueen
+  types: [poison, ground]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: nidoran-m
+  types: [poison]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: nidorino
+  types: [poison]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: lapis-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: nidoking
+  types: [poison, ground]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: clefairy
+  types: [fairy]
+  camp: mt-moonview
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: clefable
+  types: [fairy]
+  camp: mt-moonview
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: vulpix
+  types: [fire]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: fiery-field }
+- id: ninetales
+  types: [fire]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: strong-foe, dungeon: northern-range }
+- id: jigglypuff
+  types: [normal, fairy]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: wigglytuff
+  types: [normal, fairy]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: zubat
+  types: [poison, flying]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: lapis-cave }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: golbat
+  types: [poison, flying]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: lapis-cave }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+- id: oddish
+  types: [grass, poison]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: wyvern-hill }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: gloom
+  types: [grass, poison]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: purity-forest }
+- id: vileplume
+  types: [grass, poison]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: purity-forest }
+- id: paras
+  types: [bug, grass]
+  camp: mushroom-forest
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: parasect
+  types: [bug, grass]
+  camp: mushroom-forest
+  obtain:
+    - { method: dungeon, dungeon: purity-forest }
+- id: venonat
+  types: [bug, poison]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: uproar-forest }
+- id: venomoth
+  types: [bug, poison]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: diglett
+  types: [ground]
+  camp: boulder-cave
+  obtain:
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: dugtrio
+  types: [ground]
+  camp: boulder-cave
+  obtain:
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: meowth
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: wish-cave }
+- id: persian
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: psyduck
+  types: [water]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: golduck
+  types: [water]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+- id: mankey
+  types: [fighting]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: uproar-forest }
+- id: primeape
+  types: [fighting]
+  camp: vibrant-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: growlithe
+  types: [fire]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: dungeon, dungeon: purity-forest }
+- id: arcanine
+  types: [fire]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: mt-blaze }
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: dungeon, dungeon: purity-forest }
+- id: poliwag
+  types: [water]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: northwind-field }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: murky-cave }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: poliwhirl
+  types: [water]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: northwind-field }
+    - { method: dungeon, dungeon: murky-cave }
+- id: poliwrath
+  types: [water, fighting]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: northwind-field }
+    - { method: dungeon, dungeon: murky-cave }
+- id: abra
+  types: [psychic]
+  camp: decrepit-lab
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+- id: kadabra
+  types: [psychic]
+  camp: decrepit-lab
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+- id: alakazam
+  types: [psychic]
+  camp: decrepit-lab
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: machop
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+- id: machoke
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: fiery-field }
+- id: machamp
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: mt-faraway }
+- id: bellsprout
+  types: [grass, poison]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: purity-forest }
+- id: weepinbell
+  types: [grass, poison]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: purity-forest }
+- id: victreebel
+  types: [grass, poison]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: tentacool
+  types: [water, poison]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: tentacruel
+  types: [water, poison]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: geodude
+  types: [rock, ground]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: graveler
+  types: [rock, ground]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: golem
+  types: [rock, ground]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: ponyta
+  types: [fire]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: rapidash
+  types: [fire]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: mt-blaze }
+    - { method: dungeon, dungeon: fiery-field }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: mt-steel }
+- id: slowpoke
+  types: [water, psychic]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: slowbro
+  types: [water, psychic]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: magnemite
+  types: [electric, steel]
+  camp: power-plant
+  obtain:
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: wish-cave }
+- id: magneton
+  types: [electric, steel]
+  camp: power-plant
+  obtain:
+    - { method: dungeon, dungeon: lightning-field }
+- id: farfetchd
+  types: [normal, flying]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: doduo
+  types: [normal, flying]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: dodrio
+  types: [normal, flying]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: northern-range }
+- id: seel
+  types: [water]
+  camp: ice-floe-beach
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: dewgong
+  types: [water, ice]
+  camp: ice-floe-beach
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: grimer
+  types: [poison]
+  camp: poison-swamp
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: silver-trench }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: muk
+  types: [poison]
+  camp: poison-swamp
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: shellder
+  types: [water]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: cloyster
+  types: [water, ice]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: silver-trench }
+- id: gastly
+  types: [ghost, poison]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: darknight-relic }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: haunter
+  types: [ghost, poison]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: darknight-relic }
+    - { method: dungeon, dungeon: buried-relic }
+- id: gengar
+  types: [ghost, poison]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: darknight-relic }
+- id: onix
+  types: [rock, ground]
+  camp: boulder-cave
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: oddity-cave }
+- id: drowzee
+  types: [psychic]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+- id: hypno
+  types: [psychic]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: krabby
+  types: [water]
+  camp: shallow-beach
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: kingler
+  types: [water]
+  camp: shallow-beach
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: voltorb
+  types: [electric]
+  camp: power-plant
+  obtain:
+    - { method: dungeon, dungeon: thunderwave-cave }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: electrode
+  types: [electric]
+  camp: power-plant
+  obtain:
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: mt-faraway }
+- id: exeggcute
+  types: [grass, psychic]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: thunderwave-cave }
+    - { method: dungeon, dungeon: howling-forest }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+    - { method: strong-foe, dungeon: wyvern-hill }
+- id: exeggutor
+  types: [grass, psychic]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: pitfall-valley }
+- id: cubone
+  types: [ground]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: southern-cavern }
+- id: marowak
+  types: [ground]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: southern-cavern }
+- id: hitmonlee
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: hitmonchan
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: lickitung
+  types: [normal]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: koffing
+  types: [poison]
+  camp: poison-swamp
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: weezing
+  types: [poison]
+  camp: poison-swamp
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: rhyhorn
+  types: [ground, rock]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: rhydon
+  types: [ground, rock]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: chansey
+  types: [normal]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: tangela
+  types: [grass]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: lapis-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: kangaskhan
+  types: [normal]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: horsea
+  types: [water]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: seadra
+  types: [water]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: goldeen
+  types: [water]
+  camp: rub-a-dub-river
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: seaking
+  types: [water]
+  camp: rub-a-dub-river
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: staryu
+  types: [water]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: starmie
+  types: [water, psychic]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+    - { method: strong-foe, dungeon: grand-sea }
+- id: mr-mime
+  types: [psychic, fairy]
+  camp: decrepit-lab
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: scyther
+  types: [bug, flying]
+  camp: overgrown-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: jynx
+  types: [ice, psychic]
+  camp: frigid-cavern
+  obtain:
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: northwind-field }
+    - { method: dungeon, dungeon: western-cave }
+- id: electabuzz
+  types: [electric]
+  camp: power-plant
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: magmar
+  types: [fire]
+  camp: crater
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: fiery-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: pinsir
+  types: [bug]
+  camp: overgrown-forest
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: tauros
+  types: [normal]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: magikarp
+  types: [water]
+  camp: waterfall-lake
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+    - { method: strong-foe, dungeon: marvelous-sea }
+- id: gyarados
+  types: [water, flying]
+  camp: waterfall-lake
+  obtain:
+    - { method: strong-foe, dungeon: waterfall-pond }
+- id: lapras
+  types: [water, ice]
+  camp: mystic-lake
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+- id: ditto
+  types: [normal]
+  camp: decrepit-lab
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: unown-relic }
+    - { method: dungeon, dungeon: fiery-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: strong-foe, dungeon: buried-relic }
+- id: eevee
+  types: [normal]
+  camp: evolution-forest
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: vaporeon
+  types: [water]
+  camp: evolution-forest
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: northwind-field }
+    - { method: dungeon, dungeon: silver-trench }
+- id: jolteon
+  types: [electric]
+  camp: evolution-forest
+  obtain:
+    - { method: dungeon, dungeon: lightning-field }
+- id: flareon
+  types: [fire]
+  camp: evolution-forest
+  obtain:
+    - { method: dungeon, dungeon: fiery-field }
+- id: porygon
+  types: [normal]
+  camp: decrepit-lab
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+- id: omanyte
+  types: [rock, water]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: omastar
+  types: [rock, water]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: kabuto
+  types: [rock, water]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: kabutops
+  types: [rock, water]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: aerodactyl
+  types: [rock, flying]
+  camp: ancient-relic
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: snorlax
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: articuno
+  types: [ice, flying]
+  camp: legendary-island
+  obtain:
+    - { method: legendary, dungeon: frosty-forest }
+- id: zapdos
+  types: [electric, flying]
+  camp: legendary-island
+  obtain:
+    - { method: legendary, dungeon: mt-thunder }
+- id: moltres
+  types: [fire, flying]
+  camp: legendary-island
+  obtain:
+    - { method: legendary, dungeon: mt-blaze }
+- id: dratini
+  types: [dragon]
+  camp: mystic-lake
+  obtain:
+    - { method: dungeon, dungeon: wyvern-hill }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: dragonair
+  types: [dragon]
+  camp: mystic-lake
+  obtain:
+    - { method: dungeon, dungeon: wyvern-hill }
+- id: dragonite
+  types: [dragon, flying]
+  camp: mystic-lake
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: strong-foe, dungeon: mt-thunder }
+- id: mewtwo
+  types: [psychic]
+  camp: cryptic-cave
+  obtain:
+    - { method: legendary, dungeon: western-cave }
+- id: mew
+  types: [psychic]
+  camp: final-island
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+- id: chikorita
+  types: [grass]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: bayleef
+  types: [grass]
+  camp: beau-plains
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: meganium
+  types: [grass]
+  camp: beau-plains
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: cyndaquil
+  types: [fire]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: quilava
+  types: [fire]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: fiery-field }
+- id: typhlosion
+  types: [fire]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: dungeon, dungeon: murky-cave }
+- id: totodile
+  types: [water]
+  camp: rub-a-dub-river
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: wyvern-hill }
+- id: croconaw
+  types: [water]
+  camp: rub-a-dub-river
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+- id: feraligatr
+  types: [water]
+  camp: rub-a-dub-river
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: sentret
+  types: [normal]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: furret
+  types: [normal]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: purity-forest }
+- id: hoothoot
+  types: [normal, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: northern-range }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: murky-cave }
+- id: noctowl
+  types: [normal, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: northern-range }
+    - { method: strong-foe, dungeon: lapis-cave }
+- id: ledyba
+  types: [bug, flying]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: oddity-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: ledian
+  types: [bug, flying]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: northern-range }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: spinarak
+  types: [bug, poison]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: northern-range }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: ariados
+  types: [bug, poison]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: crobat
+  types: [poison, flying]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: northwind-field }
+- id: chinchou
+  types: [water, electric]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: silver-trench }
+- id: lanturn
+  types: [water, electric]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: silver-trench }
+- id: pichu
+  types: [electric]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: cleffa
+  types: [fairy]
+  camp: mt-moonview
+  obtain:
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: igglybuff
+  types: [normal, fairy]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: togepi
+  types: [fairy]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: togetic
+  types: [fairy, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: northern-range }
+- id: natu
+  types: [psychic, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: xatu
+  types: [psychic, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: northern-range }
+- id: mareep
+  types: [electric]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: lightning-field }
+- id: flaaffy
+  types: [electric]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: ampharos
+  types: [electric]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: sinister-woods }
+- id: bellossom
+  types: [grass]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: marill
+  types: [water, fairy]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: azumarill
+  types: [water, fairy]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: strong-foe, dungeon: mt-blaze }
+- id: sudowoodo
+  types: [rock]
+  camp: overgrown-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: desert-region }
+- id: politoed
+  types: [water]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+- id: hoppip
+  types: [grass, flying]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: skiploom
+  types: [grass, flying]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: jumpluff
+  types: [grass, flying]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: wyvern-hill }
+    - { method: dungeon, dungeon: northern-range }
+- id: aipom
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: uproar-forest }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+    - { method: strong-foe, dungeon: solar-cave }
+- id: sunkern
+  types: [grass]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: tiny-woods }
+- id: sunflora
+  types: [grass]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: yanma
+  types: [bug, flying]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: purity-forest }
+- id: wooper
+  types: [water, ground]
+  camp: gourd-swamp
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: quagsire
+  types: [water, ground]
+  camp: gourd-swamp
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+- id: espeon
+  types: [psychic]
+  camp: evolution-forest
+  obtain:
+    - { method: dungeon, dungeon: murky-cave }
+    - { method: strong-foe, dungeon: remains-island }
+- id: umbreon
+  types: [dark]
+  camp: evolution-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: murkrow
+  types: [dark, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: slowking
+  types: [water, psychic]
+  camp: bountiful-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: misdreavus
+  types: [ghost]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: darknight-relic }
+    - { method: dungeon, dungeon: remains-island }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: unown
+  types: [psychic]
+  camp: aged-chamber-a-n
+  obtain:
+    - { method: dungeon, dungeon: unown-relic }
+- id: wobbuffet
+  types: [psychic]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: strong-foe, dungeon: darknight-relic }
+- id: girafarig
+  types: [normal, psychic]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+- id: pineco
+  types: [bug]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: forretress
+  types: [bug, steel]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: dunsparce
+  types: [normal]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: gligar
+  types: [ground, flying]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: steelix
+  types: [steel, ground]
+  camp: boulder-cave
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: mt-faraway }
+- id: snubbull
+  types: [fairy]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: remains-island }
+- id: granbull
+  types: [fairy]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: qwilfish
+  types: [water, poison]
+  camp: serene-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: silver-trench }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: scizor
+  types: [bug, steel]
+  camp: overgrown-forest
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: shuckle
+  types: [bug, rock]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+    - { method: strong-foe, dungeon: southern-cavern }
+- id: heracross
+  types: [bug, fighting]
+  camp: overgrown-forest
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: sneasel
+  types: [dark, ice]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+- id: teddiursa
+  types: [normal]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: ursaring
+  types: [normal]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: fiery-field }
+- id: slugma
+  types: [fire]
+  camp: crater
+  obtain:
+    - { method: dungeon, dungeon: mt-blaze }
+    - { method: dungeon, dungeon: fiery-field }
+- id: magcargo
+  types: [fire, rock]
+  camp: crater
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: fiery-field }
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: swinub
+  types: [ice, ground]
+  camp: frigid-cavern
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: piloswine
+  types: [ice, ground]
+  camp: frigid-cavern
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: corsola
+  types: [water, rock]
+  camp: shallow-beach
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: silver-trench }
+    - { method: strong-foe, dungeon: far-off-sea }
+- id: remoraid
+  types: [water]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: octillery
+  types: [water]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: delibird
+  types: [ice, flying]
+  camp: frigid-cavern
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: mantine
+  types: [water, flying]
+  camp: serene-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+- id: skarmory
+  types: [steel, flying]
+  camp: ravaged-field
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: dungeon, dungeon: purity-forest }
+- id: houndour
+  types: [dark, fire]
+  camp: ravaged-field
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: howling-forest }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: houndoom
+  types: [dark, fire]
+  camp: ravaged-field
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: howling-forest }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: kingdra
+  types: [water, dragon]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: phanpy
+  types: [ground]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: donphan
+  types: [ground]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: southern-cavern }
+- id: porygon2
+  types: [normal]
+  camp: decrepit-lab
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: stantler
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: smeargle
+  types: [normal]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: western-cave }
+- id: tyrogue
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: hitmontop
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+- id: smoochum
+  types: [ice, psychic]
+  camp: frigid-cavern
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: elekid
+  types: [electric]
+  camp: power-plant
+  obtain:
+    - { method: dungeon, dungeon: thunderwave-cave }
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: marvelous-sea }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: magby
+  types: [fire]
+  camp: crater
+  obtain:
+    - { method: dungeon, dungeon: mt-blaze }
+    - { method: dungeon, dungeon: fiery-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: miltank
+  types: [normal]
+  camp: safari
+  obtain:
+    - { method: dungeon, dungeon: purity-forest }
+- id: blissey
+  types: [normal]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: raikou
+  types: [electric]
+  camp: sacred-field
+  obtain:
+    - { method: legendary, dungeon: lightning-field }
+- id: entei
+  types: [fire]
+  camp: sacred-field
+  obtain:
+    - { method: legendary, dungeon: fiery-field }
+- id: suicune
+  types: [water]
+  camp: sacred-field
+  obtain:
+    - { method: legendary, dungeon: northwind-field }
+- id: larvitar
+  types: [rock, ground]
+  camp: mt-cleft
+  obtain:
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: pupitar
+  types: [rock, ground]
+  camp: mt-cleft
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: tyranitar
+  types: [rock, dark]
+  camp: mt-cleft
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: lugia
+  types: [psychic, flying]
+  camp: deepsea-current
+  obtain:
+    - { method: legendary, dungeon: silver-trench }
+- id: ho-oh
+  types: [fire, flying]
+  camp: rainbow-peak
+  obtain:
+    - { method: legendary, dungeon: mt-faraway }
+- id: celebi
+  types: [psychic, grass]
+  camp: healing-forest
+  obtain:
+    - { method: legendary, dungeon: purity-forest }
+    - { method: mystery-house }
+- id: treecko
+  types: [grass]
+  camp: overgrown-forest
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: grovyle
+  types: [grass]
+  camp: overgrown-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: sceptile
+  types: [grass]
+  camp: overgrown-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: torchic
+  types: [fire]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: combusken
+  types: [fire, fighting]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: fiery-field }
+- id: blaziken
+  types: [fire, fighting]
+  camp: scorched-plains
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: mudkip
+  types: [water]
+  camp: gourd-swamp
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: marshtomp
+  types: [water, ground]
+  camp: gourd-swamp
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: swampert
+  types: [water, ground]
+  camp: gourd-swamp
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: poochyena
+  types: [dark]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: thunderwave-cave }
+    - { method: dungeon, dungeon: howling-forest }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: mightyena
+  types: [dark]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: howling-forest }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: zigzagoon
+  types: [normal]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: purity-forest }
+- id: linoone
+  types: [normal]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: wurmple
+  types: [bug]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: tiny-woods }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: silcoon
+  types: [bug]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+- id: beautifly
+  types: [bug, flying]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: northern-range }
+- id: cascoon
+  types: [bug]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: dustox
+  types: [bug, poison]
+  camp: stump-forest
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: lotad
+  types: [water, grass]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: lombre
+  types: [water, grass]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: ludicolo
+  types: [water, grass]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: wyvern-hill }
+- id: seedot
+  types: [grass]
+  camp: mushroom-forest
+  obtain:
+    - { method: dungeon, dungeon: uproar-forest }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: nuzleaf
+  types: [grass, dark]
+  camp: mushroom-forest
+  obtain:
+    - { method: dungeon, dungeon: uproar-forest }
+- id: shiftry
+  types: [grass, dark]
+  camp: mushroom-forest
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: northwind-field }
+- id: taillow
+  types: [normal, flying]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: swellow
+  types: [normal, flying]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: northern-range }
+- id: wingull
+  types: [water, flying]
+  camp: shallow-beach
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: pelipper
+  types: [water, flying]
+  camp: shallow-beach
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: ralts
+  types: [psychic, fairy]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: kirlia
+  types: [psychic, fairy]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+- id: gardevoir
+  types: [psychic, fairy]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: surskit
+  types: [bug, water]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: masquerain
+  types: [bug, flying]
+  camp: tadpole-pond
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: murky-cave }
+- id: shroomish
+  types: [grass]
+  camp: mushroom-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: breloom
+  types: [grass, fighting]
+  camp: mushroom-forest
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: slakoth
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: vigoroth
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+- id: slaking
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: nincada
+  types: [bug, ground]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: ninjask
+  types: [bug, flying]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: northern-range }
+- id: shedinja
+  types: [bug, ghost]
+  camp: secretive-forest
+  obtain:
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: darknight-relic }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: whismur
+  types: [normal]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: howling-forest }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: loudred
+  types: [normal]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: howling-forest }
+- id: exploud
+  types: [normal]
+  camp: echo-cave
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: makuhita
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: hariyama
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: azurill
+  types: [normal, fairy]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: nosepass
+  types: [rock]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: fantasy-strait }
+- id: skitty
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: delcatty
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+- id: sableye
+  types: [dark, ghost]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: darknight-relic }
+- id: mawile
+  types: [steel, fairy]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: magma-cavern }
+    - { method: dungeon, dungeon: buried-relic }
+- id: aron
+  types: [steel, rock]
+  camp: mt-cleft
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: lairon
+  types: [steel, rock]
+  camp: mt-cleft
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: aggron
+  types: [steel, rock]
+  camp: mt-cleft
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: meditite
+  types: [fighting, psychic]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: medicham
+  types: [fighting, psychic]
+  camp: mt-discipline
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+- id: electrike
+  types: [electric]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: manectric
+  types: [electric]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: plusle
+  types: [electric]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: thunderwave-cave }
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: minun
+  types: [electric]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: thunderwave-cave }
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: volbeat
+  types: [bug]
+  camp: rub-a-dub-river
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+- id: illumise
+  types: [bug]
+  camp: rub-a-dub-river
+  obtain:
+    - { method: dungeon, dungeon: lapis-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: roselia
+  types: [grass, poison]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: uproar-forest }
+- id: gulpin
+  types: [poison]
+  camp: poison-swamp
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+- id: swalot
+  types: [poison]
+  camp: poison-swamp
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: carvanha
+  types: [water, dark]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: sharpedo
+  types: [water, dark]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: wailmer
+  types: [water]
+  camp: serene-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: wailord
+  types: [water]
+  camp: serene-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+- id: numel
+  types: [fire, ground]
+  camp: crater
+  obtain:
+    - { method: dungeon, dungeon: mt-blaze }
+    - { method: dungeon, dungeon: fiery-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: camerupt
+  types: [fire, ground]
+  camp: crater
+  obtain:
+    - { method: dungeon, dungeon: fiery-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: torkoal
+  types: [fire]
+  camp: crater
+  obtain:
+    - { method: dungeon, dungeon: mt-blaze }
+    - { method: dungeon, dungeon: fiery-field }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: spoink
+  types: [psychic]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: howling-forest }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+- id: grumpig
+  types: [psychic]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: howling-forest }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+- id: spinda
+  types: [normal]
+  camp: mt-green
+  obtain:
+    - { method: dungeon, dungeon: western-cave }
+    - { method: strong-foe, dungeon: frosty-forest }
+- id: trapinch
+  types: [ground]
+  camp: withering-desert
+  obtain:
+    - { method: dungeon, dungeon: silent-chasm }
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: vibrava
+  types: [ground, dragon]
+  camp: withering-desert
+  obtain:
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wyvern-hill }
+- id: flygon
+  types: [ground, dragon]
+  camp: withering-desert
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wyvern-hill }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: cacnea
+  types: [grass]
+  camp: withering-desert
+  obtain:
+    - { method: dungeon, dungeon: mt-thunder }
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: cacturne
+  types: [grass, dark]
+  camp: withering-desert
+  obtain:
+    - { method: dungeon, dungeon: great-canyon }
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: purity-forest }
+- id: swablu
+  types: [normal, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: pitfall-valley }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: altaria
+  types: [dragon, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: wyvern-hill }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: fantasy-strait }
+- id: zangoose
+  types: [normal]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: western-cave }
+- id: seviper
+  types: [poison]
+  camp: wild-plains
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: northern-range }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: lunatone
+  types: [rock, psychic]
+  camp: mt-moonview
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+- id: solrock
+  types: [rock, psychic]
+  camp: mt-moonview
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: barboach
+  types: [water, ground]
+  camp: gourd-swamp
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: whiscash
+  types: [water, ground]
+  camp: gourd-swamp
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: corphish
+  types: [water]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+    - { method: dungeon, dungeon: murky-cave }
+- id: crawdaunt
+  types: [water, dark]
+  camp: turtleshell-pond
+  obtain:
+    - { method: dungeon, dungeon: northwind-field }
+- id: baltoy
+  types: [ground, psychic]
+  camp: ancient-relic
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: southern-cavern }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+- id: claydol
+  types: [ground, psychic]
+  camp: ancient-relic
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: lileep
+  types: [rock, grass]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: silver-trench }
+- id: cradily
+  types: [rock, grass]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: silver-trench }
+- id: anorith
+  types: [rock, bug]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: armaldo
+  types: [rock, bug]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: feebas
+  types: [water]
+  camp: waterfall-lake
+  obtain:
+    - { method: dungeon, dungeon: waterfall-pond }
+- id: milotic
+  types: [water]
+  camp: waterfall-lake
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: castform
+  types: [normal]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: dungeon, dungeon: murky-cave }
+- id: kecleon
+  types: [normal]
+  camp: overgrown-forest
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: shuppet
+  types: [ghost]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: darknight-relic }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: banette
+  types: [ghost]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: darknight-relic }
+- id: duskull
+  types: [ghost]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: darknight-relic }
+- id: dusclops
+  types: [ghost]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: desert-region }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: tropius
+  types: [grass, flying]
+  camp: jungle
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: lightning-field }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: chimecho
+  types: [psychic]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+- id: absol
+  types: [dark]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: mt-faraway }
+- id: wynaut
+  types: [psychic]
+  camp: echo-cave
+  obtain:
+    - { method: dungeon, dungeon: buried-relic }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+- id: snorunt
+  types: [ice]
+  camp: frigid-cavern
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: glalie
+  types: [ice]
+  camp: frigid-cavern
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: mt-faraway }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: spheal
+  types: [ice, water]
+  camp: ice-floe-beach
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: sealeo
+  types: [ice, water]
+  camp: ice-floe-beach
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: stormy-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: walrein
+  types: [ice, water]
+  camp: ice-floe-beach
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: clamperl
+  types: [water]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: huntail
+  types: [water]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: silver-trench }
+- id: gorebyss
+  types: [water]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: silver-trench }
+- id: relicanth
+  types: [water, rock]
+  camp: deepsea-floor
+  obtain:
+    - { method: dungeon, dungeon: silver-trench }
+- id: luvdisc
+  types: [water]
+  camp: treasure-sea
+  obtain:
+    - { method: dungeon, dungeon: far-off-sea }
+    - { method: dungeon, dungeon: silver-trench }
+- id: bagon
+  types: [dragon]
+  camp: dragon-cave
+  obtain:
+    - { method: dungeon, dungeon: lapis-cave }
+    - { method: dungeon, dungeon: wyvern-hill }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: shelgon
+  types: [dragon]
+  camp: dragon-cave
+  obtain:
+    - { method: dungeon, dungeon: mt-freeze }
+    - { method: dungeon, dungeon: wyvern-hill }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: salamence
+  types: [dragon, flying]
+  camp: dragon-cave
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: wyvern-hill }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: beldum
+  types: [steel, psychic]
+  camp: magnetic-quarry
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: metang
+  types: [steel, psychic]
+  camp: magnetic-quarry
+  obtain:
+    - { method: dungeon, dungeon: frosty-forest }
+    - { method: dungeon, dungeon: solar-cave }
+    - { method: dungeon, dungeon: western-cave }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+- id: metagross
+  types: [steel, psychic]
+  camp: magnetic-quarry
+  obtain:
+    - { method: dungeon, dungeon: sky-tower }
+    - { method: dungeon, dungeon: wish-cave }
+    - { method: dungeon, dungeon: joyous-tower }
+    - { method: dungeon, dungeon: purity-forest }
+    - { method: strong-foe, dungeon: silent-chasm }
+- id: regirock
+  types: [rock]
+  camp: ancient-relic
+  obtain:
+    - { method: legendary, dungeon: buried-relic }
+- id: regice
+  types: [ice]
+  camp: ancient-relic
+  obtain:
+    - { method: legendary, dungeon: buried-relic }
+- id: registeel
+  types: [steel]
+  camp: ancient-relic
+  obtain:
+    - { method: legendary, dungeon: buried-relic }
+- id: latias
+  types: [dragon, psychic]
+  camp: southern-island
+  obtain:
+    - { method: pokemon-square }
+- id: latios
+  types: [dragon, psychic]
+  camp: southern-island
+  obtain:
+    - { method: pokemon-square }
+- id: kyogre
+  types: [water]
+  camp: seafloor-cave
+  obtain:
+    - { method: legendary, dungeon: stormy-sea }
+- id: groudon
+  types: [ground]
+  camp: volcanic-pit
+  obtain:
+    - { method: legendary, dungeon: magma-cavern }
+- id: rayquaza
+  types: [dragon, flying]
+  camp: stratos-lookout
+  obtain:
+    - { method: legendary, dungeon: sky-tower }
+- id: jirachi
+  types: [steel, psychic]
+  camp: mt-moonview
+  obtain:
+    - { method: legendary, dungeon: wish-cave }
+- id: deoxys
+  types: [psychic]
+  camp: enclosed-island
+  obtain:
+    - { method: dungeon, dungeon: meteor-cave }
+    - { method: legendary, dungeon: meteor-cave }
+- id: budew
+  types: [grass, poison]
+  camp: beau-plains
+  obtain:
+    - { method: dungeon, dungeon: purity-forest }
+- id: roserade
+  types: [grass, poison]
+  camp: beau-plains
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: ambipom
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: strong-foe, dungeon: great-canyon }
+- id: mismagius
+  types: [ghost]
+  camp: darkness-ridge
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: honchkrow
+  types: [dark, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: chingling
+  types: [psychic]
+  camp: thunder-crag
+  obtain:
+    - { method: dungeon, dungeon: remains-island }
+- id: bonsly
+  types: [rock]
+  camp: overgrown-forest
+  obtain:
+    - { method: dungeon, dungeon: sinister-woods }
+    - { method: dungeon, dungeon: remains-island }
+- id: mime-jr
+  types: [psychic, fairy]
+  camp: decrepit-lab
+  obtain:
+    - { method: dungeon, dungeon: mt-steel }
+    - { method: dungeon, dungeon: wish-cave }
+- id: happiny
+  types: [normal]
+  camp: sky-blue-plains
+  obtain:
+    - { method: dungeon, dungeon: joyous-tower }
+- id: munchlax
+  types: [normal]
+  camp: vibrant-forest
+  obtain:
+    - { method: dungeon, dungeon: remains-island }
+- id: riolu
+  types: [fighting]
+  camp: mt-discipline
+  obtain:
+    - { method: mystery-house }
+- id: lucario
+  types: [fighting, steel]
+  camp: mt-discipline
+  obtain:
+    - { method: mystery-house }
+- id: mantyke
+  types: [water, flying]
+  camp: serene-sea
+  obtain:
+    - { method: dungeon, dungeon: grand-sea }
+- id: weavile
+  types: [dark, ice]
+  camp: darkness-ridge
+  obtain:
+    - { method: dungeon, dungeon: marvelous-sea }
+- id: magnezone
+  types: [electric, steel]
+  camp: power-plant
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: lickilicky
+  types: [normal]
+  camp: sky-blue-plains
+  obtain:
+    - { method: strong-foe, dungeon: mt-freeze }
+- id: rhyperior
+  types: [ground, rock]
+  camp: safari
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: tangrowth
+  types: [grass]
+  camp: jungle
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: electivire
+  types: [electric]
+  camp: power-plant
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: magmortar
+  types: [fire]
+  camp: crater
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: togekiss
+  types: [fairy, flying]
+  camp: flyaway-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: yanmega
+  types: [bug, flying]
+  camp: stump-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: leafeon
+  types: [grass]
+  camp: evolution-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: glaceon
+  types: [ice]
+  camp: evolution-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: gliscor
+  types: [ground, flying]
+  camp: mt-green
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: mamoswine
+  types: [ice, ground]
+  camp: frigid-cavern
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: porygon-z
+  types: [normal]
+  camp: decrepit-lab
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: gallade
+  types: [psychic, fighting]
+  camp: sky-blue-plains
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: probopass
+  types: [rock, steel]
+  camp: echo-cave
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: dusknoir
+  types: [ghost]
+  camp: darkness-ridge
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: froslass
+  types: [ice, ghost]
+  camp: frigid-cavern
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }
+- id: sylveon
+  types: [fairy]
+  camp: evolution-forest
+  obtain:
+    - { method: evolution }
+    - { method: fainted }
+    - { method: mystery-house }

@@ -1,0 +1,108 @@
+// English UI strings. This is the reference locale: other locales may omit keys
+// and fall back to these. Content names (Pokémon, dungeons...) live in data/locales/.
+
+export const en = {
+  'app.name': 'Pokédex: Mystery Dungeon',
+  'app.loading': 'Loading…',
+  'app.loadError': "Couldn't load the game data.",
+  'app.retry': 'Try again',
+  'app.notFound': 'Page not found.',
+  'app.home': 'Go to the Pokédex',
+
+  'nav.label': 'Main',
+  'nav.pokedex': 'Pokédex',
+  'nav.dungeons': 'Dungeons',
+  'nav.camps': 'Camps',
+  'nav.settings': 'Settings',
+
+  'progress.label': '{done} of {total} recruited',
+
+  'toggle.mark': 'Mark {name} as recruited',
+  'toggle.unmark': 'Mark {name} as not recruited',
+  'toggle.recruited': 'Recruited',
+  'toggle.notRecruited': 'Not recruited',
+
+  'pokedex.search': 'Search name or number',
+  'pokedex.filters': 'Filters',
+  'pokedex.status': 'Show',
+  'pokedex.status.all': 'All',
+  'pokedex.status.missing': 'Missing',
+  'pokedex.status.recruited': 'Recruited',
+  'pokedex.type': 'Type',
+  'pokedex.type.any': 'All types',
+  'pokedex.sort': 'Sort by',
+  'pokedex.sort.dex': 'Number',
+  'pokedex.sort.name': 'Name',
+  'pokedex.showing': 'Showing {count} of {total}',
+  'pokedex.empty': 'No Pokémon match these filters.',
+  'pokedex.clear': 'Clear filters',
+
+  'pokemon.back': 'Pokédex',
+  'pokemon.obtain': 'How to get it',
+  'pokemon.obtainNone': 'No recruitment info yet.',
+  'pokemon.camp': 'Lives in',
+  'pokemon.prev': 'Previous',
+  'pokemon.next': 'Next',
+  'pokemon.notFound': "That Pokémon isn't in this game.",
+
+  'dungeons.intro': 'In unlock order. The count is how many of the Pokémon found there you have recruited.',
+  'dungeon.back': 'Dungeons',
+  'dungeon.number': 'Dungeon {n}',
+  'dungeon.none': 'No recruitable Pokémon are listed for this dungeon yet.',
+  'dungeon.notFound': "That dungeon isn't in this game.",
+
+  'camps.intro': 'Every recruited Pokémon lives in one of these camps.',
+  'camp.back': 'Camps',
+  'camp.residents': 'Pokémon that live here',
+  'camp.notFound': "That camp isn't in this game.",
+
+  'settings.language': 'Language',
+  'settings.progress': 'Your progress',
+  'settings.summary': "You've recruited {done} of {total} Pokémon in {game}.",
+  'settings.storage.persisted': "Progress is saved on this device, and the browser won't clear it on its own.",
+  'settings.storage.best': 'Progress is saved on this device, but the browser may clear it if space runs low. Download a backup now and then.',
+  'settings.storage.memory': "This browser isn't letting the app save. Progress will be lost when you close it. Download a backup before leaving.",
+
+  'backup.title': 'Back up',
+  'backup.hint': 'Keep a copy of your progress, or move it to another device.',
+  'backup.download': 'Download backup',
+  'backup.copy': 'Copy as text',
+  'backup.copied': 'Copied to the clipboard.',
+  'backup.copyFailed': "Couldn't copy. Use Download backup instead.",
+
+  'restore.title': 'Restore',
+  'restore.file': 'Open backup file',
+  'restore.paste': 'Or paste backup text',
+  'restore.check': 'Check backup',
+  'restore.summary': 'This backup has {count} recruited Pokémon.',
+  'restore.unknown': "Entries this version doesn't know yet: {count}. They'll be kept in case a later version adds them.",
+  'restore.merge': 'Add to my progress',
+  'restore.replace': 'Replace my progress',
+  'restore.done': 'Progress restored.',
+  'restore.cancel': 'Cancel',
+  'restore.error.invalid-json': "That isn't a valid backup.",
+  'restore.error.not-pokedex-md': "That isn't a backup from this app.",
+  'restore.error.wrong-game': 'That backup is for a different game ({game}).',
+  'restore.error.unsupported-version': 'That backup was made by a newer version of the app. Reload to update, then try again.',
+
+  'reset.title': 'Reset',
+  'reset.button': 'Reset progress',
+  'reset.confirm': 'Clear all {game} progress on this device?',
+  'reset.yes': 'Yes, reset',
+  'reset.no': 'Keep it',
+  'reset.done': 'Progress cleared.',
+
+  'install.title': 'Install',
+  'install.hint': 'Add it to your home screen. It then opens like an app and works offline.',
+  'install.button': 'Install app',
+
+  'about.title': 'About',
+  'about.disclaimer': 'Fan-made and unofficial. Not affiliated with Nintendo, Creatures, GAME FREAK, The Pokémon Company or Spike Chunsoft. Pokémon names are trademarks of their respective owners.',
+  'about.sources': 'Recruitment data is based on Serebii and Bulbapedia and may contain mistakes.',
+  'about.portraits': "Pokémon portraits come from PMDCollab's SpriteCollab and are shared under CC BY-NC 4.0. Most are from the official Mystery Dungeon games by Spike Chunsoft.",
+  'about.portraitArtists': 'Portrait artists: {artists}.',
+  'about.portraitsLink': 'SpriteCollab on GitHub',
+} as const;
+
+export type UiKey = keyof typeof en;
+export type UiStrings = Partial<Record<UiKey, string>>;

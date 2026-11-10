@@ -1,0 +1,18 @@
+# Game metadata for Pokémon Mystery Dungeon: Rescue Team DX (Nintendo Switch, 2020).
+# Display names live in data/locales/<lang>/dx.yaml under `game`.
+id: dx
+platform: switch
+releaseYear: 2020
+# Ways to recruit or obtain a Pokémon in this game. `dungeon: true` means an
+# `obtain` entry with this method must name the dungeon where it happens.
+methods:
+  - { id: dungeon, dungeon: true }
+  - { id: strong-foe, dungeon: true }
+  - { id: legendary, dungeon: true }
+  - { id: fainted, dungeon: false }
+  - { id: evolution, dungeon: false }
+  - { id: mystery-house, dungeon: false }
+  - { id: pokemon-square, dungeon: false }
+# If an entry id ever has to change, map the old id to the new one here so
+# saved progress keeps working. Never reuse an old id for something else.
+idAliases: {}

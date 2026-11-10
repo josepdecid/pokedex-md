@@ -1,0 +1,39 @@
+import { describe, expect, it } from 'vitest';
+import { parseHash, paths, sharedEntry } from '../src/lib/router.svelte.ts';
+
+describe('parseHash', () => {
+  it('parses game-prefixed routes', () => {
+    expect(parseHash('')).toBeNull();
+    expect(parseHash('#/dx')).toEqual({ name: 'pokedex', gameId: 'dx' });
+    expect(parseHash('#/dx/pokemon/mr-mime')).toEqual({ name: 'pokemon', gameId: 'dx', id: 'mr-mime' });
+    expect(parseHash('#/dx/dungeons/tiny-woods')).toEqual({ name: 'dungeon', gameId: 'dx', id: 'tiny-woods' });
+    expect(parseHash('#/dx/settings')).toEqual({ name: 'settings', gameId: 'dx' });
+  });
+
+  it('flags unknown games and pages', () => {
+    expect(parseHash('#/sky')).toEqual({ name: 'not-found', gameId: 'dx' });
+    expect(parseHash('#/dx/nope')).toEqual({ name: 'not-found', gameId: 'dx' });
+  });
+
+  it('round-trips paths', () => {
+    expect(parseHash(paths.camp('dx', 'beau-plains'))).toEqual({ name: 'camp', gameId: 'dx', id: 'beau-plains' });
+  });
+});
+
+describe('sharedEntry', () => {
+  const list = { name: 'pokedex', gameId: 'dx' } as const;
+  const pika = { name: 'pokemon', gameId: 'dx', id: 'pikachu' } as const;
+  const raichu = { name: 'pokemon', gameId: 'dx', id: 'raichu' } as const;
+  const dungeon = { name: 'dungeon', gameId: 'dx', id: 'mt-steel' } as const;
+
+  it('morphs the Pokémon going into and out of its page', () => {
+    expect(sharedEntry(list, pika)).toBe('pikachu');
+    expect(sharedEntry(pika, dungeon)).toBe('pikachu');
+  });
+
+  it('does not morph on first load, between Pokémon, or between lists', () => {
+    expect(sharedEntry(null, pika)).toBeNull();
+    expect(sharedEntry(pika, raichu)).toBeNull();
+    expect(sharedEntry(list, dungeon)).toBeNull();
+  });
+});
