@@ -10,8 +10,17 @@ export function format(template: string, params?: Params): string {
   return template.replace(/\{(\w+)\}/g, (match, key: string) => (key in params ? String(params[key]) : match));
 }
 
-/** Lowercase, accent-free form used for searching. */
-export const normalize = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+/**
+ * Lowercase, accent-free form used for searching. Full-width characters become regular ones
+ * and hiragana becomes katakana, so ふしぎ finds フシギダネ and ２ finds ポリゴン２.
+ */
+export const normalize = (s: string) =>
+  s
+    .normalize('NFKC')
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase()
+    .replace(/[ぁ-ゖ]/g, (c) => String.fromCharCode(c.charCodeAt(0) + 0x60));
 
 class I18n {
   locale = $state(DEFAULT_LOCALE);

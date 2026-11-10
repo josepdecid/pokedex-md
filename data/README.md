@@ -110,3 +110,17 @@ names separately) and were cross-checked with Bulbapedia, which agrees on every 
 For camps Bulbapedia sometimes gives only the GBA name. One real disagreement: Southern
 Island is "Isla Sureña" on WikiDex and "Isla del Sur" on Bulbapedia (we use WikiDex). Known gap: Celebi's strong-foe
 dungeon was missing from the source and was left out.
+
+French, German, Italian and Japanese Pokémon and type names come from PokéAPI's `pokemon_species_names.csv`
+and `type_names.csv`. French, German and Japanese Pokémon names were checked against Bulbapedia's
+"List of <language> Pokémon names" pages, which agree except on Yanmega, where Bulbapedia has "Yanméga"
+and we follow Poképédia. All 418 Italian names match English, so Italian uses `species: english`.
+
+Dungeon and camp names come from each language's own wiki, which use the DX names as their current page
+titles: [Poképédia](https://www.pokepedia.fr/) (French), [PokéWiki](https://www.pokewiki.de/) (German) and
+[Pokémon Central Wiki](https://wiki.pokemoncentral.it/) (Italian). Prefer them over Bulbapedia for camps: its
+tables often only have the GBA names (Piana Brada for what DX calls Piana Selvaggia). Japanese place names
+come from Bulbapedia's infoboxes in kanji, which is how DX writes them, and the dungeons were checked against
+[Game8's DX list](https://game8.jp/pokemon-dungeondx/324297). Game terms come from the same wikis. Words that
+aren't named game terms (like "found fainted" or the labels for recruit methods) were written by hand with
+those terms, and haven't been checked in-game or reviewed by native speakers.
