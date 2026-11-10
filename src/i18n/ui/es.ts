@@ -96,6 +96,10 @@ export const es: UiStrings = {
   'install.title': 'Instalar',
   'install.hint': 'Añádela a la pantalla de inicio. Se abrirá como una aplicación y funcionará sin conexión.',
   'install.button': 'Instalar aplicación',
+  'install.ios': 'Toca Compartir en el navegador (en Safari puede estar en el menú •••) y elige Añadir a pantalla de inicio.',
+  'install.bannerTitle': 'Instalar Pokédex MD',
+  'install.later': 'Ahora no',
+  'install.ok': 'Entendido',
 
   'about.title': 'Acerca de',
   'about.disclaimer': 'Hecho por fans y no oficial. Sin relación con Nintendo, Creatures, GAME FREAK, The Pokémon Company ni Spike Chunsoft. Los nombres de los Pokémon son marcas registradas de sus respectivos propietarios.',
