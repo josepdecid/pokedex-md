@@ -90,6 +90,17 @@ describe('shipped data', () => {
     for (const s of dx.sections) expect(names[`section-none.${s}`], s).toBeTruthy();
   });
 
+  it('resolves method and evolve icons to files in public/', () => {
+    const icon = (id: string) => dx.methods.find((m) => m.id === id)?.icon;
+    expect(icon('dungeon')).toBe('icons/dx/band.png');
+    expect(icon('mystery-house')).toBe('icons/dx/invitation.png');
+    expect(icon('fainted')).toBe('icons/dx/apple.png');
+    expect(icon('strong-foe')).toBe('icons/dx/strong-foe.png');
+    expect(icon('legendary')).toBeUndefined();
+    expect(dx.evolveIcon).toBe('icons/dx/evolution-crystal.png');
+    expect(result.warnings.filter((w) => w.includes('icons/'))).toEqual([]);
+  });
+
   it('has floors, level and recruit rate from Bulbapedia, including fainted Pokémon', () => {
     const obtain = (id: string) => dx.pokemon.find((e) => e.id === id)!.obtain;
     expect(obtain('beedrill')).toContainEqual({ method: 'dungeon', dungeon: 'silent-chasm', floors: '8-9', level: 14, rate: 14.4 });
@@ -169,7 +180,7 @@ describe('validation', () => {
   it('reports a method in an unknown section', () => {
     const dir = copy();
     const file = join(dir, 'games/dx/game.yaml');
-    writeFileSync(file, readFileSync(file, 'utf8').replace('section: fainted }', 'section: nowhere }'));
+    writeFileSync(file, readFileSync(file, 'utf8').replace('section: fainted', 'section: nowhere'));
     expect(() => buildData(dir, PORTRAITS)).toThrow('method "fainted": unknown section "nowhere"');
   });
 

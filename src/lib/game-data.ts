@@ -7,6 +7,8 @@ export interface ObtainMethod {
   dungeon: boolean;
   /** Section of the Pokémon page it is listed in (one of GameData.sections). */
   section: string;
+  /** Icon path under public/ (icons/<gameId>/<name>.png). Absent if none. */
+  icon?: string;
 }
 
 export interface Obtain {
@@ -69,6 +71,8 @@ export interface GameData {
   /** Sections of a Pokémon's "How to get it", in order. `evolve` lists `evolvesFrom`; the rest list methods. */
   sections: string[];
   methods: ObtainMethod[];
+  /** Icon of the `evolve` section, like ObtainMethod.icon. */
+  evolveIcon?: string;
   pokemon: PokemonEntry[];
   /** In unlock order. */
   dungeons: Dungeon[];

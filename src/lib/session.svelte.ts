@@ -1,4 +1,4 @@
-import type { Camp, Dungeon, GameData, Obtain, PokemonEntry } from './game-data.ts';
+import type { Camp, Dungeon, GameData, Obtain, ObtainMethod, PokemonEntry } from './game-data.ts';
 import type { ProgressStore } from './progress.svelte.ts';
 
 export interface DungeonEncounter {
@@ -14,6 +14,7 @@ export class GameSession {
   readonly entryById: ReadonlyMap<string, PokemonEntry>;
   readonly dungeonById: ReadonlyMap<string, Dungeon>;
   readonly campById: ReadonlyMap<string, Camp>;
+  readonly methodById: ReadonlyMap<string, ObtainMethod>;
   readonly encountersByDungeon: ReadonlyMap<string, DungeonEncounter[]>;
   readonly entriesByCamp: ReadonlyMap<string, PokemonEntry[]>;
   readonly knownIds: ReadonlySet<string>;
@@ -26,6 +27,7 @@ export class GameSession {
     this.entryById = new Map(data.pokemon.map((e) => [e.id, e]));
     this.dungeonById = new Map(data.dungeons.map((d) => [d.id, d]));
     this.campById = new Map(data.camps.map((c) => [c.id, c]));
+    this.methodById = new Map(data.methods.map((m) => [m.id, m]));
     this.knownIds = new Set(data.pokemon.map((e) => e.id));
 
     const byDungeon = new Map<string, DungeonEncounter[]>(data.dungeons.map((d) => [d.id, []]));

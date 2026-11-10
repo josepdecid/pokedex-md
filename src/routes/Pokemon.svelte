@@ -26,7 +26,9 @@
       const items = entry.obtain.filter((o) => methods.includes(o.method)).sort((a, b) => order(a) - order(b));
       // The section's first method is its default (plain "Recruit in dungeon"), so only the others get a note.
       const empty = id === EVOLVE ? !entry.evolvesFrom : items.length === 0;
-      return { id, items, empty, defaultMethod: methods[0] };
+      // Evolve has its own icon; the others use their default method's.
+      const icon = id === EVOLVE ? session.data.evolveIcon : session.methodById.get(methods[0]!)?.icon;
+      return { id, items, empty, defaultMethod: methods[0], icon };
     });
   });
   const evolvesFrom = $derived(entry?.evolvesFrom ? session.entryById.get(entry.evolvesFrom.from) : undefined);
@@ -65,7 +67,10 @@
       <h2>{t('pokemon.obtain')}</h2>
       {#each sections as section (section.id)}
         <section>
-          <h3>{i18n.name('section', section.id)}</h3>
+          <h3>
+            {#if section.icon}<img src={`${import.meta.env.BASE_URL}${section.icon}`} alt="" width="18" height="18" />{/if}
+            {i18n.name('section', section.id)}
+          </h3>
           {#if !section.empty}
             <ul class="facts">
               {#if section.id === EVOLVE && entry.evolvesFrom}
@@ -162,12 +167,18 @@
     gap: 1rem;
   }
   h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
     margin: 0;
     font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--text);
+  }
+  h3 img {
+    object-fit: contain;
   }
   .facts li {
     display: flex;
