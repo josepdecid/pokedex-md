@@ -58,6 +58,11 @@
     document.title = t('app.name');
   });
 
+  // The game's logo in the UI language, from public/logos/<gameId>/<locale>.webp.
+  // Falls back to the game's short name if there's no logo for that game or language.
+  const logo = $derived(`${import.meta.env.BASE_URL}logos/${gameId}/${i18n.locale}.webp`);
+  let missingLogo = $state<string | null>(null);
+
   // Suggest installing once someone is clearly using the app, not on their first visit.
   // The count is read when the Pokédex opens (untracked), so the banner never appears mid-list
   // and pushes rows away while someone is ticking them off.
@@ -74,8 +79,13 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href={paths.pokedex(gameId)}>
-      <h1 class="brand-name">{t('app.name')}</h1>
-      {#if session}<span class="brand-game">{i18n.name('game', 'short')}</span>{/if}
+      {#if session && missingLogo !== logo}
+        <img class="brand-logo" src={logo} alt={i18n.name('game', 'title')} height="44" onerror={() => (missingLogo = logo)} />
+      {/if}
+      <div class="brand-text">
+        <h1 class="brand-name">{t('app.name')}</h1>
+        {#if session && missingLogo === logo}<span class="brand-game">{i18n.name('game', 'short')}</span>{/if}
+      </div>
     </a>
     {#if session}
       <ProgressBar

@@ -178,11 +178,24 @@ button:focus-visible {
 
 .brand {
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 0.6rem;
   min-width: 0;
   color: var(--text);
   text-decoration: none;
+}
+
+.brand-logo {
+  flex: none;
+  width: auto;
+  height: 44px;
+}
+
+.brand-text {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 0;
 }
 
 .brand-name {
