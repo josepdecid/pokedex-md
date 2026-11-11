@@ -43,7 +43,9 @@
   }
 </script>
 
-<a class="back" href={paths.pokedex(session.id)}>‹ {t('pokemon.back')}</a>
+<div class="back-bar">
+  <a class="back" href={paths.pokedex(session.id)}>‹ {t('pokemon.back')}</a>
+</div>
 
 {#if entry}
   <article class="card">
@@ -136,6 +138,33 @@
 {/if}
 
 <style>
+  /* Full-bleed over .page's gutter, so the card doesn't show beside it as it scrolls under. */
+  .back-bar {
+    margin: 0 -16px var(--back-fade);
+    padding: 0 16px;
+    background: var(--bg);
+    --back-fade: 0.5rem;
+  }
+  /* Stays on screen while the page scrolls; not on short screens (phones in landscape). */
+  @media (min-height: 480px) {
+    .back-bar {
+      position: sticky;
+      top: var(--topbar-h);
+      z-index: 5;
+      /* Browsers floor the topbar's border to whole device pixels, leaving it a fraction short
+         of --topbar-h on fractional-density screens. Reaches behind it to close that gap. */
+      box-shadow: 0 -1px var(--bg);
+    }
+    /* Content fades out as it scrolls under. Fills the margin below, so it's invisible at rest. */
+    .back-bar::after {
+      content: '';
+      position: absolute;
+      inset: 100% 0 auto;
+      height: var(--back-fade);
+      background: linear-gradient(var(--bg), transparent);
+      pointer-events: none;
+    }
+  }
   header {
     display: flex;
     align-items: center;

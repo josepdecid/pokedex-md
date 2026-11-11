@@ -62,12 +62,15 @@ export const en = {
   'sections.recruited': 'Recruited',
 
   'dungeons.intro': 'In unlock order. The count is how many of the Pokémon found there you have recruited.',
+  'dungeons.search': 'Search dungeons',
+  'dungeons.empty': 'No dungeons match.',
   'dungeon.back': 'Dungeons',
-  'dungeon.number': 'Dungeon {n}',
   'dungeon.none': 'No recruitable Pokémon are listed for this dungeon yet.',
   'dungeon.notFound': "That dungeon isn't in this game.",
 
   'camps.intro': 'In unlock order. Every recruited Pokémon lives in one of these camps.',
+  'camps.search': 'Search camps',
+  'camps.empty': 'No camps match.',
   'camp.back': 'Camps',
   'camp.residents': 'Pokémon that live here',
   'camp.notFound': "That camp isn't in this game.",

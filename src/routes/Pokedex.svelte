@@ -1,7 +1,9 @@
 <script lang="ts">
   import { slide } from 'svelte/transition';
   import PokemonList from '../components/PokemonList.svelte';
+  import SearchInput from '../components/SearchInput.svelte';
   import { i18n, normalize, t } from '../i18n/i18n.svelte.ts';
+  import { entryMatcher } from '../lib/search.svelte.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
   import { clearFilters, filterPanel, filters, type StatusFilter } from './pokedex-filters.svelte.ts';
 
@@ -13,11 +15,12 @@
     session.data.pokemon.map((entry) => ({ entry, text: normalize(i18n.entryLabel(entry)) })),
   );
 
+  const texts = $derived(new Map(searchable.map((r) => [r.entry, r.text])));
+
   const visible = $derived.by(() => {
-    const q = normalize(filters.query.trim()).replace(/^#/, '');
-    const num = /^\d+$/.test(q) ? Number(q) : undefined;
-    const rows = searchable.filter(({ entry, text }) => {
-      if (q && !(num !== undefined ? entry.dex === num || String(entry.dex).startsWith(q) : text.includes(q))) return false;
+    const matches = entryMatcher(filters.query, (entry) => texts.get(entry) ?? '');
+    const rows = searchable.filter(({ entry }) => {
+      if (!matches(entry)) return false;
       if (filters.type && !entry.types.includes(filters.type)) return false;
       if (filters.status !== 'all' && session.progress.isRecruited(entry.id) !== (filters.status === 'recruited')) return false;
       return true;
@@ -48,11 +51,7 @@
 
 <div class="tools">
   <div class="search-row">
-    <label class="search">
-      <span class="visually-hidden">{t('pokedex.search')}</span>
-      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
-      <input type="search" bind:value={filters.query} placeholder={t('pokedex.search')} autocomplete="off" enterkeyhint="search" />
-    </label>
+    <SearchInput bind:value={filters.query} label={t('pokedex.search')} />
     <button
       type="button"
       class="filters-button"
@@ -149,26 +148,6 @@
   .search-row {
     display: flex;
     gap: 0.5rem;
-  }
-  .search {
-    position: relative;
-    display: block;
-    flex: 1;
-    min-width: 0;
-  }
-  .search svg {
-    position: absolute;
-    left: 0.8rem;
-    top: 50%;
-    transform: translateY(-50%);
-    fill: none;
-    stroke: var(--muted);
-    stroke-width: 2;
-    stroke-linecap: round;
-  }
-  .search input {
-    width: 100%;
-    padding-left: 2.6rem;
   }
   .filters-button {
     position: relative;

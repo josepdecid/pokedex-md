@@ -64,12 +64,15 @@ export const it: UiStrings = {
   'sections.recruited': 'Reclutati',
 
   'dungeons.intro': 'In ordine di sblocco. Il contatore indica quanti dei Pokémon presenti in ciascun dungeon hai reclutato.',
+  'dungeons.search': 'Cerca dungeon',
+  'dungeons.empty': 'Nessun dungeon corrisponde.',
   'dungeon.back': 'Dungeon',
-  'dungeon.number': 'Dungeon {n}',
   'dungeon.none': 'Non sono ancora elencati Pokémon reclutabili per questo dungeon.',
   'dungeon.notFound': 'Questo dungeon non è presente in questo gioco.',
 
   'camps.intro': 'In ordine di sblocco. Ogni Pokémon reclutato vive in uno di questi Campi Base.',
+  'camps.search': 'Cerca Campi Base',
+  'camps.empty': 'Nessun Campo Base corrisponde.',
   'camp.back': 'Campi Base',
   'camp.residents': 'Pokémon che vivono qui',
   'camp.notFound': 'Questo Campo Base non è presente in questo gioco.',

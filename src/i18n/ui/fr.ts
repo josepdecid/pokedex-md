@@ -64,12 +64,15 @@ export const fr: UiStrings = {
   'sections.recruited': 'Recrutés',
 
   'dungeons.intro': 'Par ordre de déblocage. Le compteur indique combien de Pokémon de chaque donjon vous avez recrutés.',
+  'dungeons.search': 'Chercher un donjon',
+  'dungeons.empty': 'Aucun donjon ne correspond.',
   'dungeon.back': 'Donjons',
-  'dungeon.number': 'Donjon {n}',
   'dungeon.none': 'Aucun Pokémon recrutable n’est encore répertorié pour ce donjon.',
   'dungeon.notFound': 'Ce donjon n’est pas dans ce jeu.',
 
   'camps.intro': 'Par ordre de déblocage. Chaque Pokémon recruté vit dans l’un de ces camps.',
+  'camps.search': 'Chercher un camp',
+  'camps.empty': 'Aucun camp ne correspond.',
   'camp.back': 'Camps',
   'camp.residents': 'Pokémon qui vivent ici',
   'camp.notFound': 'Ce camp n’est pas dans ce jeu.',

@@ -12,6 +12,8 @@ sections: [recruit, evolve, mystery-house, fainted]
 # `dungeon: any` means it happens in any dungeon (no dungeon named, shown as "Any dungeon").
 # `icon`: optional public/icons/<gameId>/<icon>.webp (DX item icons from Serebii). Methods without
 # one get a generic icon.
+# The order matters: a dungeon's page lists its Pokémon grouped by method in this order, and each
+# Pokémon's lines there follow it too.
 methods:
   - { id: dungeon, dungeon: true, section: recruit, icon: band }
   - { id: strong-foe, dungeon: true, section: recruit, icon: strong-foe }
@@ -19,8 +21,8 @@ methods:
   - { id: pokemon-square, dungeon: false, section: recruit }
   # Stealing from a Kecleon Shop: the Kecleon that attack can be recruited.
   - { id: shop-thief, dungeon: any, section: recruit }
-  - { id: mystery-house, dungeon: true, section: mystery-house, icon: invitation }
   - { id: fainted, dungeon: true, section: fainted, icon: apple }
+  - { id: mystery-house, dungeon: true, section: mystery-house, icon: invitation }
 # Icon of the built-in `evolve` section, like a method's `icon`.
 evolveIcon: evolution-crystal
 # If an entry id ever has to change, map the old id to the new one here so
