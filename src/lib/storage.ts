@@ -4,6 +4,7 @@ import { createStore, get, set, del } from 'idb-keyval';
 // (and app-wide settings) can share one database without colliding:
 //   app/settings
 //   game/<gameId>/progress
+//   game/<gameId>/rescue
 
 const store = (() => {
   try {
@@ -19,6 +20,8 @@ const memory = new Map<string, unknown>();
 export const storageKeys = {
   settings: 'app/settings',
   progress: (gameId: string) => `game/${gameId}/progress`,
+  /** The rescue password being entered on the Rescues page, and the A-OK password made for it. */
+  rescue: (gameId: string) => `game/${gameId}/rescue`,
 } as const;
 
 export async function readValue<T>(key: string): Promise<T | undefined> {

@@ -223,7 +223,7 @@ button:focus-visible {
   inset: auto 0 0 0;
   z-index: 10;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(var(--tabs, 4), 1fr);
   height: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
   padding: 0 max(0px, (100% - 720px) / 2) env(safe-area-inset-bottom);
   background: var(--surface);
@@ -406,6 +406,51 @@ button:focus-visible {
   font-weight: 600;
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* Segmented control (Pokédex status filter, Rescues entry modes): one option is active. Options are
+   labels around a hidden input (radio or file), or buttons. */
+.segmented {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  padding: 3px;
+  border-radius: 12px;
+  background: var(--track);
+}
+
+.segmented > label,
+.segmented > button {
+  display: grid;
+  place-items: center;
+  min-height: 40px;
+  padding: 0.25rem 0.4rem;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.segmented > .active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+}
+
+.segmented input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.segmented > label:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
 }
 
 /* Page transitions (View Transition API). The router names one Pokémon's portrait and

@@ -82,6 +82,15 @@ export interface GameData {
   camps: Camp[];
   /** Old entry id -> current entry id, applied to saved progress on load. */
   idAliases: Record<string, string>;
+  /** What the internal indexes in a rescue password stand for. Absent for games without rescue passwords. */
+  rescue?: RescueTable;
+}
+
+export interface RescueTable {
+  /** Internal dungeon index -> dungeon id and floor count. */
+  dungeons: Record<string, { id: string; floors: number }>;
+  /** Internal Pokémon index -> entry id, or a species id when it isn't a checklist entry. */
+  pokemon: Record<string, string>;
 }
 
 /** Flat map of `<kind>.<id>` -> display name, already merged with fallbacks. */

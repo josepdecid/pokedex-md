@@ -14,6 +14,7 @@ data/
     pokemon.yaml          # checklist entries
     dungeons.yaml         # dungeons, in unlock order
     camps.yaml            # Rescue Team Camps / Friend Areas, in unlock order
+    rescue.yaml           # optional: internal dungeon/Pokémon indexes used by rescue passwords
   locales/<lang>/         # display names, one folder per language
     shared.yaml           # names shared by every game (species, types)
     <gameId>.yaml         # names for one game; overrides shared.yaml
@@ -80,6 +81,12 @@ The same folder holds the Shiny icon (`shiny.webp`) and the bottom navigation ic
 (`pokedex`, `dungeons`, `camps`, `settings`). The navigation ones are trimmed to their content
 and resized to 96px tall before converting:
 `magick <name>.png -trim +repage -resize x96 small.png && cwebp -q 85 -alpha_q 100 -metadata none small.png -o <name>.webp`.
+
+`games/dx/rescue.yaml` maps the internal indexes a rescue password stores to our ids. It comes from
+the ROM tables in [pmd-gen](https://github.com/Karthik99999/pmd-gen) (MIT), matched by English name.
+The password symbols' suit art (`public/rescue/dx/<suit>.webp`) the glyph shapes
+(`src/lib/rescue/dx-glyphs.ts`) and the suit silhouettes (`dx-suits.ts`) come from pmd-gen's `static/rtdx-password/` too, which has them from
+the game. The suits are lossless WebP, like the item icons.
 
 `evolvesFrom` in `shared/species.yaml` comes from PokéAPI's `pokemon_species.csv`.
 

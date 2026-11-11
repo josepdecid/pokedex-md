@@ -184,36 +184,6 @@
     background: var(--accent);
     box-shadow: 0 0 0 2px var(--surface);
   }
-  .segmented {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    padding: 3px;
-    border-radius: 12px;
-    background: var(--track);
-  }
-  .segmented label {
-    display: grid;
-    place-items: center;
-    min-height: 40px;
-    border-radius: 9px;
-    font-weight: 600;
-    font-size: 0.92rem;
-    color: var(--muted);
-    cursor: pointer;
-  }
-  .segmented label.active {
-    background: var(--surface);
-    color: var(--text);
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
-  }
-  .segmented input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .segmented label:has(input:focus-visible) {
-    outline: 3px solid var(--focus);
-  }
   /* One select per line on phones, side by side from tablet width up. */
   .selects {
     display: grid;

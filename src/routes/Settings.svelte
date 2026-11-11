@@ -189,6 +189,9 @@
   <p class="small">
     <a href="https://www.serebii.net/dungeonrescueteamdx/" target="_blank" rel="noopener">{t('about.artwork')}</a>
   </p>
+  <p class="small">
+    <a href="https://github.com/Karthik99999/pmd-gen" target="_blank" rel="noopener">{t('about.rescues')}</a>
+  </p>
   <p class="muted small">{t('about.disclaimer')}</p>
 </section>
 
