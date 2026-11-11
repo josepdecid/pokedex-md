@@ -4,6 +4,7 @@
   import ProgressBar from './components/ProgressBar.svelte';
   import { i18n, t } from './i18n/i18n.svelte.ts';
   import { pickLocale } from './i18n/locales.ts';
+  import { gameInfo } from './games/registry.ts';
   import { loadGame } from './lib/data.ts';
   import { install } from './lib/install.svelte.ts';
   import { ProgressStore } from './lib/progress.svelte.ts';
@@ -17,6 +18,7 @@
   import NotFound from './routes/NotFound.svelte';
   import Pokedex from './routes/Pokedex.svelte';
   import Pokemon from './routes/Pokemon.svelte';
+  import Rescues from './routes/Rescues.svelte';
   import Settings from './routes/Settings.svelte';
 
   let session = $state.raw<GameSession | null>(null);
@@ -51,8 +53,9 @@
     { id: 'pokedex', href: paths.pokedex(gameId), label: t('nav.pokedex') },
     { id: 'dungeons', href: paths.dungeons(gameId), label: t('nav.dungeons') },
     { id: 'camps', href: paths.camps(gameId), label: t('nav.camps') },
+    ...(gameInfo(gameId)?.rescue ? [{ id: 'rescues', href: paths.rescues(gameId), label: t('nav.rescues') }] : []),
     { id: 'settings', href: paths.settings(gameId), label: t('nav.settings') },
-  ] as const);
+  ]);
 
   $effect(() => {
     document.title = t('app.name');
@@ -112,6 +115,8 @@
     <Camps {session} />
   {:else if route.name === 'camp'}
     <Camp {session} id={route.id} />
+  {:else if route.name === 'rescues'}
+    <Rescues {session} />
   {:else if route.name === 'settings'}
     <Settings {session} />
   {:else}
@@ -119,7 +124,7 @@
   {/if}
 </main>
 
-<nav class="tabbar" aria-label={t('nav.label')}>
+<nav class="tabbar" aria-label={t('nav.label')} style:--tabs={tabs.length}>
   {#each tabs as tab (tab.id)}
     <a href={tab.href} aria-current={section === tab.id ? 'page' : undefined}>
       <img src={`${import.meta.env.BASE_URL}icons/${gameId}/${tab.id}.webp`} alt="" width="151" height="96" />

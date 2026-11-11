@@ -71,6 +71,12 @@ const PokemonFile = z
 /** `<kind>: { <id>: name }` */
 // Each kind is a map of names, or the string `english` to say this language uses the
 // English names on purpose (e.g. Pokémon names in Spanish), which silences the fallback warning.
+// Rescue passwords store dungeons and Pokémon as the game's internal indexes (see games/dx/rescue.yaml).
+const index = z.string().regex(/^\d+$/, 'keys are internal indexes');
+const RescueFile = z.strictObject({
+  dungeons: z.record(index, z.strictObject({ id, floors: z.number().int().positive() })),
+  pokemon: z.record(index, id),
+});
 const LocaleFile = z.record(id, z.union([z.literal('english'), z.record(id, z.string().min(1))])).nullable();
 
 /** Id of the generated Shiny entry of an entry that can be Shiny. */
@@ -167,6 +173,8 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
     const dungeons = readYaml(join(dir, 'dungeons.yaml'), DungeonsFile, problems) ?? [];
     const camps = readYaml(join(dir, 'camps.yaml'), CampsFile, problems) ?? [];
     const pokemon = readYaml(join(dir, 'pokemon.yaml'), PokemonFile, problems) ?? [];
+    const rescueFile = join(dir, 'rescue.yaml');
+    const rescue = existsSync(rescueFile) ? readYaml(rescueFile, RescueFile, problems) : undefined;
     if (!game) continue;
     if (game.id !== gameId) problems.push(`${where('game.yaml')}: id "${game.id}" must match folder name "${gameId}"`);
 
@@ -299,6 +307,17 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
       if (entryIds.has(from)) problems.push(`${where('game.yaml')}: idAliases.${from} is still an entry id`);
     }
 
+    if (rescue) {
+      for (const [i, d] of Object.entries(rescue.dungeons)) {
+        if (!dungeonSet.has(d.id)) problems.push(`${where('rescue.yaml')}: dungeons.${i}: unknown dungeon "${d.id}"`);
+      }
+      for (const [i, p] of Object.entries(rescue.pokemon)) {
+        if (entryIds.has(p)) continue;
+        if (speciesById.has(p)) required.add(`species.${p}`); // shown by name, without an entry to link to
+        else problems.push(`${where('rescue.yaml')}: pokemon.${i}: "${p}" is neither an entry nor a species`);
+      }
+    }
+
     // Dictionaries: <locale>/<game> overrides <locale>/shared, and every locale falls back to English.
     const gameLocaleFiles = new Map(
       locales.map((l) => {
@@ -344,6 +363,7 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
       dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1, ...artwork('dungeons', d) })),
       camps: camps.map((c) => ({ id: c.id, ...artwork('camps', c) })),
       idAliases: game.idAliases,
+      ...(rescue && { rescue }),
     });
   }
 

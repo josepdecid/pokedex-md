@@ -8,6 +8,8 @@ describe('parseHash', () => {
     expect(parseHash('#/dx/pokemon/mr-mime')).toEqual({ name: 'pokemon', gameId: 'dx', id: 'mr-mime' });
     expect(parseHash('#/dx/dungeons/tiny-woods')).toEqual({ name: 'dungeon', gameId: 'dx', id: 'tiny-woods' });
     expect(parseHash('#/dx/settings')).toEqual({ name: 'settings', gameId: 'dx' });
+    expect(parseHash('#/dx/rescues')).toEqual({ name: 'rescues', gameId: 'dx' });
+    expect(parseHash('#/dx/rescues/x')).toEqual({ name: 'not-found', gameId: 'dx' });
   });
 
   it('flags unknown games and pages', () => {

@@ -1,5 +1,5 @@
 import { tick } from 'svelte';
-import { DEFAULT_GAME_ID, isGameId } from '../games/registry.ts';
+import { DEFAULT_GAME_ID, gameInfo, isGameId } from '../games/registry.ts';
 
 // Hash-based routes, so GitHub Pages needs no server-side rewrites.
 // Every route is prefixed with the game id: #/dx, #/dx/pokemon/pikachu, ...
@@ -11,6 +11,7 @@ export type Route =
   | { name: 'dungeon'; gameId: string; id: string }
   | { name: 'camps'; gameId: string }
   | { name: 'camp'; gameId: string; id: string }
+  | { name: 'rescues'; gameId: string }
   | { name: 'settings'; gameId: string }
   | { name: 'not-found'; gameId: string };
 
@@ -29,6 +30,8 @@ export function parseHash(hash: string): Route | null {
       return id ? { name: 'dungeon', gameId, id } : { name: 'dungeons', gameId };
     case 'camps':
       return id ? { name: 'camp', gameId, id } : { name: 'camps', gameId };
+    case 'rescues':
+      return id || !gameInfo(gameId)?.rescue ? { name: 'not-found', gameId } : { name: 'rescues', gameId };
     case 'settings':
       return id ? { name: 'not-found', gameId } : { name: 'settings', gameId };
     default:
@@ -44,6 +47,7 @@ export const paths = {
   dungeon: (g: string, id: string) => `#/${enc(g)}/dungeons/${enc(id)}`,
   camps: (g: string) => `#/${enc(g)}/camps`,
   camp: (g: string, id: string) => `#/${enc(g)}/camps/${enc(id)}`,
+  rescues: (g: string) => `#/${enc(g)}/rescues`,
   settings: (g: string) => `#/${enc(g)}/settings`,
 };
 

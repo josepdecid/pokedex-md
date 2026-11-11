@@ -8,6 +8,9 @@ progress is saved on the device (IndexedDB) and can be backed up and restored as
 - **Pokémon pages**: a Mystery Dungeon portrait, how to get it (dungeon, strong foe, legendary encounter, Mystery House...) and its camp.
 - **Dungeons**: in unlock order with a screenshot, split into incomplete and complete, with which Pokémon you can recruit in each and how many you have.
 - **Camps**: in unlock order with their artwork, split into incomplete and complete, and which Pokémon live in each.
+- **Rescues**: turns a rescue request password into the A-OK password that revives your team
+  (self-rescue). Type the 30 symbols, read them live with the camera, or import a photo or a
+  Switch screenshot; it shows what the request says (team, Pokémon, dungeon and floor) as a check.
 - **Settings**: language, back up / restore / reset progress, install.
 
 ## Development
@@ -43,6 +46,7 @@ src/
   games/registry.ts       # known games (only `dx` for now)
   i18n/                   # UI strings per language + runtime lookup
   lib/                    # data loading, storage, progress, router, session
+  lib/rescue/             # DX rescue passwords: codec, picture reader (+ its worker)
   components/ routes/     # Svelte UI
 tests/
 ```
@@ -62,6 +66,23 @@ tests/
 `.github/workflows/deploy.yml` checks, tests and builds every push to `main`, then deploys
 to GitHub Pages. In the repo settings, set **Pages → Source** to **GitHub Actions**.
 The workflow sets `BASE_PATH` to `/<repo-name>/`.
+
+## Rescue passwords
+
+`src/lib/rescue/dx-password.ts` encodes and decodes DX's 30-symbol passwords. It's ported from
+[pmd-gen](https://github.com/Karthik99999/pmd-gen) (MIT), credited in Settings → About.
+`recognize.ts` reads a password from a picture, entirely on the device and in a Web Worker: it finds
+the white glyphs, fits the 2×15 layout to them (the user can drag the corners if it's off), then
+scores each symbol's suit by colour and by silhouette (`dx-suits.ts`; colours shift a lot in photos)
+and its glyph against the masks in `dx-glyphs.ts`. When the best
+guesses don't make a valid password, it tries swapping one or two symbols for runner-up guesses.
+Symbols that were hard to read get a dashed border so they're checked against the screen. The
+password's checksum is a plain sum, so two misreads can cancel out. `rescue.ts` checks the
+dungeon, floor, Pokémon and team name too, which catches nearly all of those.
+The camera (Photo) reads frames from a guide frame shaped like the game's panel (getUserMedia, so
+laptop webcams work too) and takes the password once two reads in a row give the same valid one.
+`tests/fixtures/rescue-*.jpg` are Serebii's screenshot of the password screen, a distorted copy of it
+(perspective, blur, colour cast, glare) and a real phone photo of a Switch, used by `tests/rescue.test.ts`.
 
 ## Portraits
 

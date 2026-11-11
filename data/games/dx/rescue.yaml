@@ -1,0 +1,530 @@
+# What the numbers inside a rescue password mean (Rescues page, src/lib/rescue/).
+# A rescue request stores its dungeon and Pokémon as the game's internal indexes.
+# Source: the ROM tables in pmd-gen (https://github.com/Karthik99999/pmd-gen, MIT),
+# matched to our ids by English name. Indexes the game never uses are left out.
+#
+# dungeons: <index>: { id: <dungeons.yaml id>, floors: <floor count> }
+#   The dungeons pmd-gen accepts in a rescue request (Rock Path, Snow Path and the Mazes aren't).
+# pokemon: <index>: <pokemon.yaml entry id (Unown letters, -shiny ones), or a species id
+#   when it isn't a checklist entry (Deoxys' other forms share Deoxys' entry)>
+dungeons:
+  1: { id: tiny-woods, floors: 3 }
+  2: { id: thunderwave-cave, floors: 5 }
+  3: { id: mt-steel, floors: 9 }
+  4: { id: sinister-woods, floors: 13 }
+  5: { id: silent-chasm, floors: 9 }
+  6: { id: mt-thunder, floors: 13 }
+  7: { id: great-canyon, floors: 12 }
+  8: { id: lapis-cave, floors: 14 }
+  9: { id: mt-blaze, floors: 15 }
+  10: { id: frosty-forest, floors: 14 }
+  11: { id: mt-freeze, floors: 20 }
+  12: { id: magma-cavern, floors: 26 }
+  13: { id: sky-tower, floors: 34 }
+  16: { id: uproar-forest, floors: 4 }
+  17: { id: waterfall-pond, floors: 19 }
+  18: { id: desert-region, floors: 20 }
+  19: { id: southern-cavern, floors: 50 }
+  20: { id: wyvern-hill, floors: 30 }
+  21: { id: darknight-relic, floors: 15 }
+  22: { id: unown-relic, floors: 11 }
+  23: { id: grand-sea, floors: 30 }
+  24: { id: far-off-sea, floors: 75 }
+  25: { id: howling-forest, floors: 15 }
+  26: { id: stormy-sea, floors: 40 }
+  27: { id: buried-relic, floors: 99 }
+  28: { id: solar-cave, floors: 20 }
+  29: { id: fiery-field, floors: 30 }
+  30: { id: lightning-field, floors: 30 }
+  31: { id: northwind-field, floors: 30 }
+  32: { id: mt-faraway, floors: 60 }
+  33: { id: western-cave, floors: 20 }
+  34: { id: northern-range, floors: 25 }
+  35: { id: pitfall-valley, floors: 25 }
+  36: { id: wish-cave, floors: 99 }
+  37: { id: joyous-tower, floors: 99 }
+  38: { id: purity-forest, floors: 99 }
+  39: { id: murky-cave, floors: 19 }
+  40: { id: silver-trench, floors: 99 }
+  42: { id: oddity-cave, floors: 8 }
+  43: { id: remains-island, floors: 13 }
+  44: { id: marvelous-sea, floors: 18 }
+  45: { id: fantasy-strait, floors: 25 }
+pokemon:
+  1: bulbasaur
+  2: ivysaur
+  3: venusaur
+  5: charmander
+  6: charmeleon
+  7: charizard
+  10: squirtle
+  11: wartortle
+  12: blastoise
+  14: caterpie
+  15: metapod
+  16: butterfree
+  17: weedle
+  18: kakuna
+  19: beedrill
+  21: pidgey
+  22: pidgeotto
+  23: pidgeot
+  25: rattata
+  26: raticate
+  27: spearow
+  28: fearow
+  29: ekans
+  30: arbok
+  31: pichu
+  32: pikachu
+  33: raichu
+  34: sandshrew
+  35: sandslash
+  36: nidoran-m
+  37: nidorina
+  38: nidoqueen
+  39: nidoran-m
+  40: nidorino
+  41: nidoking
+  42: cleffa
+  43: clefairy
+  44: clefable
+  45: vulpix
+  46: ninetales
+  47: igglybuff
+  48: jigglypuff
+  49: wigglytuff
+  50: zubat
+  51: golbat
+  52: crobat
+  53: oddish
+  54: gloom
+  55: vileplume
+  56: bellossom
+  57: paras
+  58: parasect
+  59: venonat
+  60: venomoth
+  61: diglett
+  62: dugtrio
+  63: meowth
+  64: persian
+  65: psyduck
+  66: golduck
+  67: mankey
+  68: primeape
+  69: growlithe
+  70: arcanine
+  71: poliwag
+  72: poliwhirl
+  73: poliwrath
+  74: politoed
+  75: abra
+  76: kadabra
+  77: alakazam
+  79: machop
+  80: machoke
+  81: machamp
+  82: bellsprout
+  83: weepinbell
+  84: victreebel
+  85: tentacool
+  86: tentacruel
+  87: geodude
+  88: graveler
+  89: golem
+  90: ponyta
+  91: rapidash
+  92: slowpoke
+  93: slowbro
+  95: slowking
+  96: magnemite
+  97: magneton
+  98: magnezone
+  99: farfetchd
+  100: doduo
+  101: dodrio
+  102: seel
+  103: dewgong
+  104: grimer
+  105: muk
+  106: shellder
+  107: cloyster
+  108: gastly
+  109: haunter
+  110: gengar
+  112: onix
+  113: steelix
+  115: drowzee
+  116: hypno
+  117: krabby
+  118: kingler
+  119: voltorb
+  120: electrode
+  121: exeggcute
+  122: exeggutor
+  123: cubone
+  124: marowak
+  125: tyrogue
+  126: hitmonlee
+  127: hitmonchan
+  128: hitmontop
+  129: lickitung
+  130: lickilicky
+  131: koffing
+  132: weezing
+  133: rhyhorn
+  134: rhydon
+  135: rhyperior
+  136: happiny
+  137: chansey
+  138: blissey
+  139: tangela
+  140: tangrowth
+  141: kangaskhan
+  143: horsea
+  144: seadra
+  145: kingdra
+  146: goldeen
+  147: seaking
+  148: staryu
+  149: starmie
+  150: mime-jr
+  151: mr-mime
+  152: scyther
+  153: scizor
+  155: smoochum
+  156: jynx
+  157: elekid
+  158: electabuzz
+  159: electivire
+  160: magby
+  161: magmar
+  162: magmortar
+  163: pinsir
+  165: tauros
+  166: magikarp
+  167: gyarados
+  169: lapras
+  170: ditto
+  171: eevee
+  172: vaporeon
+  173: jolteon
+  174: flareon
+  175: espeon
+  176: umbreon
+  177: leafeon
+  178: glaceon
+  179: sylveon
+  180: porygon
+  181: porygon2
+  182: porygon-z
+  183: omanyte
+  184: omastar
+  185: kabuto
+  186: kabutops
+  187: aerodactyl
+  189: munchlax
+  190: snorlax
+  191: articuno
+  192: zapdos
+  193: moltres
+  194: dratini
+  195: dragonair
+  196: dragonite
+  197: mewtwo
+  200: mew
+  201: chikorita
+  202: bayleef
+  203: meganium
+  204: cyndaquil
+  205: quilava
+  206: typhlosion
+  207: totodile
+  208: croconaw
+  209: feraligatr
+  210: sentret
+  211: furret
+  212: hoothoot
+  213: noctowl
+  214: ledyba
+  215: ledian
+  216: spinarak
+  217: ariados
+  218: chinchou
+  219: lanturn
+  220: togepi
+  221: togetic
+  222: togekiss
+  223: natu
+  224: xatu
+  225: mareep
+  226: flaaffy
+  227: ampharos
+  229: azurill
+  230: marill
+  231: azumarill
+  232: bonsly
+  233: sudowoodo
+  234: hoppip
+  235: skiploom
+  236: jumpluff
+  237: aipom
+  238: ambipom
+  239: sunkern
+  240: sunflora
+  241: yanma
+  242: yanmega
+  243: wooper
+  244: quagsire
+  245: murkrow
+  246: honchkrow
+  247: misdreavus
+  248: mismagius
+  249: unown-a
+  250: unown-b
+  251: unown-c
+  252: unown-d
+  253: unown-e
+  254: unown-f
+  255: unown-g
+  256: unown-h
+  257: unown-i
+  258: unown-j
+  259: unown-k
+  260: unown-l
+  261: unown-m
+  262: unown-n
+  263: unown-o
+  264: unown-p
+  265: unown-q
+  266: unown-r
+  267: unown-s
+  268: unown-t
+  269: unown-u
+  270: unown-v
+  271: unown-w
+  272: unown-x
+  273: unown-y
+  274: unown-z
+  275: unown-exclamation
+  276: unown-question
+  277: wynaut
+  278: wobbuffet
+  279: girafarig
+  280: pineco
+  281: forretress
+  282: dunsparce
+  283: gligar
+  284: gliscor
+  285: snubbull
+  286: granbull
+  287: qwilfish
+  288: shuckle
+  289: heracross
+  291: sneasel
+  292: weavile
+  293: teddiursa
+  294: ursaring
+  295: slugma
+  296: magcargo
+  297: swinub
+  298: piloswine
+  299: mamoswine
+  300: corsola
+  301: remoraid
+  302: octillery
+  303: delibird
+  304: mantyke
+  305: mantine
+  306: skarmory
+  307: houndour
+  308: houndoom
+  310: phanpy
+  311: donphan
+  312: stantler
+  313: smeargle
+  314: miltank
+  315: raikou
+  316: entei
+  317: suicune
+  318: larvitar
+  319: pupitar
+  320: tyranitar
+  322: lugia
+  323: ho-oh
+  324: celebi
+  326: treecko
+  327: grovyle
+  328: sceptile
+  330: torchic
+  331: combusken
+  332: blaziken
+  334: mudkip
+  335: marshtomp
+  336: swampert
+  338: poochyena
+  339: mightyena
+  340: zigzagoon
+  341: linoone
+  342: wurmple
+  343: wurmple
+  344: silcoon
+  345: beautifly
+  346: cascoon
+  347: dustox
+  348: lotad
+  349: lombre
+  350: ludicolo
+  351: seedot
+  352: nuzleaf
+  353: shiftry
+  354: taillow
+  355: swellow
+  356: wingull
+  357: pelipper
+  358: ralts
+  359: kirlia
+  360: gardevoir
+  362: gallade
+  364: surskit
+  365: masquerain
+  366: shroomish
+  367: breloom
+  368: slakoth
+  369: vigoroth
+  370: slaking
+  371: nincada
+  372: ninjask
+  373: shedinja
+  374: whismur
+  375: loudred
+  376: exploud
+  377: makuhita
+  378: hariyama
+  379: nosepass
+  380: probopass
+  381: skitty
+  382: delcatty
+  383: sableye
+  385: mawile
+  387: aron
+  388: lairon
+  389: aggron
+  391: meditite
+  392: medicham
+  394: electrike
+  395: manectric
+  397: plusle
+  398: minun
+  399: volbeat
+  400: illumise
+  401: budew
+  402: roselia
+  403: roserade
+  404: gulpin
+  405: swalot
+  406: carvanha
+  407: sharpedo
+  409: wailmer
+  410: wailord
+  411: numel
+  412: camerupt
+  414: torkoal
+  415: spoink
+  416: grumpig
+  417: spinda
+  418: trapinch
+  419: vibrava
+  420: flygon
+  421: cacnea
+  422: cacturne
+  423: swablu
+  424: altaria
+  426: zangoose
+  427: seviper
+  428: lunatone
+  429: solrock
+  430: barboach
+  431: whiscash
+  432: corphish
+  433: crawdaunt
+  434: baltoy
+  435: claydol
+  436: lileep
+  437: cradily
+  438: anorith
+  439: armaldo
+  440: feebas
+  441: milotic
+  442: castform
+  446: kecleon
+  447: shuppet
+  448: banette
+  450: duskull
+  451: dusclops
+  452: dusknoir
+  453: tropius
+  454: chingling
+  455: chimecho
+  456: absol
+  458: snorunt
+  459: glalie
+  461: froslass
+  462: spheal
+  463: sealeo
+  464: walrein
+  465: clamperl
+  466: huntail
+  467: gorebyss
+  468: relicanth
+  469: luvdisc
+  470: bagon
+  471: shelgon
+  472: salamence
+  474: beldum
+  475: metang
+  476: metagross
+  478: regirock
+  479: regice
+  480: registeel
+  481: latias
+  483: latios
+  485: kyogre
+  487: groudon
+  489: rayquaza
+  491: jirachi
+  492: deoxys
+  493: deoxys
+  494: deoxys
+  495: deoxys
+  555: riolu
+  556: lucario
+  949: butterfree-shiny
+  950: ninetales-shiny
+  951: rapidash-shiny
+  952: electrode-shiny
+  953: exeggcute-shiny
+  954: exeggutor-shiny
+  955: lickilicky-shiny
+  956: starmie-shiny
+  957: magikarp-shiny
+  958: gyarados-shiny
+  960: ditto-shiny
+  961: espeon-shiny
+  962: dragonite-shiny
+  963: hoothoot-shiny
+  964: noctowl-shiny
+  965: ampharos-shiny
+  967: azumarill-shiny
+  968: sudowoodo-shiny
+  969: aipom-shiny
+  970: ambipom-shiny
+  971: wobbuffet-shiny
+  972: shuckle-shiny
+  973: corsola-shiny
+  975: celebi-shiny
+  976: spinda-shiny
+  977: altaria-shiny
+  979: zangoose-shiny
+  980: metagross-shiny
