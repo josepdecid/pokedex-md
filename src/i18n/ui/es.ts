@@ -64,12 +64,15 @@ export const es: UiStrings = {
   'sections.recruited': 'Reclutados',
 
   'dungeons.intro': 'En orden de desbloqueo. El contador indica cuántos de los Pokémon que aparecen en cada uno has reclutado.',
+  'dungeons.search': 'Buscar territorios',
+  'dungeons.empty': 'Ningún territorio coincide.',
   'dungeon.back': 'Territorios',
-  'dungeon.number': 'Territorio {n}',
   'dungeon.none': 'Aún no hay Pokémon reclutables en este territorio.',
   'dungeon.notFound': 'Ese territorio no está en este juego.',
 
   'camps.intro': 'En orden de desbloqueo. Cada Pokémon reclutado vive en uno de estos campamentos.',
+  'camps.search': 'Buscar campamentos',
+  'camps.empty': 'Ningún campamento coincide.',
   'camp.back': 'Campamentos',
   'camp.residents': 'Pokémon que viven aquí',
   'camp.notFound': 'Ese campamento no está en este juego.',

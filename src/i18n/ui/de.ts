@@ -64,12 +64,15 @@ export const de: UiStrings = {
   'sections.recruited': 'Rekrutiert',
 
   'dungeons.intro': 'In der Reihenfolge der Freischaltung. Die Zahl zeigt, wie viele der dort vorkommenden Pokémon du rekrutiert hast.',
+  'dungeons.search': 'Dungeons suchen',
+  'dungeons.empty': 'Kein Dungeon passt.',
   'dungeon.back': 'Dungeons',
-  'dungeon.number': 'Dungeon {n}',
   'dungeon.none': 'Für diesen Dungeon sind noch keine rekrutierbaren Pokémon eingetragen.',
   'dungeon.notFound': 'Dieser Dungeon ist nicht in diesem Spiel.',
 
   'camps.intro': 'In der Reihenfolge der Freischaltung. Jedes rekrutierte Pokémon lebt in einem dieser Camps.',
+  'camps.search': 'Camps suchen',
+  'camps.empty': 'Kein Camp passt.',
   'camp.back': 'Camps',
   'camp.residents': 'Pokémon, die hier leben',
   'camp.notFound': 'Dieses Camp ist nicht in diesem Spiel.',

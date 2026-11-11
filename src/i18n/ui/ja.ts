@@ -63,12 +63,15 @@ export const ja: UiStrings = {
   'sections.recruited': '仲間',
 
   'dungeons.intro': '解放順に並んでいます。数字は、そのダンジョンに出現するポケモンのうち仲間にした数です。',
+  'dungeons.search': 'ダンジョンを検索',
+  'dungeons.empty': '該当するダンジョンはありません。',
   'dungeon.back': 'ダンジョン',
-  'dungeon.number': 'ダンジョン{n}',
   'dungeon.none': 'このダンジョンで仲間にできるポケモンはまだ登録されていません。',
   'dungeon.notFound': 'そのダンジョンはこのゲームにありません。',
 
   'camps.intro': '解放順に並んでいます。仲間にしたポケモンは、いずれかのキャンプに住みます。',
+  'camps.search': 'キャンプを検索',
+  'camps.empty': '該当するキャンプはありません。',
   'camp.back': 'キャンプ',
   'camp.residents': 'ここに住むポケモン',
   'camp.notFound': 'そのキャンプはこのゲームにありません。',
