@@ -52,8 +52,6 @@ export const de: UiStrings = {
   'pokemon.next': 'Weiter',
   'pokemon.notFound': 'Dieses Pokémon ist nicht in diesem Spiel.',
 
-  'obtain.floor': 'Ebene {floors}',
-  'obtain.floors': 'Ebenen {floors}',
   'obtain.level': 'Lv. {level}',
   'obtain.anyDungeon': 'Jeder Dungeon',
   'obtain.rateShort': '{rate} %',
@@ -70,6 +68,9 @@ export const de: UiStrings = {
   'dungeon.back': 'Dungeons',
   'dungeon.none': 'Für diesen Dungeon sind noch keine rekrutierbaren Pokémon eingetragen.',
   'dungeon.notFound': 'Dieser Dungeon ist nicht in diesem Spiel.',
+  'obtain.floor': 'Ebene {floors}',
+  'obtain.floors': 'Ebenen {floors}',
+  'floor.short': 'E{floor}',
 
   'camps.intro': 'In der Reihenfolge der Freischaltung. Jedes rekrutierte Pokémon lebt in einem dieser Camps.',
   'camps.search': 'Camps suchen',

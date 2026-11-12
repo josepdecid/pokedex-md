@@ -8,6 +8,7 @@
     backHref,
     backLabel,
     title,
+    subtitle,
     morph = false,
     done,
     total,
@@ -15,6 +16,8 @@
     backHref: string;
     backLabel: string;
     title: string;
+    /** Small line under the name. */
+    subtitle?: string;
     /** Whether the name morphs from the card it was opened from. */
     morph?: boolean;
     done: number;
@@ -25,7 +28,10 @@
 <div class="headline" class:pinned={total > 0}>
   <div class="title-row">
     <a class="back" href={backHref}>‹ {backLabel}</a>
-    <h1 style:view-transition-name={morph ? 'artwork-title' : undefined}>{title}</h1>
+    <div class="heading">
+      <h1 style:view-transition-name={morph ? 'artwork-title' : undefined}>{title}</h1>
+      {#if subtitle}<p class="subtitle">{subtitle}</p>{/if}
+    </div>
   </div>
   {#if total > 0}
     <div class="headline-progress">
@@ -76,10 +82,19 @@
   .back {
     flex: none;
   }
-  h1 {
+  .heading {
     min-width: 0;
-    margin: 0 0 0 auto;
+    margin-left: auto;
     text-align: right;
+  }
+  h1 {
+    margin: 0;
     font-size: 1.25rem;
+  }
+  .subtitle {
+    margin: 0.1rem 0 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
   }
 </style>

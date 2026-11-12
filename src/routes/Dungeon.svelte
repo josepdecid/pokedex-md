@@ -6,7 +6,7 @@
   import RecruitSections from '../components/RecruitSections.svelte';
   import { i18n, t } from '../i18n/i18n.svelte.ts';
   import type { Obtain } from '../lib/game-data.ts';
-  import { firstFloor } from '../lib/obtain.ts';
+  import { firstFloor, lastFloor } from '../lib/obtain.ts';
   import { paths, router } from '../lib/router.svelte.ts';
   import type { DungeonEncounter, GameSession } from '../lib/session.svelte.ts';
 
@@ -21,12 +21,16 @@
   const encounters = $derived(
     (session.encountersByDungeon.get(id) ?? []).map((e): DungeonEncounter => ({ ...e, obtains: [...e.obtains].sort(byMethod) })),
   );
-  // Grouped by their best way of getting it, then from the lowest floor it shows up on, then in dex order.
-  // Every encounter has at least one obtain: it's listed here because of one.
+  // Legendaries last, the rest grouped by their best way of getting it, then from the lowest floor it
+  // shows up on, then in dex order. Every encounter has at least one obtain: it's listed here because of one.
+  const legendaryLast = (e: DungeonEncounter) => (e.entry.legendary ? 1 : 0);
   const entries = $derived(
     encounters
       .slice()
-      .sort((a, b) => byMethod(a.obtains[0]!, b.obtains[0]!) || a.entry.dex - b.entry.dex)
+      .sort(
+        (a, b) =>
+          legendaryLast(a) - legendaryLast(b) || byMethod(a.obtains[0]!, b.obtains[0]!) || a.entry.dex - b.entry.dex,
+      )
       .map((e) => e.entry),
   );
   const obtainsById = $derived(new Map(encounters.map((e) => [e.entry.id, e.obtains])));
@@ -36,10 +40,11 @@
   );
   const done = $derived(session.countRecruited(entries));
   const morph = $derived(router.morphDungeonId === id);
+  const last = $derived(lastFloor(dungeon));
 </script>
 
 {#snippet details(entry: { id: string })}
-  <ObtainLines obtains={obtainsById.get(entry.id) ?? []} methods={session.methodById} />
+  <ObtainLines obtains={obtainsById.get(entry.id) ?? []} methods={session.methodById} {dungeon} />
 {/snippet}
 
 {#if dungeon}
@@ -48,6 +53,7 @@
     backHref={paths.dungeons(session.id)}
     backLabel={t('dungeon.back')}
     title={i18n.name('dungeon', dungeon.id)}
+    subtitle={last}
     {morph}
     {done}
     total={entries.length}

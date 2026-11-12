@@ -15,6 +15,7 @@
     "artwork": "node scripts/fetch-artwork.ts"
   },
   "dependencies": {
+    "@hiseb/confetti": "^2.2.0",
     "idb-keyval": "^6.3.0"
   },
   "devDependencies": {

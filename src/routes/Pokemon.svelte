@@ -102,7 +102,7 @@
                   {/if}
                   <span class="details">
                     {#if showIcon}<MethodIcon method={o.method} icon={session.methodById.get(o.method)?.icon} />{/if}
-                    {#if o.floors}<span>{formatFloors(o.floors)}</span>{/if}
+                    {#if o.floors}<span>{formatFloors(o.floors, session.dungeonById.get(o.dungeon ?? ''))}</span>{/if}
                     {#if o.level !== undefined}<span>{t('obtain.level', { level: o.level })}</span>{/if}
                     {#if o.rate !== undefined}
                       <span class="rate" class:blocked={o.rate < 0} title={t('obtain.rateLabel')}>

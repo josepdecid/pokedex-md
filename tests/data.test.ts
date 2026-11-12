@@ -12,7 +12,32 @@ describe('shipped data', () => {
 
   it('builds DX', () => {
     expect(dx.pokemon.length).toBeGreaterThan(400);
-    expect(dx.dungeons[0]).toEqual({ id: 'tiny-woods', order: 1, image: 'dungeons/dx/tiny-woods.webp' });
+    expect(dx.dungeons[0]).toEqual({
+      id: 'tiny-woods',
+      order: 1,
+      floors: 3,
+      basement: true,
+      image: 'dungeons/dx/tiny-woods.webp',
+    });
+  });
+
+  it('knows how many floors each dungeon has, and which go down', () => {
+    const byId = new Map(dx.dungeons.map((d) => [d.id, d]));
+    expect(byId.get('mt-steel')).toMatchObject({ floors: 9 });
+    expect(byId.get('mt-steel')?.basement).toBeUndefined();
+    expect(byId.get('magma-cavern')).toMatchObject({ floors: 26, basement: true });
+    // Its floors change every time.
+    expect(byId.get('illusory-grotto')?.floors).toBeUndefined();
+    // Rescue requests check floors against the same counts.
+    expect(dx.rescue?.dungeons['10']).toEqual({ id: 'frosty-forest', floors: 14 });
+  });
+
+  it('marks Legendary and Mythical Pokémon', () => {
+    const legendary = dx.pokemon.filter((e) => e.legendary && !e.shiny).map((e) => e.species);
+    expect(legendary).toContain('mewtwo');
+    expect(legendary).toContain('celebi');
+    expect(legendary).not.toContain('dragonite');
+    expect(legendary).toHaveLength(21);
   });
 
   it('has an English name for everything it references', () => {

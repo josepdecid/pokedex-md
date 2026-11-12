@@ -52,8 +52,6 @@ export const it: UiStrings = {
   'pokemon.next': 'Successivo',
   'pokemon.notFound': 'Questo Pokémon non è presente in questo gioco.',
 
-  'obtain.floor': 'Piano {floors}',
-  'obtain.floors': 'Piani {floors}',
   'obtain.level': 'Liv. {level}',
   'obtain.anyDungeon': 'Qualsiasi dungeon',
   'obtain.rateShort': '{rate}%',
@@ -70,6 +68,9 @@ export const it: UiStrings = {
   'dungeon.back': 'Dungeon',
   'dungeon.none': 'Non sono ancora elencati Pokémon reclutabili per questo dungeon.',
   'dungeon.notFound': 'Questo dungeon non è presente in questo gioco.',
+  'obtain.floor': 'Piano {floors}',
+  'obtain.floors': 'Piani {floors}',
+  'floor.short': 'P{floor}',
 
   'camps.intro': 'In ordine di sblocco. Ogni Pokémon reclutato vive in uno di questi Campi Base.',
   'camps.search': 'Cerca Campi Base',

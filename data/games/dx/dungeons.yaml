@@ -2,51 +2,57 @@
 # Artwork: public/dungeons/dx/<id>.webp, downloaded by `npm run artwork`.
 # Serebii doesn't list Rock Path or Snow Path (and has no artwork for them); they sit
 # where they unlock in the story, right after Lapis Cave and Mt. Blaze.
-- id: tiny-woods
-- id: thunderwave-cave
-- id: mt-steel
-- id: sinister-woods
-- id: silent-chasm
-- id: mt-thunder
-- id: great-canyon
-- id: lapis-cave
-- id: rock-path
-  artwork: false
-- id: mt-blaze
-- id: snow-path
-  artwork: false
-- id: frosty-forest
-- id: mt-freeze
-- id: magma-cavern
-- id: sky-tower
-- id: uproar-forest
-- id: waterfall-pond
-- id: desert-region
-- id: southern-cavern
-- id: wyvern-hill
-- id: darknight-relic
-- id: unown-relic
-- id: grand-sea
-- id: far-off-sea
-- id: howling-forest
-- id: stormy-sea
-- id: buried-relic
-- id: solar-cave
-- id: fiery-field
-- id: lightning-field
-- id: northwind-field
-- id: mt-faraway
-- id: western-cave
-- id: northern-range
-- id: pitfall-valley
-- id: wish-cave
-- id: joyous-tower
-- id: purity-forest
-- id: murky-cave
-- id: silver-trench
-- id: meteor-cave
-- id: oddity-cave
-- id: remains-island
-- id: marvelous-sea
-- id: fantasy-strait
+#
+# floors: how many floors it has (the last one included), from the ROM tables in pmd-gen (rescue.yaml's
+#   source); Rock Path, Snow Path and Meteor Cave, which pmd-gen leaves out, from Poképédia and WikiDex.
+#   Illusory Grotto has none: its floors change. `floors` in pokemon.yaml count from 1, the first floor.
+# basement: it goes down. The game numbers its floors B1F, B2F... (shown as -1, -2...). Without it,
+#   it goes up from the ground floor, 1F, 2F... in English (shown as 0, 1...: PB, P1... in Spanish).
+#   From the DX tables on Poképédia, which agree with Serebii's final floors (B3F, 9F) except on
+#   Magma Cavern, Unown Relic, Wish Cave and Silver Trench, where WikiDex sides with Poképédia.
+- { id: tiny-woods, floors: 3, basement: true }
+- { id: thunderwave-cave, floors: 5, basement: true }
+- { id: mt-steel, floors: 9 }
+- { id: sinister-woods, floors: 13 }
+- { id: silent-chasm, floors: 9, basement: true }
+- { id: mt-thunder, floors: 13 }
+- { id: great-canyon, floors: 12 }
+- { id: lapis-cave, floors: 14, basement: true }
+- { id: rock-path, floors: 4, artwork: false }
+- { id: mt-blaze, floors: 15 }
+- { id: snow-path, floors: 4, artwork: false }
+- { id: frosty-forest, floors: 14 }
+- { id: mt-freeze, floors: 20 }
+- { id: magma-cavern, floors: 26, basement: true }
+- { id: sky-tower, floors: 34 }
+- { id: uproar-forest, floors: 4, basement: true }
+- { id: waterfall-pond, floors: 19, basement: true }
+- { id: desert-region, floors: 20 }
+- { id: southern-cavern, floors: 50, basement: true }
+- { id: wyvern-hill, floors: 30 }
+- { id: darknight-relic, floors: 15, basement: true }
+- { id: unown-relic, floors: 11, basement: true }
+- { id: grand-sea, floors: 30, basement: true }
+- { id: far-off-sea, floors: 75, basement: true }
+- { id: howling-forest, floors: 15 }
+- { id: stormy-sea, floors: 40, basement: true }
+- { id: buried-relic, floors: 99, basement: true }
+- { id: solar-cave, floors: 20, basement: true }
+- { id: fiery-field, floors: 30 }
+- { id: lightning-field, floors: 30 }
+- { id: northwind-field, floors: 30 }
+- { id: mt-faraway, floors: 60 }
+- { id: western-cave, floors: 20, basement: true }
+- { id: northern-range, floors: 25 }
+- { id: pitfall-valley, floors: 25, basement: true }
+- { id: wish-cave, floors: 99, basement: true }
+- { id: joyous-tower, floors: 99 }
+- { id: purity-forest, floors: 99 }
+- { id: murky-cave, floors: 19, basement: true }
+- { id: silver-trench, floors: 99, basement: true }
+- { id: meteor-cave, floors: 20, basement: true }
+- { id: oddity-cave, floors: 8, basement: true }
+- { id: remains-island, floors: 13, basement: true }
+- { id: marvelous-sea, floors: 18, basement: true }
+- { id: fantasy-strait, floors: 25, basement: true }
 - id: illusory-grotto

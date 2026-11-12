@@ -50,8 +50,6 @@ export const en = {
   'pokemon.next': 'Next',
   'pokemon.notFound': "That Pokémon isn't in this game.",
 
-  'obtain.floor': 'Floor {floors}',
-  'obtain.floors': 'Floors {floors}',
   'obtain.level': 'Lv. {level}',
   'obtain.anyDungeon': 'Any dungeon',
   'obtain.rateShort': '{rate}%',
@@ -68,6 +66,9 @@ export const en = {
   'dungeon.back': 'Dungeons',
   'dungeon.none': 'No recruitable Pokémon are listed for this dungeon yet.',
   'dungeon.notFound': "That dungeon isn't in this game.",
+  'obtain.floor': 'Floor {floors}',
+  'obtain.floors': 'Floors {floors}',
+  'floor.short': 'F{floor}',
 
   'camps.intro': 'In unlock order. Every recruited Pokémon lives in one of these camps.',
   'camps.search': 'Search camps',

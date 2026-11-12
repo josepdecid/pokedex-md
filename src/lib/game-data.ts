@@ -37,6 +37,8 @@ export interface PokemonEntry {
   id: string;
   species: string;
   dex: number;
+  /** A Legendary or Mythical Pokémon. */
+  legendary?: true;
   /** Position when sorting by family: dex order, with each evolution line kept together. */
   familyOrder: number;
   form?: string;
@@ -55,6 +57,10 @@ export interface Dungeon {
   id: string;
   /** 1-based unlock order. */
   order: number;
+  /** How many floors it has. Absent if they aren't fixed (or known). */
+  floors?: number;
+  /** It goes down (B1F, B2F...: floors -1, -2...). Otherwise it goes up from the ground floor (0, 1...). */
+  basement?: true;
   /** Artwork path under public/ (dungeons/<gameId>/<id>.webp). Absent if none. */
   image?: string;
 }

@@ -17,6 +17,7 @@
     passwordToText,
     type PasswordSymbol,
   } from '../lib/rescue/dx-password.ts';
+  import { formatFloors } from '../lib/obtain.ts';
   import { bestPassword, isUnsure, type SymbolReading } from '../lib/rescue/recognize.ts';
   import { readRescue } from '../lib/rescue/rescue.ts';
   import { paths } from '../lib/router.svelte.ts';
@@ -264,7 +265,7 @@
       <dt>{t('rescues.where')}</dt>
       <dd>
         <a href={paths.dungeon(session.id, info.dungeon)}>{i18n.name('dungeon', info.dungeon)}</a>,
-        {t('obtain.floor', { floors: info.floor })}
+        {formatFloors(String(info.floor), session.dungeonById.get(info.dungeon))}
       </dd>
       <dt>{t('rescues.when')}</dt>
       <dd>{date}</dd>

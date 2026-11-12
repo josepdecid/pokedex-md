@@ -52,8 +52,6 @@ export const es: UiStrings = {
   'pokemon.next': 'Siguiente',
   'pokemon.notFound': 'Ese Pokémon no está en este juego.',
 
-  'obtain.floor': 'Piso {floors}',
-  'obtain.floors': 'Pisos {floors}',
   'obtain.level': 'Nv. {level}',
   'obtain.anyDungeon': 'Cualquier territorio',
   'obtain.rateShort': '{rate} %',
@@ -70,6 +68,9 @@ export const es: UiStrings = {
   'dungeon.back': 'Territorios',
   'dungeon.none': 'Aún no hay Pokémon reclutables en este territorio.',
   'dungeon.notFound': 'Ese territorio no está en este juego.',
+  'obtain.floor': 'Piso {floors}',
+  'obtain.floors': 'Pisos {floors}',
+  'floor.short': 'P{floor}',
 
   'camps.intro': 'En orden de desbloqueo. Cada Pokémon reclutado vive en uno de estos campamentos.',
   'camps.search': 'Buscar campamentos',
