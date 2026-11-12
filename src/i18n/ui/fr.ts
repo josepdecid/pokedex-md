@@ -52,8 +52,6 @@ export const fr: UiStrings = {
   'pokemon.next': 'Suivant',
   'pokemon.notFound': 'Ce Pokémon n’est pas dans ce jeu.',
 
-  'obtain.floor': 'Étage {floors}',
-  'obtain.floors': 'Étages {floors}',
   'obtain.level': 'N. {level}',
   'obtain.anyDungeon': 'N’importe quel donjon',
   'obtain.rateShort': '{rate} %',
@@ -70,6 +68,9 @@ export const fr: UiStrings = {
   'dungeon.back': 'Donjons',
   'dungeon.none': 'Aucun Pokémon recrutable n’est encore répertorié pour ce donjon.',
   'dungeon.notFound': 'Ce donjon n’est pas dans ce jeu.',
+  'obtain.floor': 'Étage {floors}',
+  'obtain.floors': 'Étages {floors}',
+  'floor.short': 'É{floor}',
 
   'camps.intro': 'Par ordre de déblocage. Chaque Pokémon recruté vit dans l’un de ces camps.',
   'camps.search': 'Chercher un camp',

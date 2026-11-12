@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { slide } from 'svelte/transition';
   import PokemonList from '../components/PokemonList.svelte';
   import SearchInput from '../components/SearchInput.svelte';
   import { i18n, normalize, t } from '../i18n/i18n.svelte.ts';
+  import { celebrate } from '../lib/confetti.ts';
   import { entryMatcher } from '../lib/search.svelte.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
   import { clearFilters, filterPanel, filters, type StatusFilter } from './pokedex-filters.svelte.ts';
@@ -38,6 +40,12 @@
   const hiddenActive = $derived(!filterPanel.open && (filters.type !== '' || filters.sort !== 'family'));
 
   const reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // With every Pokémon recruited, opening the Pokédex throws confetti (App also does when the last one is ticked).
+  onMount(() => {
+    const total = session.data.pokemon.length;
+    if (total > 0 && session.recruitedCount === total) void celebrate(session.data.types);
+  });
 
   // The tools stay on screen mid-list, so a new filter starts its results from the top.
   // Skips the first run, which would undo the router restoring the list's scroll position.

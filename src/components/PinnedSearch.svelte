@@ -22,10 +22,12 @@
 <style>
   /* Full-bleed over .page's gutter, so rows don't show beside it as they scroll under.
      The top margin cancels .page's padding, so it rests where it pins and doesn't shift. */
+  /* The bottom padding makes room for the input's focus ring (3px outline, 2px offset), which the
+     fade below would otherwise paint over. */
   .pinned-search {
     display: flex;
     margin: -1rem -16px var(--search-fade);
-    padding: 0.5rem 16px 0;
+    padding: 0.5rem 16px 6px;
     background: var(--bg);
     --search-fade: 1rem;
   }

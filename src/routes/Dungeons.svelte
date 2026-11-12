@@ -3,6 +3,7 @@
   import CompletionSections from '../components/CompletionSections.svelte';
   import PinnedSearch from '../components/PinnedSearch.svelte';
   import { i18n, t } from '../i18n/i18n.svelte.ts';
+  import { lastFloor } from '../lib/obtain.ts';
   import { paths, router } from '../lib/router.svelte.ts';
   import { listQueries, nameMatcher } from '../lib/search.svelte.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
@@ -13,7 +14,8 @@
   const rows = $derived(
     session.data.dungeons.map((dungeon) => {
       const found = (session.encountersByDungeon.get(dungeon.id) ?? []).map((e) => e.entry);
-      return { dungeon, done: session.countRecruited(found), total: found.length };
+      const last = lastFloor(dungeon);
+      return { dungeon, done: session.countRecruited(found), total: found.length, last };
     }),
   );
   const shown = $derived.by(() => {
@@ -29,10 +31,11 @@
 
 {#if shown.length}
   <CompletionSections rows={shown} key={(r) => r.dungeon.id} storageKey="dungeons">
-    {#snippet item({ dungeon, done, total })}
+    {#snippet item({ dungeon, done, total, last })}
       <ArtworkCard
         href={paths.dungeon(session.id, dungeon.id)}
         title={i18n.name('dungeon', dungeon.id)}
+        subtitle={last}
         image={dungeon.image}
         {done}
         {total}

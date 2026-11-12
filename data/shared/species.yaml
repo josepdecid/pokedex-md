@@ -1,5 +1,6 @@
 # Species shared by every game: stable id + National Pokédex number.
 # evolvesFrom: the species it evolves from (used to keep evolution lines together when sorting).
+# legendary: a Legendary or Mythical Pokémon (listed last on a dungeon's page).
 # Ids follow PokéAPI slugs. Never change an id once published: saved progress references it.
 - { id: bulbasaur, dex: 1 }
 - { id: ivysaur, dex: 2, evolvesFrom: bulbasaur }
@@ -144,14 +145,14 @@
 - { id: kabutops, dex: 141, evolvesFrom: kabuto }
 - { id: aerodactyl, dex: 142 }
 - { id: snorlax, dex: 143, evolvesFrom: munchlax }
-- { id: articuno, dex: 144 }
-- { id: zapdos, dex: 145 }
-- { id: moltres, dex: 146 }
+- { id: articuno, dex: 144, legendary: true }
+- { id: zapdos, dex: 145, legendary: true }
+- { id: moltres, dex: 146, legendary: true }
 - { id: dratini, dex: 147 }
 - { id: dragonair, dex: 148, evolvesFrom: dratini }
 - { id: dragonite, dex: 149, evolvesFrom: dragonair }
-- { id: mewtwo, dex: 150 }
-- { id: mew, dex: 151 }
+- { id: mewtwo, dex: 150, legendary: true }
+- { id: mew, dex: 151, legendary: true }
 - { id: chikorita, dex: 152 }
 - { id: bayleef, dex: 153, evolvesFrom: chikorita }
 - { id: meganium, dex: 154, evolvesFrom: bayleef }
@@ -243,15 +244,15 @@
 - { id: magby, dex: 240 }
 - { id: miltank, dex: 241 }
 - { id: blissey, dex: 242, evolvesFrom: chansey }
-- { id: raikou, dex: 243 }
-- { id: entei, dex: 244 }
-- { id: suicune, dex: 245 }
+- { id: raikou, dex: 243, legendary: true }
+- { id: entei, dex: 244, legendary: true }
+- { id: suicune, dex: 245, legendary: true }
 - { id: larvitar, dex: 246 }
 - { id: pupitar, dex: 247, evolvesFrom: larvitar }
 - { id: tyranitar, dex: 248, evolvesFrom: pupitar }
-- { id: lugia, dex: 249 }
-- { id: ho-oh, dex: 250 }
-- { id: celebi, dex: 251 }
+- { id: lugia, dex: 249, legendary: true }
+- { id: ho-oh, dex: 250, legendary: true }
+- { id: celebi, dex: 251, legendary: true }
 - { id: treecko, dex: 252 }
 - { id: grovyle, dex: 253, evolvesFrom: treecko }
 - { id: sceptile, dex: 254, evolvesFrom: grovyle }
@@ -377,16 +378,16 @@
 - { id: beldum, dex: 374 }
 - { id: metang, dex: 375, evolvesFrom: beldum }
 - { id: metagross, dex: 376, evolvesFrom: metang }
-- { id: regirock, dex: 377 }
-- { id: regice, dex: 378 }
-- { id: registeel, dex: 379 }
-- { id: latias, dex: 380 }
-- { id: latios, dex: 381 }
-- { id: kyogre, dex: 382 }
-- { id: groudon, dex: 383 }
-- { id: rayquaza, dex: 384 }
-- { id: jirachi, dex: 385 }
-- { id: deoxys, dex: 386 }
+- { id: regirock, dex: 377, legendary: true }
+- { id: regice, dex: 378, legendary: true }
+- { id: registeel, dex: 379, legendary: true }
+- { id: latias, dex: 380, legendary: true }
+- { id: latios, dex: 381, legendary: true }
+- { id: kyogre, dex: 382, legendary: true }
+- { id: groudon, dex: 383, legendary: true }
+- { id: rayquaza, dex: 384, legendary: true }
+- { id: jirachi, dex: 385, legendary: true }
+- { id: deoxys, dex: 386, legendary: true }
 - { id: budew, dex: 406 }
 - { id: roserade, dex: 407, evolvesFrom: roselia }
 - { id: ambipom, dex: 424, evolvesFrom: aipom }

@@ -1,12 +1,16 @@
 <script lang="ts">
   import { t } from '../i18n/i18n.svelte.ts';
-  import type { Obtain, ObtainMethod } from '../lib/game-data.ts';
+  import type { Dungeon, Obtain, ObtainMethod } from '../lib/game-data.ts';
   import { formatFloors, formatRate } from '../lib/obtain.ts';
   import MethodIcon from './MethodIcon.svelte';
 
   // One line per way of getting a Pokémon in a dungeon: method icon, then
-  // floors · level · recruit rate, with whatever is known.
-  let { obtains, methods }: { obtains: readonly Obtain[]; methods: ReadonlyMap<string, ObtainMethod> } = $props();
+  // floors · level · recruit rate, with whatever is known. Floors are numbered like `dungeon`'s.
+  let {
+    obtains,
+    methods,
+    dungeon,
+  }: { obtains: readonly Obtain[]; methods: ReadonlyMap<string, ObtainMethod>; dungeon: Dungeon | undefined } = $props();
 </script>
 
 <ul class="obtains">
@@ -14,7 +18,7 @@
     <li>
       <MethodIcon method={o.method} icon={methods.get(o.method)?.icon} />
       <span class="facts">
-        {#if o.floors}<span class="floors">{formatFloors(o.floors)}</span>{/if}
+        {#if o.floors}<span class="floors">{formatFloors(o.floors, dungeon)}</span>{/if}
         {#if o.level !== undefined}<span>{t('obtain.level', { level: o.level })}</span>{/if}
         {#if o.rate !== undefined}
           <span class="rate" class:blocked={o.rate <= 0} title={t('obtain.rateLabel')}>

@@ -51,8 +51,6 @@ export const ja: UiStrings = {
   'pokemon.next': '次へ',
   'pokemon.notFound': 'そのポケモンはこのゲームにいません。',
 
-  'obtain.floor': '{floors}F',
-  'obtain.floors': '{floors}F',
   'obtain.level': 'Lv.{level}',
   'obtain.anyDungeon': 'すべてのダンジョン',
   'obtain.rateShort': '{rate}%',
@@ -69,6 +67,9 @@ export const ja: UiStrings = {
   'dungeon.back': 'ダンジョン',
   'dungeon.none': 'このダンジョンで仲間にできるポケモンはまだ登録されていません。',
   'dungeon.notFound': 'そのダンジョンはこのゲームにありません。',
+  'obtain.floor': '{floors}F',
+  'obtain.floors': '{floors}F',
+  'floor.short': '{floor}F',
 
   'camps.intro': '解放順に並んでいます。仲間にしたポケモンは、いずれかのキャンプに住みます。',
   'camps.search': 'キャンプを検索',

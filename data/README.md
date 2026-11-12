@@ -101,6 +101,16 @@ come from the Rescue Team DX tables on Bulbapedia's dungeon pages (Rock Path and
 have none). Where Serebii and Bulbapedia disagreed on which Pokémon appear in a dungeon (a
 handful of rows), we follow Bulbapedia.
 
+Each dungeon's floor count (`floors` in `dungeons.yaml`) comes from the ROM tables in pmd-gen, like
+`rescue.yaml`; the three it leaves out (Rock Path, Snow Path, Meteor Cave) come from Poképédia and WikiDex.
+Whether it goes up or down (`basement`) comes from the DX recruit tables on [Poképédia](https://www.pokepedia.fr/),
+which number floors like the Spanish and French games: 0 (the ground floor, "PB" in Spanish) and up, or -1 and
+down. Serebii's final floors (B3F, 9F) agree except on Magma Cavern, Unown Relic, Wish Cave and Silver Trench,
+where WikiDex sides with Poképédia. `floors` in `pokemon.yaml` still count from 1, the first floor (Bulbapedia's
+1F/B1F); the app turns them into those numbers.
+
+Legendary and Mythical Pokémon (`legendary` in `shared/species.yaml`) follow the official lists.
+
 Which Pokémon can be Shiny (`shiny:` in `pokemon.yaml`) comes from Serebii's
 [Shiny Pokémon](https://www.serebii.net/dungeonrescueteamdx/shinypokemon.shtml) page: the 27 strong
 foes, each Shiny only as that strong foe, plus Celebi, whose Shiny one only shows up in a Mystery

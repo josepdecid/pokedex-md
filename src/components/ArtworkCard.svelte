@@ -9,6 +9,7 @@
   let {
     href,
     title,
+    subtitle,
     image,
     done,
     total,
@@ -16,6 +17,8 @@
   }: {
     href: string;
     title: string;
+    /** Small line after the name. */
+    subtitle?: string;
     /** Path under public/; no artwork if absent. */
     image?: string;
     done: number;
@@ -41,7 +44,10 @@
     <span class="art missing" aria-hidden="true" style:view-transition-name={morph ? 'artwork' : undefined}>?</span>
   {/if}
   <span class="body">
-    <span class="title" style:view-transition-name={morph ? 'artwork-title' : undefined}>{title}</span>
+    <span class="heading">
+      <span class="title" style:view-transition-name={morph ? 'artwork-title' : undefined}>{title}</span>
+      {#if subtitle}<span class="subtitle">{subtitle}</span>{/if}
+    </span>
     <ProgressBar {done} {total} label={t('progress.label', { done, total })} />
   </span>
 </a>
@@ -76,10 +82,24 @@
   .body {
     padding-left: calc(var(--art) - 0.15rem);
   }
+  /* Name on the left; the subtitle on the right of the same line, in the progress count's font.
+     A long name wraps rather than pushing the subtitle down. */
+  .heading {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
   .title {
-    align-self: start;
-    justify-self: start;
-    max-width: 100%;
+    flex: 1;
+    min-width: 0;
+  }
+  .subtitle {
+    flex: none;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
   }
   .art-card:hover .title {
     text-decoration: underline;

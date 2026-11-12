@@ -3,53 +3,53 @@
 # Source: the ROM tables in pmd-gen (https://github.com/Karthik99999/pmd-gen, MIT),
 # matched to our ids by English name. Indexes the game never uses are left out.
 #
-# dungeons: <index>: { id: <dungeons.yaml id>, floors: <floor count> }
+# dungeons: <index>: <dungeons.yaml id> (its floor count comes from dungeons.yaml)
 #   The dungeons pmd-gen accepts in a rescue request (Rock Path, Snow Path and the Mazes aren't).
 # pokemon: <index>: <pokemon.yaml entry id (Unown letters, -shiny ones), or a species id
 #   when it isn't a checklist entry (Deoxys' other forms share Deoxys' entry)>
 dungeons:
-  1: { id: tiny-woods, floors: 3 }
-  2: { id: thunderwave-cave, floors: 5 }
-  3: { id: mt-steel, floors: 9 }
-  4: { id: sinister-woods, floors: 13 }
-  5: { id: silent-chasm, floors: 9 }
-  6: { id: mt-thunder, floors: 13 }
-  7: { id: great-canyon, floors: 12 }
-  8: { id: lapis-cave, floors: 14 }
-  9: { id: mt-blaze, floors: 15 }
-  10: { id: frosty-forest, floors: 14 }
-  11: { id: mt-freeze, floors: 20 }
-  12: { id: magma-cavern, floors: 26 }
-  13: { id: sky-tower, floors: 34 }
-  16: { id: uproar-forest, floors: 4 }
-  17: { id: waterfall-pond, floors: 19 }
-  18: { id: desert-region, floors: 20 }
-  19: { id: southern-cavern, floors: 50 }
-  20: { id: wyvern-hill, floors: 30 }
-  21: { id: darknight-relic, floors: 15 }
-  22: { id: unown-relic, floors: 11 }
-  23: { id: grand-sea, floors: 30 }
-  24: { id: far-off-sea, floors: 75 }
-  25: { id: howling-forest, floors: 15 }
-  26: { id: stormy-sea, floors: 40 }
-  27: { id: buried-relic, floors: 99 }
-  28: { id: solar-cave, floors: 20 }
-  29: { id: fiery-field, floors: 30 }
-  30: { id: lightning-field, floors: 30 }
-  31: { id: northwind-field, floors: 30 }
-  32: { id: mt-faraway, floors: 60 }
-  33: { id: western-cave, floors: 20 }
-  34: { id: northern-range, floors: 25 }
-  35: { id: pitfall-valley, floors: 25 }
-  36: { id: wish-cave, floors: 99 }
-  37: { id: joyous-tower, floors: 99 }
-  38: { id: purity-forest, floors: 99 }
-  39: { id: murky-cave, floors: 19 }
-  40: { id: silver-trench, floors: 99 }
-  42: { id: oddity-cave, floors: 8 }
-  43: { id: remains-island, floors: 13 }
-  44: { id: marvelous-sea, floors: 18 }
-  45: { id: fantasy-strait, floors: 25 }
+  1: tiny-woods
+  2: thunderwave-cave
+  3: mt-steel
+  4: sinister-woods
+  5: silent-chasm
+  6: mt-thunder
+  7: great-canyon
+  8: lapis-cave
+  9: mt-blaze
+  10: frosty-forest
+  11: mt-freeze
+  12: magma-cavern
+  13: sky-tower
+  16: uproar-forest
+  17: waterfall-pond
+  18: desert-region
+  19: southern-cavern
+  20: wyvern-hill
+  21: darknight-relic
+  22: unown-relic
+  23: grand-sea
+  24: far-off-sea
+  25: howling-forest
+  26: stormy-sea
+  27: buried-relic
+  28: solar-cave
+  29: fiery-field
+  30: lightning-field
+  31: northwind-field
+  32: mt-faraway
+  33: western-cave
+  34: northern-range
+  35: pitfall-valley
+  36: wish-cave
+  37: joyous-tower
+  38: purity-forest
+  39: murky-cave
+  40: silver-trench
+  42: oddity-cave
+  43: remains-island
+  44: marvelous-sea
+  45: fantasy-strait
 pokemon:
   1: bulbasaur
   2: ivysaur

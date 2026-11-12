@@ -21,7 +21,7 @@ const unique = <T extends { id: string }>(label: string) => (items: T[], ctx: z.
 
 const TypesFile = z.array(id);
 const SpeciesFile = z
-  .array(z.strictObject({ id, dex: z.number().int().positive(), evolvesFrom: id.optional() }))
+  .array(z.strictObject({ id, dex: z.number().int().positive(), evolvesFrom: id.optional(), legendary: z.literal(true).optional() }))
   .superRefine(unique('species'));
 /** Built-in section listing each entry's `evolve`. */
 const EVOLVE_SECTION = 'evolve';
@@ -39,7 +39,10 @@ const GameFile = z.strictObject({
 });
 // `artwork: false`: Serebii has no artwork for it, so don't warn that it's missing.
 const Place = z.strictObject({ id, artwork: z.literal(false).optional() });
-const DungeonsFile = z.array(Place).superRefine(unique('dungeon'));
+// floors: how many it has; basement: it goes down (B1F, B2F...) instead of up from the ground floor.
+const DungeonsFile = z
+  .array(Place.extend({ floors: z.number().int().positive().optional(), basement: z.literal(true).optional() }))
+  .superRefine(unique('dungeon'));
 const CampsFile = z.array(Place).superRefine(unique('camp'));
 const PokemonFile = z
   .array(
@@ -74,7 +77,7 @@ const PokemonFile = z
 // Rescue passwords store dungeons and Pokémon as the game's internal indexes (see games/dx/rescue.yaml).
 const index = z.string().regex(/^\d+$/, 'keys are internal indexes');
 const RescueFile = z.strictObject({
-  dungeons: z.record(index, z.strictObject({ id, floors: z.number().int().positive() })),
+  dungeons: z.record(index, id),
   pokemon: z.record(index, id),
 });
 const LocaleFile = z.record(id, z.union([z.literal('english'), z.record(id, z.string().min(1))])).nullable();
@@ -253,6 +256,7 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
         id: p.id,
         species: speciesId,
         dex: s?.dex ?? 0,
+        ...(s?.legendary ? { legendary: true as const } : {}),
         ...(p.form ? { form: p.form } : {}),
         ...(portrait ? { portrait } : {}),
         types: p.types,
@@ -309,7 +313,9 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
 
     if (rescue) {
       for (const [i, d] of Object.entries(rescue.dungeons)) {
-        if (!dungeonSet.has(d.id)) problems.push(`${where('rescue.yaml')}: dungeons.${i}: unknown dungeon "${d.id}"`);
+        const dungeon = dungeons.find((x) => x.id === d);
+        if (!dungeon) problems.push(`${where('rescue.yaml')}: dungeons.${i}: unknown dungeon "${d}"`);
+        else if (!dungeon.floors) problems.push(`${where('rescue.yaml')}: dungeons.${i}: "${d}" needs floors in dungeons.yaml`);
       }
       for (const [i, p] of Object.entries(rescue.pokemon)) {
         if (entryIds.has(p)) continue;
@@ -360,10 +366,24 @@ export function buildData(dataDir: string, artworkDir = join(dataDir, '../public
       methods: game.methods.map(({ icon: name, ...m }) => ({ ...m, ...icon(name, `method "${m.id}"`) })),
       ...(game.evolveIcon && { evolveIcon: icon(game.evolveIcon, 'evolveIcon').icon }),
       pokemon: entries.map((e) => ({ ...e, familyOrder: familyIndex.get(e.id)! })),
-      dungeons: dungeons.map((d, i) => ({ id: d.id, order: i + 1, ...artwork('dungeons', d) })),
+      dungeons: dungeons.map((d, i) => ({
+        id: d.id,
+        order: i + 1,
+        ...(d.floors && { floors: d.floors }),
+        ...(d.basement && { basement: true as const }),
+        ...artwork('dungeons', d),
+      })),
       camps: camps.map((c) => ({ id: c.id, ...artwork('camps', c) })),
       idAliases: game.idAliases,
-      ...(rescue && { rescue }),
+      ...(rescue && {
+        rescue: {
+          // Floor counts come from dungeons.yaml (checked above).
+          dungeons: Object.fromEntries(
+            Object.entries(rescue.dungeons).map(([i, d]) => [i, { id: d, floors: dungeons.find((x) => x.id === d)?.floors ?? 0 }]),
+          ),
+          pokemon: rescue.pokemon,
+        },
+      }),
     });
   }
 

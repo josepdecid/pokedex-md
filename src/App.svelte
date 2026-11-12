@@ -5,6 +5,7 @@
   import { i18n, t } from './i18n/i18n.svelte.ts';
   import { pickLocale } from './i18n/locales.ts';
   import { gameInfo } from './games/registry.ts';
+  import { celebrate } from './lib/confetti.ts';
   import { loadGame } from './lib/data.ts';
   import { install } from './lib/install.svelte.ts';
   import { ProgressStore } from './lib/progress.svelte.ts';
@@ -59,6 +60,17 @@
 
   $effect(() => {
     document.title = t('app.name');
+  });
+
+  // Confetti the moment the last Pokémon is recruited (ticked anywhere, or a restored backup that
+  // completes it). Only on the change: a Pokédex that is already complete celebrates when it opens.
+  let wasComplete: { session: GameSession; complete: boolean } | null = null;
+  $effect(() => {
+    if (!session) return;
+    const total = session.data.pokemon.length;
+    const complete = total > 0 && session.recruitedCount === total;
+    if (wasComplete?.session === session && !wasComplete.complete && complete) void celebrate(session.data.types);
+    wasComplete = { session, complete };
   });
 
   // Suggest installing once someone is clearly using the app, not on their first visit.
