@@ -124,12 +124,14 @@
   <nav class="pager" aria-label="{t('pokemon.prev')} / {t('pokemon.next')}">
     {#if prev}
       <a href={paths.pokemon(session.id, prev.id)} rel="prev">
-        <small>‹ {t('pokemon.prev')}</small><span><EntryName entry={prev} /></span>
+        <Portrait entryId={prev.id} portrait={prev.portrait} size={40} />
+        <span class="pager-text"><small>‹ {t('pokemon.prev')}</small><span><EntryName entry={prev} /></span></span>
       </a>
     {:else}<span></span>{/if}
     {#if next}
       <a href={paths.pokemon(session.id, next.id)} rel="next" class="next">
-        <small>{t('pokemon.next')} ›</small><span><EntryName entry={next} /></span>
+        <span class="pager-text"><small>{t('pokemon.next')} ›</small><span><EntryName entry={next} /></span></span>
+        <Portrait entryId={next.id} portrait={next.portrait} size={40} />
       </a>
     {/if}
   </nav>
@@ -274,9 +276,10 @@
     margin-top: 1rem;
   }
   .pager a {
-    display: grid;
-    gap: 0.1rem;
-    padding: 0.7rem 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     background: var(--surface);
@@ -284,8 +287,15 @@
     text-decoration: none;
     font-weight: 600;
     min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  }
+  .pager-text {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    gap: 0.1rem;
+  }
+  .pager-text > span {
+    overflow-wrap: anywhere;
   }
   .pager small {
     color: var(--muted);

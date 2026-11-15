@@ -50,10 +50,20 @@
   const section = $derived(
     route.name === 'pokemon' ? 'pokedex' : route.name === 'dungeon' ? 'dungeons' : route.name === 'camp' ? 'camps' : route.name,
   );
+  // The Dungeons and Camps tabs reopen the page last seen in them (a dungeon's page, say), so
+  // a detour to the Pokédex doesn't lose it. Pressed again from inside, they go back to the list.
+  const REMEMBERED = ['dungeons', 'camps'];
+  const lastSeen = $state<Record<string, string>>({});
+  $effect(() => {
+    void route; // every navigation, including from one dungeon to another
+    if (REMEMBERED.includes(section)) lastSeen[`${gameId}/${section}`] = location.hash;
+  });
+  const tabHref = (id: string, list: string) => (section === id ? list : (lastSeen[`${gameId}/${id}`] ?? list));
+
   const tabs = $derived([
     { id: 'pokedex', href: paths.pokedex(gameId), label: t('nav.pokedex') },
-    { id: 'dungeons', href: paths.dungeons(gameId), label: t('nav.dungeons') },
-    { id: 'camps', href: paths.camps(gameId), label: t('nav.camps') },
+    { id: 'dungeons', href: tabHref('dungeons', paths.dungeons(gameId)), label: t('nav.dungeons') },
+    { id: 'camps', href: tabHref('camps', paths.camps(gameId)), label: t('nav.camps') },
     ...(gameInfo(gameId)?.rescue ? [{ id: 'rescues', href: paths.rescues(gameId), label: t('nav.rescues') }] : []),
     { id: 'settings', href: paths.settings(gameId), label: t('nav.settings') },
   ]);

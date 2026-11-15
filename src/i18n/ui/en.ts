@@ -165,6 +165,8 @@ export const en = {
   'rescues.aokHint': 'Enter it in the game to get your team back on its feet. It comes from team {team}.',
 
   'about.title': 'About',
+  'about.openSource': 'This app is open source. Spotted a mistake or have an idea for a new feature? Issues and pull requests are welcome.',
+  'about.github': 'See the code on GitHub.',
   'about.disclaimer': 'Fan-made and unofficial. Not affiliated with Nintendo, Creatures, GAME FREAK, The Pokémon Company or Spike Chunsoft. Pokémon names are trademarks of their respective owners.',
   'about.sources': 'Recruitment data is based on Serebii and Bulbapedia and may contain mistakes.',
   'about.artwork': 'Pokémon portraits, camp artwork, dungeon screenshots and item icons from Serebii.net.',

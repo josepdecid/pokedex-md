@@ -11,6 +11,7 @@
   let { session }: { session: GameSession } = $props();
 
   const COFFEE_URL = 'https://buymeacoffee.com/josepdecid';
+  const GITHUB_URL = 'https://github.com/josepdecid/pokedex-md';
 
   const gameName = $derived(i18n.name('game', 'short'));
   const total = $derived(session.data.pokemon.length);
@@ -185,6 +186,10 @@
 
 <section class="card">
   <h2>{t('about.title')}</h2>
+  <p class="small">
+    {t('about.openSource')}
+    <a href={GITHUB_URL} target="_blank" rel="noopener">{t('about.github')}</a>
+  </p>
   <p class="small">{t('about.sources')}</p>
   <p class="small">
     <a href="https://www.serebii.net/dungeonrescueteamdx/" target="_blank" rel="noopener">{t('about.artwork')}</a>

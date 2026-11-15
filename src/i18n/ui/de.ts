@@ -167,6 +167,8 @@ export const de: UiStrings = {
   'rescues.aokHint': 'Gib es im Spiel ein, um dein Team wieder auf die Beine zu bringen. Es kommt vom Team {team}.',
 
   'about.title': 'Über',
+  'about.openSource': 'Diese App ist Open Source. Einen Fehler entdeckt oder eine Idee für eine neue Funktion? Issues und Pull-Requests sind willkommen.',
+  'about.github': 'Code auf GitHub ansehen.',
   'about.disclaimer': 'Inoffizielles Fanprojekt. Keine Verbindung zu Nintendo, Creatures, GAME FREAK, The Pokémon Company oder Spike Chunsoft. Pokémon-Namen sind Marken ihrer jeweiligen Inhaber.',
   'about.sources': 'Die Rekrutierungsdaten basieren auf Serebii und Bulbapedia und können Fehler enthalten. Die deutschen Namen stammen von PokéWiki und Bulbapedia.',
   'about.artwork': 'Pokémon-Porträts, Camp-Artworks, Dungeon-Screenshots und Item-Symbole von Serebii.net.',

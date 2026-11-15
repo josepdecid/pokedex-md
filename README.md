@@ -104,3 +104,13 @@ credited in Settings → About.
 The data was imported from Serebii and Bulbapedia and has not been verified entry by entry
 in-game; see `data/README.md`. This is an unofficial fan project, not affiliated with
 Nintendo, Creatures, GAME FREAK, The Pokémon Company or Spike Chunsoft.
+
+## License
+
+The source code is released under the [MIT License](LICENSE). The rescue password code is based on
+pmd-gen, also MIT; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+The license covers the code only. It doesn't cover the Pokémon portraits, camp artwork, dungeon
+screenshots, icons, logo, or Pokémon, item and place names, which belong to their respective owners
+(Nintendo, Creatures, GAME FREAK, The Pokémon Company and Spike Chunsoft), nor the recruitment data
+in `data/`, which is compiled from Serebii and Bulbapedia.
