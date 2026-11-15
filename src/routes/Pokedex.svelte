@@ -7,7 +7,14 @@
   import { celebrate } from '../lib/confetti.ts';
   import { entryMatcher } from '../lib/search.svelte.ts';
   import type { GameSession } from '../lib/session.svelte.ts';
-  import { clearFilters, filterPanel, filters, type StatusFilter } from './pokedex-filters.svelte.ts';
+  import {
+    clearFilters,
+    filterPanel,
+    filters,
+    groupsOf,
+    inGroup,
+    type StatusFilter,
+  } from './pokedex-filters.svelte.ts';
 
   let { session }: { session: GameSession } = $props();
 
@@ -24,10 +31,14 @@
     const rows = searchable.filter(({ entry }) => {
       if (!matches(entry)) return false;
       if (filters.type && !entry.types.includes(filters.type)) return false;
+      if (!inGroup(entry, filters.group)) return false;
       if (filters.status !== 'all' && session.progress.isRecruited(entry.id) !== (filters.status === 'recruited')) return false;
       return true;
     });
-    if (filters.sort === 'family') rows.sort((a, b) => a.entry.familyOrder - b.entry.familyOrder);
+    // Within one generation, family order would pull in older families' babies (Azurill, Wynaut)
+    // to sit at their family's place, so it falls back to number order (the data's own).
+    const oneGeneration = filters.group.startsWith('gen-');
+    if (filters.sort === 'family' && !oneGeneration) rows.sort((a, b) => a.entry.familyOrder - b.entry.familyOrder);
     else if (filters.sort === 'name') rows.sort((a, b) => i18n.collator.compare(a.text, b.text));
     return rows.map((r) => r.entry);
   });
@@ -35,9 +46,14 @@
   const types = $derived(
     [...session.data.types].sort((a, b) => i18n.collator.compare(i18n.name('type', a), i18n.name('type', b))),
   );
-  const filtered = $derived(filters.query !== '' || filters.status !== 'all' || filters.type !== '');
+  const groups = $derived(groupsOf(session.data.pokemon));
+  const filtered = $derived(
+    filters.query !== '' || filters.status !== 'all' || filters.type !== '' || filters.group !== 'all',
+  );
   // Flags the filters button while the panel is closed but still narrowing or reordering the list.
-  const hiddenActive = $derived(!filterPanel.open && (filters.type !== '' || filters.sort !== 'family'));
+  const hiddenActive = $derived(
+    !filterPanel.open && (filters.type !== '' || filters.group !== 'all' || filters.sort !== 'family'),
+  );
 
   const reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -51,7 +67,7 @@
   // Skips the first run, which would undo the router restoring the list's scroll position.
   let filtersApplied = false;
   $effect(() => {
-    void [filters.query, filters.status, filters.type, filters.sort];
+    void [filters.query, filters.status, filters.type, filters.group, filters.sort];
     if (filtersApplied) window.scrollTo(0, 0);
     filtersApplied = true;
   });
@@ -81,6 +97,18 @@
 
   {#if filterPanel.open}
     <div class="selects" id="pokedex-filters" transition:slide={{ duration: reducedMotion ? 0 : 180 }}>
+      <label>
+        <span class="visually-hidden">{t('pokedex.group')}</span>
+        <select bind:value={filters.group}>
+          {#each groups as group (group)}
+            <option value={group}>
+              {group.startsWith('gen-')
+                ? t('pokedex.group.gen', { gen: group.slice(4) })
+                : t(`pokedex.group.${group as 'all' | 'extras' | 'shiny'}`)}
+            </option>
+          {/each}
+        </select>
+      </label>
       <label>
         <span class="visually-hidden">{t('pokedex.type')}</span>
         <select bind:value={filters.type}>
@@ -199,7 +227,7 @@
   }
   @media (min-width: 600px) {
     .selects {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
   .selects select {
