@@ -166,6 +166,8 @@ export const ja: UiStrings = {
   'rescues.aokHint': 'ゲームで入力すると、チームが復活します。チーム「{team}」から届いたものです。',
 
   'about.title': 'このアプリについて',
+  'about.openSource': 'このアプリはオープンソースです。間違いを見つけたときや新機能のアイデアがあるときは、IssueやPull Requestをお気軽にどうぞ。',
+  'about.github': 'GitHubでコードを見る',
   'about.disclaimer': 'ファンによる非公式プロジェクトです。任天堂、クリーチャーズ、ゲームフリーク、株式会社ポケモン、スパイク・チュンソフトとは関係ありません。ポケモンの名前は各権利者の商標です。',
   'about.sources': '仲間にする方法のデータはSerebiiとBulbapediaに基づいており、誤りを含む場合があります。日本語の名前はBulbapediaとGame8を参照しています。',
   'about.artwork': 'ポケモンの顔グラフィック、キャンプのイラスト、ダンジョンのスクリーンショット、道具のアイコンはSerebii.netより。',
